@@ -1,0 +1,43 @@
+<div class="border-form">
+	<%= form_for @type do |form| %>
+		<% if @type.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@type.errors.count, "error") %> prohibited the type from being saved:</h2>
+
+				<ul>
+					<% @type.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+		<div class="field">
+			<%= form.label :name %>
+			<%= form.text_field :name %>
+		</div>
+		Properties
+		<%= form.fields_for :properties do |ff| %>
+		  <p>
+			  <%= ff.label :name, "Name" %><br />
+			  <%= ff.text_field :name %><br />
+			  <%= ff.label :proptype, "Type" %><br />
+			  <%= ff.text_field :proptype %><br />
+			  <%= ff.check_box :name_prop %>
+			  <%= ff.label :name_prop, "Mark as the Name Property" %>
+
+			
+			  <%= ff.check_box :_destroy %>
+			  <%= ff.label :_destroy, "Remove Property" %>
+
+		  </p>
+		  <% end %>
+		<div>
+			<p>
+				<%= form.submit "Create", :class => "form-submit-button" %>
+			</p>
+		</div>
+			
+	<%end%>
+
+</div>
+</br>

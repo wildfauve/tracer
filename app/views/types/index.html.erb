@@ -1,0 +1,25 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+		<th>Name</th>
+		<th>Properties</th>
+	</tr>
+  </thead>
+  <tbody>
+
+<% for type in @types do %>
+<tr>
+	<td><%= link_to type.name, type_path(type) %></td>
+	<td>
+		<% for prop in type.properties%>
+			<p>
+				name: <%= prop.name%>
+				type: <%= prop.proptype%>
+				Name Property: <%= prop.name_prop%>
+			</p>			
+		<%end%>
+	</td>
+</tr>	
+<%end%>
+
+<%= link_to 'New Type', new_type_path %>

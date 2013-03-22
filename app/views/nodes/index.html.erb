@@ -1,0 +1,5 @@
+<%= link_to 'new node', new_node_path %>
+<% for node in @nodes %>
+	<%= node.name %>
+	<%= node.type %>
+<%end%>

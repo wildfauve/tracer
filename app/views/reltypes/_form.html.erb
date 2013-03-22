@@ -1,0 +1,54 @@
+<div class="border-form">
+	<%= form_for @rel do |form| %>
+		<% if @rel.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@rel.errors.count, "error") %> prohibited the type from being saved:</h2>
+
+				<ul>
+					<% @rel.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+		<div class="field">
+			<%= form.label :name %>
+			<%= form.text_field :name %>
+		</div>
+		Properties
+		<%= form.fields_for :properties do |ff| %>
+		  <p>
+			  <%= ff.label :name, "Name" %><br />
+			  <%= ff.text_field :name %><br />
+			  <%= ff.label :proptype, "Type" %><br />
+			  <%= ff.text_field :proptype %><br />
+			  <%= ff.check_box :name_prop %>
+			  <%= ff.label :name_prop, "Mark as the Name Property" %>
+
+			
+			  <%= ff.check_box :_destroy %>
+			  <%= ff.label :_destroy, "Remove Property" %>
+
+		  </p>
+		  <% end %>
+		<%= form.fields_for :arcprop do |ff| %>
+		  <p>
+			<%= ff.label :start, 'Start Node' %>
+			<%= ff.select(:start, options_for_select(type_list)) %>
+			<%= ff.label :end, 'End Node' %>
+			<%= ff.select(:end, options_for_select(type_list)) %>
+			<%= ff.check_box :directed %>
+			<%= ff.label :directed, "Directed?" %>
+		  </p>
+		<% end %>
+		
+		<div>
+			<p>
+				<%= form.submit "Create", :class => "form-submit-button" %>
+			</p>
+		</div>
+			
+	<%end%>
+
+</div>
+</br>
