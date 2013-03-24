@@ -1,5 +1,5 @@
 <div class="border-form">
-	<%= form_for @type do |form| %>
+	<%= form_for(setup_type(@type)) do |form| %>
 		<% if @type.errors.any? %>
 			<div id="error_explanation">
 				<h2><%= pluralize(@type.errors.count, "error") %> prohibited the type from being saved:</h2>

@@ -1,5 +1,5 @@
 <div class="border-form">
-	<%= form_for @rel do |form| %>
+	<%= form_for(setup_reltype(@rel)) do |form| %>
 		<% if @rel.errors.any? %>
 			<div id="error_explanation">
 				<h2><%= pluralize(@rel.errors.count, "error") %> prohibited the type from being saved:</h2>
@@ -14,6 +14,8 @@
 		<div class="field">
 			<%= form.label :name %>
 			<%= form.text_field :name %>
+			<%= form.label :desc %>
+			<%= form.text_area :desc, :rows => 5, :cols => 40  %>
 		</div>
 		Properties
 		<%= form.fields_for :properties do |ff| %>
@@ -34,9 +36,9 @@
 		<%= form.fields_for :arcprop do |ff| %>
 		  <p>
 			<%= ff.label :start, 'Start Node' %>
-			<%= ff.select(:start, options_for_select(type_list)) %>
+			<%= ff.select(:start, options_for_select(type_list, @rel.arcprop.start)) %>
 			<%= ff.label :end, 'End Node' %>
-			<%= ff.select(:end, options_for_select(type_list)) %>
+			<%= ff.select(:end, options_for_select(type_list, @rel.arcprop.end)) %>
 			<%= ff.check_box :directed %>
 			<%= ff.label :directed, "Directed?" %>
 		  </p>

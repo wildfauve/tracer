@@ -4,4 +4,12 @@ class NodesController < ApplicationController
     @nodes = Node.all
   end
   
+  def new
+    
+  end
+  
+  def create
+    
+  end
+  
 end

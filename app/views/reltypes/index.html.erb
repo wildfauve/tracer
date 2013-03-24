@@ -2,6 +2,7 @@
   <thead>
     <tr>
 		<th>Name</th>
+		<th>Description</th>
 		<th>Properties</th>
 		<th>Arc</th>		
 		<th>Actions</th>				
@@ -12,6 +13,9 @@
 <% for rel in @rels do %>
 <tr>
 	<td><%= link_to rel.name, reltype_path(rel) %></td>
+	<td>
+		<p><%= rel.desc%></p>
+	</td>	
 	<td>
 		<% for prop in rel.properties%>
 			<p>
@@ -27,7 +31,7 @@
 		<%end %>
 	</td>
 	<td>
-		<%= link_to 'edit', reltype_path(rel)%>
+		<%= link_to 'edit', edit_reltype_path(rel)%>
 		<%= link_to 'delete', reltype_path(rel), :method => :delete%>		
 	</td>
 </tr>	

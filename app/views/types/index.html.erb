@@ -2,7 +2,9 @@
   <thead>
     <tr>
 		<th>Name</th>
+		<th>Description</th>
 		<th>Properties</th>
+		<th>Actions</th>		
 	</tr>
   </thead>
   <tbody>
@@ -11,6 +13,9 @@
 <tr>
 	<td><%= link_to type.name, type_path(type) %></td>
 	<td>
+		<p><%= type.desc%></p>
+	</td>
+	<td>
 		<% for prop in type.properties%>
 			<p>
 				name: <%= prop.name%>
@@ -18,6 +23,10 @@
 				Name Property: <%= prop.name_prop%>
 			</p>			
 		<%end%>
+	</td>
+	<td>
+		<%= link_to 'edit', edit_type_path(type)%>
+		<%= link_to 'delete', type_path(type), :method => :delete%>		
 	</td>
 </tr>	
 <%end%>

@@ -13,7 +13,6 @@ class TypesController < ApplicationController
   
   def new
     @type = Type.new
-    3.times {@type.properties.build}
     respond_to do |format|
       format.html # new.html.erb
     end
@@ -39,6 +38,34 @@ class TypesController < ApplicationController
       end
     end
   end
-  
-  
+
+  def update
+    @type = Type.find(params[:id])
+    @type.update_the_type(params[:type])
+    respond_to do |format|
+      if @type.valid?
+        format.html { redirect_to types_path }
+        format.json
+      else
+        format.html { render action: "edit" }
+        format.json
+      end
+    end
+  end
+
+
+  def destroy
+    @type = Type.find(params[:id])
+    @type.destroy
+    respond_to do |format|
+      if @type.valid?
+        format.html { redirect_to types_path }
+        format.json
+      else
+        format.html { render action: "new" }
+        format.json
+      end
+    end
+  end
+
 end

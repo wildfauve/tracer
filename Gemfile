@@ -28,13 +28,11 @@ gem 'redis'
 gem "highcharts-rails"
 gem 'kaminari'
 gem "twitter-bootstrap-rails"
+gem 'neography'
 
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -43,4 +41,4 @@ gem "twitter-bootstrap-rails"
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'
