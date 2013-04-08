@@ -11,7 +11,7 @@
 
 <% for type in @types do %>
 <tr>
-	<td><%= link_to type.name, type_path(type) %></td>
+	<td><%= link_to type.type_ref, type_path(type) %></td>
 	<td>
 		<p><%= type.desc%></p>
 	</td>

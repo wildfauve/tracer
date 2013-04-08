@@ -1,11 +1,11 @@
 class Arcprop
   include Mongoid::Document
     
-  field :start, :type => String
-  field :end, :type => String
+  field :start, :type => Moped::BSON::ObjectId
+  field :end, :type => Moped::BSON::ObjectId
   field :directed, :type => Boolean
   
-  embedded_in :relationship
+  embedded_in :reltype
   
   def start_node
     return Type.find(self.start)
@@ -15,5 +15,8 @@ class Arcprop
     return Type.find(self.end)
   end
   
+  def which?(type)
+    type.id == self.start ? "Start" : "End"
+  end
   
 end

@@ -1,0 +1,41 @@
+<% title "Type #{@type.type_ref}"%>
+<% if @type.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@type.errors.count, "error") %> prohibited the type from being saved:</h2>
+
+		<ul>
+			<% @type.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<%= @type.type_ref%>
+
+<p>Used in the following Relation Types</p>
+<% @type.assigned_reltypes.each do |rt| %>
+	<p><%= rt.name %> --> <%= rt.arcprop.which?(@type)%></p>
+<%end %>
+
+<p>Nodes of this type:</p>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Node Name</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		<% @type.nodes.each do |node| %>
+			<tr>
+				<td><%= link_to node.name, node_path(node) %></td>
+			</tr>
+		<%end %>
+	</tbody>
+</table>
+
+
+<p>
+<%= link_to 'Back to List', types_path %>
+</p>

@@ -56,13 +56,14 @@ class TypesController < ApplicationController
 
   def destroy
     @type = Type.find(params[:id])
-    @type.destroy
+    @type.delete
+    Rails.logger.info(">>>TypeController#delete #{@type.errors.inspect} ")         
     respond_to do |format|
-      if @type.valid?
+      if @type.errors.blank?
         format.html { redirect_to types_path }
         format.json
       else
-        format.html { render action: "new" }
+        format.html { render "show" }
         format.json
       end
     end

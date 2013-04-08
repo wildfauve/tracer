@@ -4,6 +4,7 @@ class Reltype
     
   field :name, :type => String
   field :desc, :type => String
+
   
   embeds_many :properties
   embeds_one  :arcprop
@@ -22,18 +23,16 @@ class Reltype
   
   
   def self.create_the_reltype(params)
-    #raise Exceptions::InvalidProfileConfidence if 
     type = self.new params
 #    type.attributes = params
     type.save!
-    return type
+    type
   end
 
   def update_the_reltype(params)
-    #raise Exceptions::InvalidProfileConfidence if 
     self.attributes = params       
     save!
-    return self
+    self
   end
 
       

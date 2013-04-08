@@ -28,7 +28,14 @@ gem 'redis'
 gem "highcharts-rails"
 gem 'kaminari'
 gem "twitter-bootstrap-rails"
-gem 'neography'
+
+# Neo4j Gems
+#gem 'neography'
+#gem 'multi_json'
+#gem 'oj'
+#gem 'keymaker'
+#gem 'architect4r'
+#gem 'neoid', '~> 0.1.1'
 
 
 # To use ActiveModel has_secure_password

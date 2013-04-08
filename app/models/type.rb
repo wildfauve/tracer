@@ -3,10 +3,15 @@ class Type
     
   include Mongoid::Document
     
-  field :name, :type => String
+  field :type_ref, :type => String
   field :desc, :type => String
   
   embeds_many :properties
+  has_many :node
+  
+#  validate :has_assigned_reltypes, :on => :destroy
+  before_destroy :has_assigned_reltypes
+
   
   # TODO: Needs to not create the property if NIL
   accepts_nested_attributes_for :properties, :allow_destroy => true, 
@@ -21,23 +26,47 @@ class Type
   end
     
   def self.create_the_type(params)
-    #raise Exceptions::InvalidProfileConfidence if 
     Rails.logger.info(">>>Type#create_the_type #{params[:properties_attributes].count}")    
-    type = self.new(params)
-    #type.attributes = params       
+    type = self.new(params)  
     type.save!
     Rails.logger.info(">>>Type#create_the_type #{type.properties.count}")     
     return type
   end
 
   def update_the_type(params)
-    #raise Exceptions::InvalidProfileConfidence if 
     self.attributes = params       
     save!
     return self
   end
     
+  def delete
+    #raise Exceptions::TypeHasTypeRel if assigned_reltypes?
+    self.destroy
+    return self
+  end  
+  
+  def has_assigned_reltypes?
+    Reltype.all.all? {|r| r.arcprop.start == self.id || r.arcprop.end == self.id }
+  end
+  
+  def assigned_reltypes
+    Reltype.all.keep_if {|r| r.arcprop.start == self.id || r.arcprop.end == self.id }
+  end
+
+
+  def nodes
+    Node.where(:type => self)
+  end
+
+    
   private
+  
+  
+  def has_assigned_reltypes
+    Rails.logger.info(">>>Type#has_assigned_reltypes ")     
+    errors.add(:type_ref, "Cant delete a type if it has assigned relation types") if self.has_assigned_reltypes?
+    errors.blank?
+  end
   
   
 end

@@ -1,3 +1,4 @@
+=begin
 Neography.configure do |config|
   config.protocol       = "http://"
   config.server         = "localhost"
@@ -13,3 +14,4 @@ Neography.configure do |config|
   config.password       = nil
   config.parser         = {:parser => MultiJsonParser}
 end
+=end

@@ -1,5 +1,41 @@
 <%= link_to 'new node', new_node_path %>
-<% for node in @nodes %>
-	<%= node.ref %>
-	<%= node.type %>
-<%end%>
+<table class="table table-striped">
+  <thead>
+    <tr>
+		<th>Node Name</th>
+		<th>Node Type</th>
+		<th>Properties</th>
+		<th>Arcs</th>
+		<th>Actions</th>				
+	</tr>
+  </thead>
+  <tbody>
+	<% for node in @nodes %>
+		<tr>
+			<td>
+				<%= link_to node.name, node_path(node) %>
+			</td>
+			<td>
+			<%= node.type.type_ref %>
+			</td>
+			<td>
+				<% node.propinstances.each do |pi| %>
+				<p>
+					<%= "#{pi.name} = #{pi.value} "%>
+				</p>
+				<% end %>
+			</td>
+			<td>
+				<% node.relinstances.each do |rel| %>
+					<%= rel.name%>
+					<%= rel.nodereltype.name%>
+					<%= rel.related_node.name%>
+				<% end %>
+			</td>
+			<td>
+				<%= link_to 'Edit', edit_node_path(node) %>
+				<%= link_to 'Delete', node_path(node), :method => :delete%>			
+			</td>
+		</tr>
+	<%end%>	
+</table>

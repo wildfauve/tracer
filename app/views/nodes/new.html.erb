@@ -1,0 +1,33 @@
+<table>
+	<tr>
+		<th>Start Node Type</th>
+		<th>Relationship Type
+		<th>End Node Type</th>
+	</tr>
+	<tr>
+		<td>
+			<%= select_tag(:start, options_for_select(type_list), :include_blank => true, :prompt => "Select a Node Type", :class => "start_node") %>
+		</td>
+		<td>
+			<%= select_tag(:reltype, options_for_select(reltype_list), :include_blank => true, :prompt => "Select a Relationship Type", :class => "rel_type") %>			
+		</td>
+		<td>
+			<%= select_tag(:end, options_for_select(type_list), :include_blank => true, :prompt => "Select a Node Type", :class => "end_node") %>
+		</td>
+		
+	</tr>
+	<tr>
+		<td>
+			<div id='start_form'/>
+		</td>
+		<td>
+			<div id='rel_form'/>
+		</td>
+		<td>
+			<div id='rel_form'/>
+		</td>
+		
+	</tr>
+<table>
+<%= button_tag 'Generate', :class => 'gen_node_form_button'%>
+<div id="start_node_form"/>
