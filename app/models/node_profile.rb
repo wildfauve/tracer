@@ -6,11 +6,11 @@ class NodeProfile
   end
   
   def start
-    Type.find(@start)
+    @start[:type] ? Type.find(@start[:type]) : Node.find(@start[:node])
   end
 
   def end
-    Type.find(@end)
+    @end[:type] ? Type.find(@end[:type]) : nil
   end
 
   def rel

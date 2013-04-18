@@ -20,7 +20,6 @@ class Type
   
   def self.search(params)
     page = params[:page] || "1"
-    #Rails.logger.info(">>>CARDS MODEL SEARCH #{page}")
     doc_from = ((page.to_i - 1) * @@per_page)
     self.all.order_by([:year, :asc]).page(params[:page])
   end

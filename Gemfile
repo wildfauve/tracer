@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '3.2.12'
 
@@ -19,6 +19,12 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'  
+  gem 'meta_request'
+end
+
 gem 'jquery-rails'
 gem "mongoid", "~> 3.0.0"
 gem "origin", "~> 1.0.4"
@@ -27,7 +33,7 @@ gem 'jbuilder'
 gem 'redis'
 gem "highcharts-rails"
 gem 'kaminari'
-gem "twitter-bootstrap-rails"
+#gem "twitter-bootstrap-rails"
 
 # Neo4j Gems
 #gem 'neography'

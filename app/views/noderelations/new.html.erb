@@ -6,7 +6,13 @@
 	</tr>
 	<tr>
 		<td>
-			<%= select_tag(:start, options_for_select(type_list), :include_blank => true, :prompt => "Select a Node Type", :class => "start_node") %>
+			<% if @start_node %>
+				<div data-sn=<%=@start_node%>>
+					<%= Node.find(@start_node).name %>
+				</div>
+			<% else %>
+				<%= select_tag(:start, options_for_select(type_list), :include_blank => true, :prompt => "Select a Node Type", :class => "start_node") %>
+			<% end %>
 		</td>
 		<td>
 			<%= select_tag(:reltype, options_for_select(reltype_list), :include_blank => true, :prompt => "Select a Relationship Type", :class => "rel_type") %>			
@@ -28,6 +34,10 @@
 		</td>
 		
 	</tr>
-<table>
-<%= button_tag 'Generate', :class => 'gen_node_form_button'%>
-<div id="start_node_form"/>
+</table>
+	<div id=node-create-status>
+		Non Selected
+	</div>
+<%= button_tag 'Generate Node-Node', :class => 'gen_node_form_button'%>
+<div id="start_node_form">
+</div>

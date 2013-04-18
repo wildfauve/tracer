@@ -1,0 +1,11 @@
+<%= form_tag (node_relation_path), :id => @rel, :method => :put  do %>
+	<div id='rel'>
+		<% for p in @rel.nodereltype.properties.each %>
+			<%= label_tag p.name%>
+			<% ref = @rel.relpropinstances.where(:ref => p) %>
+			<% ref.empty? ? value = "" : value = ref.first.value %>
+			<%= text_field_tag "rel[#{p.id}]", value %>			
+		<% end %>
+	</div>	
+	<%= submit_tag "Confirm" %>		
+<% end %>

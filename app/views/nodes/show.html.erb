@@ -1,3 +1,4 @@
+<% title "Node", @node.name%>
 <% if @node.errors.any? %>
 	<div id="error_explanation">
 		<h2><%= pluralize(@node.errors.count, "error") %> prohibited the node from being saved:</h2>
@@ -10,7 +11,7 @@
 	</div>
 <% end %>
 
-<% title "Node #{@node.name}"%>
+
 <%= @node.name%>
 <p>Node Type: <%= link_to @node.type.type_ref, type_path(@node.type)%></p>
 
@@ -21,7 +22,7 @@
 	</p>
 <% end %>
 
-<button><%= link_to 'New Relationship', new_node_path(:start_node => @node)%></button>
+<button><%= link_to 'New Relationship', new_noderelation_path(:start_node => @node)%></button>
 
 <p>Related to the following Nodes:</p>
 <table class="table table-striped">
@@ -30,19 +31,33 @@
 			<th>Node Name</th>
 			<th>Node Type</th>
 			<th>Node Relation Type</th>
+			<th>Relation Instances</th>
+			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
 
 		<% @node.relinstances.each do |nrel| %>
 			<tr>
-				<td><%= nrel.name %></td>
 				<td><%= link_to nrel.related_node.name, node_path(nrel.related_node) %></td>
+				<td><%= link_to nrel.related_node.type.type_ref, reltype_path(nrel.nodereltype) %></td>
 				<td><%= nrel.nodereltype.name %></td>
+				<td>
+					<% nrel.relpropinstances.each do |i| %>
+						<%= i.proptype.name%>
+						<%= i.value %>
+					<% end %>
+				</td>
+				<td>
+					<p><%= link_to 'delete relation', node_relation_path(@node, nrel), :method => :delete %></p>
+					<p><%= link_to 'edit relation', edit_node_relation_path(@node, nrel) %></p>
+				</td>
 			</tr>
 		<% end %>
 	</tbody>
 </table>
+
+<%= link_to 'Delete Node', node_path(@node), :method => :delete %>
 
 <p>
 <%= link_to 'Back to List', nodes_path %>

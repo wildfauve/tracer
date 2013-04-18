@@ -1,0 +1,15 @@
+<%if flashs %>
+		<% flashs.each do |key, msg| %>
+		  <div id="<%= key %>">
+				<% if key == :notice %>
+					<p><span>X</span> <%= msg %></p>
+				<% end %>
+				<% if key == :errors %>
+					<% msg.each do |k, v| %>
+			    	<p><span>X</span> <%= "Error in #{k.capitalize}:  #{v.join(", ")}" %></p>
+					<% end %>
+				<% end %>
+		    <div class="clear"></div>
+		  </div>
+		<% end %>
+<% end %>

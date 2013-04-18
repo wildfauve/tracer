@@ -1,14 +1,7 @@
-class NodesController < ApplicationController
-  
-  def index
-    @nodes = Node.all
-  end
+class NoderelationsController < ApplicationController
   
   def new
-  end
-  
-  def show
-    @node = Node.find(params[:id])
+    @start_node = params[:start_node]
   end
   
   def edit
@@ -16,7 +9,7 @@ class NodesController < ApplicationController
   end
   
   def create
-
+    @nodeset = Nodeset.new(params)
     respond_to do |format|
 #      if @type.valid?
         format.html { redirect_to nodes_path }
@@ -43,5 +36,13 @@ class NodesController < ApplicationController
     end
   end
   
+  def node_form
+    #Rails.logger.info(">>>NodesController#node_form: #{params.inspect}, #{request.format}")
+    @profile = NodeProfile.new(params[:node_profile])
+    respond_to do |format|
+      #format.html {render 'node_form', :layout => false}
+      format.js {render 'node_form', :layout => false }# 
+    end
+  end
   
 end

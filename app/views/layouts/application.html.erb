@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tracer</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+	<title><%= content_for?(:title) ? content_for(:title) : 'Tracer' %></title>
+  	<%= stylesheet_link_tag    "application", :media => "all" %>
+  	<%= javascript_include_tag "application" %>
+ 	<%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+	<div id="header">
+		<div id="logo">Tracer</div>
+		<div id="page-title"><%= content_for(:title) %></div>  
+	</div>
+	<div id="main">
+		<div class=" column navbar">
+			<ul>
+				<li><%= link_to "Types", types_path %></li>
+				<li><%= link_to "Rel Types", reltypes_path %></li>
+				<li><%= link_to "Nodes", nodes_path %></li>
+			</ul>
+		</div><!-- /navbar -->
+		<div class="column content">
+			<!-- <%= render :partial => 'shared/flash', :locals => {:flashs => flash} %> -->
+			<%= yield %>
+		</div>
+		<div class="sidebar">
+			<div id="search">
+				Sidebar
+			</div>
+			</br>
+			<div id="tag-cloud">
+				Tag Cloud
+			</div>
+		</div>
+		<footer>
+			<p>&copy; Dinsdale Arts 2013</p>
+		</footer>
+	</div>
 </body>
 </html>

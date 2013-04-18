@@ -16,8 +16,10 @@ class Node
 # type = ref to the type
 # Prop instances, :propref = :implement_date, :propvalue = "0101010"
   def self.nodefactory(node_params)
+    return Node.find(node_params[:node]) if node_params[:node]  # if this is an existing node
     node = Node.new
-    t = Type.where(:type_ref => node_params[:type]).first
+#    t = Type.where(:type_ref => node_params[:type]).first
+    t = Type.find(node_params[:type])
     raise Exceptions::NoTypeError if t.nil?
     node.type = t
     node.name = node_params[t.properties.where(:name_prop => true).first.name.to_sym] # find the name prop and set it in the node
@@ -40,5 +42,13 @@ class Node
     return self
   end
   
-  
+  def delete_relation(id)
+    here = self.relinstances.find(id)
+    others = here.related_node.relinstances.where(:relnode => self.id)
+    raise Exception if others.count > 1
+    other = others.first
+    here.destroy
+    other.destroy
+  end
+    
 end

@@ -1,6 +1,6 @@
 module ApplicationHelper
   def title(page_title, sup_title = "")
-	    content_for(:title, page_title.to_s )
+	    content_for(:title, page_title.to_s + ":" + sup_title.to_s )
 	end
 
   def show_errors(model)  

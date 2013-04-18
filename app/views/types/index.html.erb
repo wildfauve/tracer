@@ -1,3 +1,4 @@
+<%= link_to 'New Type', new_type_path %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -10,25 +11,24 @@
   <tbody>
 
 <% for type in @types do %>
-<tr>
-	<td><%= link_to type.type_ref, type_path(type) %></td>
-	<td>
-		<p><%= type.desc%></p>
-	</td>
-	<td>
-		<% for prop in type.properties%>
-			<p>
-				name: <%= prop.name%>
-				type: <%= prop.proptype%>
-				Name Property: <%= prop.name_prop%>
-			</p>			
-		<%end%>
-	</td>
-	<td>
-		<%= link_to 'edit', edit_type_path(type)%>
-		<%= link_to 'delete', type_path(type), :method => :delete%>		
-	</td>
-</tr>	
+	<tr>
+		<td><%= link_to type.type_ref, type_path(type) %></td>
+		<td>
+			<p><%= type.desc%></p>
+		</td>
+		<td>
+			<% for prop in type.properties%>
+				<p>
+					name: <%= prop.name%>
+					type: <%= prop.proptype%>
+					Name Property: <%= prop.name_prop%>
+				</p>			
+			<%end%>
+		</td>
+		<td>
+			<%= link_to 'edit', edit_type_path(type)%>
+			<%= link_to 'delete', type_path(type), :method => :delete%>		
+		</td>
+	</tr>	
 <%end%>
-
-<%= link_to 'New Type', new_type_path %>
+</table>

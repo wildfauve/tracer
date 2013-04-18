@@ -27,9 +27,11 @@
 			</td>
 			<td>
 				<% node.relinstances.each do |rel| %>
-					<%= rel.name%>
-					<%= rel.nodereltype.name%>
-					<%= rel.related_node.name%>
+					<p>
+						<%= rel.name%>
+						<%= rel.nodereltype.name%>
+						<%= "#{rel.related_node.type.type_ref}::#{rel.related_node.name}"%>
+					</p>
 				<% end %>
 			</td>
 			<td>

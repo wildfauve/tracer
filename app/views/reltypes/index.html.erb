@@ -1,3 +1,4 @@
+<%= link_to 'New relationship type', new_reltype_path %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -19,15 +20,17 @@
 	<td>
 		<% for prop in rel.properties%>
 			<p>
-				name: <%= prop.name%>
-				rel: <%= prop.proptype%>
-				Name Property: <%= prop.name_prop%>
+				Name: <%= prop.name%>
+				Type: <%= prop.proptype%>
+				Name Property?: <%= prop.name_prop%>
 			</p>			
 		<%end%>
 	</td>
 	<td>
 		<% if rel.arcprop %>
-			Start: <%= rel.arcprop.start_node.type_ref%> End: <%= rel.arcprop.end_node.type_ref%> Directed: <%= rel.arcprop.directed %>
+			<p>Start: <%= rel.arcprop.start_node.type_ref%> </p>
+			<p>End: <%= rel.arcprop.end_node.type_ref%> </p>
+			<p>Directed: <%= rel.arcprop.directed %></p>
 		<%end %>
 	</td>
 	<td>
@@ -36,5 +39,4 @@
 	</td>
 </tr>	
 <%end%>
-
-<%= link_to 'New relationship type', new_reltype_path %>
+</table>

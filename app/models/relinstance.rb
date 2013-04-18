@@ -15,7 +15,7 @@ class Relinstance
     rt = Reltype.where(:name => params[:type]).first
     raise Exceptions::NoRelTypeError if rt.nil?
     rel.reltype = rt.id
-    rel.name = params[rt.properties.where(:name_prop => true).first.name.to_sym] if !rt.properties.empty? # find the name prop and set it in the rel
+    #rel.name = params[rt.properties.where(:name_prop => true).first.name.to_sym] if !rt.properties.empty? # find the name prop and set it in the rel
     rt.properties.keep_if {|p| p.name_prop == false}.each do |prop|
       #work with the properties
       rel.relpropinstances << Relpropinstance.new(:ref => prop.name, :value => params[prop.name])
@@ -23,10 +23,22 @@ class Relinstance
     rel
   end
   
+  def update_rel(params)
+    params[:rel].each do |k, v|
+      inst = self.relpropinstances.find(k)
+      if inst
+        inst.ref = v
+      else
+        self.relpropinstances << Relpropinstance.new(:ref => k, :value => v)
+      end
+    end
+    save!
+  end
+  
   def nodereltype
     Reltype.find(self.reltype)
   end
-  
+    
   def related_node
     Node.find(self.relnode)
 	end

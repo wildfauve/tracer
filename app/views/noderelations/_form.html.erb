@@ -1,11 +1,15 @@
-<%= form_tag(nodes_path) do %>
+<%= form_tag(noderelations_path) do %>
 	<div id='start_node'>
 		<p>Start Node Form</p>
-		<%= hidden_field_tag 'start[type]', @profile.start.type_ref%>
-		<p>Properties</p>
-		<% for p in @profile.start.properties.each %>
-			<%= label_tag p.name%>
-			<%= text_field_tag "start[#{p.name}]"%>			
+		<% if @profile.start.class == Node %>
+			<%= hidden_field_tag('start[node]', @profile.start.id) %>		
+		<% else %>
+			<%= hidden_field_tag 'start[type]', @profile.start.id%>
+			<p>Properties</p>
+			<% for p in @profile.start.properties.each %>
+				<%= label_tag p.name%>
+				<%= text_field_tag "start[#{p.name}]"%>			
+			<% end %>
 		<% end %>
 	</div>
 	<div id='rel'>
@@ -19,7 +23,7 @@
 	</div>	
 	<div id='end_node'>
 		<p>End Node Form</p>
-		<%= hidden_field_tag 'end[type]', @profile.end.type_ref%>
+		<%= hidden_field_tag 'end[type]', @profile.end.id%>
 		<p>Properties</p>
 		<% for p in @profile.end.properties%>
 			<%= label_tag p.name%>
