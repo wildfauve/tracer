@@ -1,1 +1,2 @@
-<%= @type.type_ref %>
+form = "<%= escape_javascript(render(:partial => 'form')) %>"
+$('#single_node_form').html(form)

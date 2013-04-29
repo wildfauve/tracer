@@ -1,0 +1,13 @@
+<%= form_tag(nodes_path) do %>
+	<div id='node'>
+		<p>Node Form</p>
+		<p>Properties</p>
+		<%= hidden_field_tag 'type', @node_type.id%>
+		<% for p in @node_type.properties.each %>
+			<%= label_tag p.name%>
+			<%= text_field_tag "#{p.name}"%>			
+		<% end %>
+	</div>
+	
+	<%= submit_tag "Confirm" %>		
+<% end %>

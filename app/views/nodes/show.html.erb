@@ -1,17 +1,4 @@
 <% title "Node", @node.name%>
-<% if @node.errors.any? %>
-	<div id="error_explanation">
-		<h2><%= pluralize(@node.errors.count, "error") %> prohibited the node from being saved:</h2>
-
-		<ul>
-			<% @node.errors.full_messages.each do |msg| %>
-			<li><%= msg %></li>
-			<% end %>
-		</ul>
-	</div>
-<% end %>
-
-
 <%= @node.name%>
 <p>Node Type: <%= link_to @node.type.type_ref, type_path(@node.type)%></p>
 

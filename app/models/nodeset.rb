@@ -7,8 +7,8 @@ class Nodeset
     @rel = Relinstance.relfactory(params[:rel])
     @start = Node.nodefactory(params[:start]) 
     @end = Node.nodefactory(params[:end])
-    @start.create_the_node(@rel, @end)
-    @end.create_the_node(@rel, @start)
+    @start.create_the_node(:rel => @rel, :other_node => @end)
+    @end.create_the_node(:rel => @rel, :other_node => @start)
   end
     
 end

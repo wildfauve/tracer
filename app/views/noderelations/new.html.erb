@@ -1,16 +1,14 @@
 <table>
 	<tr>
-		<th>Start Node Type</th>
-		<th>Relationship Type
-		<th>End Node Type</th>
+		<th/>
+		<th>Start Node </th>
+		<th>Relationship</th>
+		<th>End Node </th>
 	</tr>
 	<tr>
+		<td>Types</td>
 		<td>
-			<% if @start_node %>
-				<div data-sn=<%=@start_node%>>
-					<%= Node.find(@start_node).name %>
-				</div>
-			<% else %>
+			<% if !@start_node %>
 				<%= select_tag(:start, options_for_select(type_list), :include_blank => true, :prompt => "Select a Node Type", :class => "start_node") %>
 			<% end %>
 		</td>
@@ -19,6 +17,25 @@
 		</td>
 		<td>
 			<%= select_tag(:end, options_for_select(type_list), :include_blank => true, :prompt => "Select a Node Type", :class => "end_node") %>
+		</td>
+		
+	</tr>
+	<tr>
+		<td>Instances</td>
+		<td>
+			<% if @start_node %>
+				<div data-sn=<%=@start_node%>>
+					<%= Node.find(@start_node).name %>
+				</div>
+			<% else %>
+				<%= select_tag(:start_instance, options_for_select(node_list), :include_blank => true, :prompt => "Select a Node ", :class => "start_node_inst") %>
+			
+			<% end %>
+		</td>
+		<td>
+		</td>
+		<td>
+			<%= select_tag(:end_instance, options_for_select(node_list), :include_blank => true, :prompt => "Select a Node ", :class => "end_node_inst") %>
 		</td>
 		
 	</tr>

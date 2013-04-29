@@ -5,29 +5,34 @@ class Relinstance
   field :name, :type => String
   field :reltype, :type => Moped::BSON::ObjectId
   field :relnode, :type => Moped::BSON::ObjectId
+  field :deleted, :type => Boolean
 
   embedded_in :node, :inverse_of => :relinstances
   embeds_many :relpropinstances
 
 
   def self.relfactory(params)
+    Rails.logger.info(">>>Relinstance#relfactory #{params.inspect} ")
     rel = Relinstance.new
-    rt = Reltype.where(:name => params[:type]).first
+    rt = Reltype.find(params[:type])
     raise Exceptions::NoRelTypeError if rt.nil?
     rel.reltype = rt.id
-    #rel.name = params[rt.properties.where(:name_prop => true).first.name.to_sym] if !rt.properties.empty? # find the name prop and set it in the rel
+    if !rt.properties.empty? # find the name prop and set it in the rel
+      name_prop = rt.properties.where(:name_prop => true).first
+      rel.name = params[name_prop.to_sym] if !name_prop.nil?
+    end
     rt.properties.keep_if {|p| p.name_prop == false}.each do |prop|
       #work with the properties
-      rel.relpropinstances << Relpropinstance.new(:ref => prop.name, :value => params[prop.name])
+      rel.relpropinstances << Relpropinstance.new(:ref => prop.id, :value => params[prop.name])
     end
     rel
   end
   
   def update_rel(params)
     params[:rel].each do |k, v|
-      inst = self.relpropinstances.find(k)
-      if inst
-        inst.ref = v
+      inst = self.relpropinstances.where(:ref => k)
+      if !inst.empty?
+        inst.first.value = v
       else
         self.relpropinstances << Relpropinstance.new(:ref => k, :value => v)
       end

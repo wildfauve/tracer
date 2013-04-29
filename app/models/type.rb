@@ -28,7 +28,6 @@ class Type
     Rails.logger.info(">>>Type#create_the_type #{params[:properties_attributes].count}")    
     type = self.new(params)  
     type.save!
-    Rails.logger.info(">>>Type#create_the_type #{type.properties.count}")     
     return type
   end
 

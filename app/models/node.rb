@@ -3,6 +3,7 @@ class Node
   include Mongoid::Document
   
   field :name, :type => String
+  field :deleted, :type => Boolean
   
   embeds_many :propinstances
   embeds_many :relinstances
@@ -16,9 +17,9 @@ class Node
 # type = ref to the type
 # Prop instances, :propref = :implement_date, :propvalue = "0101010"
   def self.nodefactory(node_params)
+    Rails.logger.info(">>>Node#Nodefactory #{node_params.inspect} ")
     return Node.find(node_params[:node]) if node_params[:node]  # if this is an existing node
     node = Node.new
-#    t = Type.where(:type_ref => node_params[:type]).first
     t = Type.find(node_params[:type])
     raise Exceptions::NoTypeError if t.nil?
     node.type = t
@@ -30,9 +31,12 @@ class Node
     node
   end
   
-  def create_the_node(rel, noderel)
-    rel.relnode = noderel.id 
-    self.relinstances << rel
+  def create_the_node(params={}) # :rel => Relinstance, :other_node => Node
+    Rails.logger.info(">>>Node#create_the_node #{params.inspect} ")    
+    if params[:rel]  # a relationship provided?
+      params[:rel].relnode = params[:other_node].id
+      self.relinstances << params[:rel]
+    end
     save!
   end
   
@@ -41,14 +45,34 @@ class Node
     save!
     return self
   end
+
+  def add_relationship
+    
+  end
   
   def delete_relation(id)
-    here = self.relinstances.find(id)
-    others = here.related_node.relinstances.where(:relnode => self.id)
+    this = self.relinstances.find(id)
+    others = this.related_node.relinstances.where(:relnode => self.id)
     raise Exception if others.count > 1
     other = others.first
-    here.destroy
+    this.destroy
     other.destroy
+  end
+  
+  def remove_the_node
+    #to_delete = []
+    self.relinstances.each do |relation|
+      rel_node = relation.related_node
+      rel_node.relinstances.each do |rel_inst|  # need to delete the other side of the relationship
+        #to_delete << {:node => rel_node.related_node.name, :rel => rel_inst.id, :related => rel_inst.relnode} if rel_inst.relnode == self.id  
+        rel_inst.deleted = true if rel_inst.relnode == self.id  
+        rel_node.save! # save changes to related node relinstances
+      end
+      relation.deleted = true # delete the relations on self side
+    end
+    self.deleted = true
+    #Rails.logger.info(">>>Node#remove_the_node self: #{self.id}  #{to_delete.inspect} ")    
+    save!
   end
     
 end

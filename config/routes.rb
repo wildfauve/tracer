@@ -1,13 +1,20 @@
 Tracer::Application.routes.draw do
-  resources :types
+  resources :types do
+    resources :type_relations
+  end
   resources :reltypes
   resources :nodes do
       resources :relations
+      collection do
+        get 'node_form'
+      end
   end
   resources :noderelations do
     collection do
       get 'node_form'
+      get 'accumulate_node_form'
     end
   end
+  resources :archives
   
 end

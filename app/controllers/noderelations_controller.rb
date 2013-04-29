@@ -37,12 +37,19 @@ class NoderelationsController < ApplicationController
   end
   
   def node_form
-    #Rails.logger.info(">>>NodesController#node_form: #{params.inspect}, #{request.format}")
     @profile = NodeProfile.new(params[:node_profile])
     respond_to do |format|
       #format.html {render 'node_form', :layout => false}
       format.js {render 'node_form', :layout => false }# 
     end
+  end
+  
+  def accumulate_node_form
+    @profile = NodeProfile.new(params[:node_profile])
+    respond_to do |format|
+      #format.html {render 'node_form', :layout => false}
+      format.js {render 'node_form', :layout => false }# 
+    end  
   end
   
 end

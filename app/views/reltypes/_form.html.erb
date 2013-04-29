@@ -20,15 +20,15 @@
 		Properties
 		<%= form.fields_for :properties do |ff| %>
 		  <p>
+			
 			  <%= ff.label :name, "Name" %><br />
 			  <%= ff.text_field :name %><br />
 			  <%= ff.label :proptype, "Type" %><br />
 			  <%= ff.text_field :proptype %><br />
-
-			
+			  <%= ff.check_box :name_prop %>
+			  <%= ff.label :name_prop, "Mark as the Name Property" %>			
 			  <%= ff.check_box :_destroy %>
 			  <%= ff.label :_destroy, "Remove Property" %>
-
 		  </p>
 		  <% end %>
 		<%= form.fields_for :arcprop do |ff| %>
