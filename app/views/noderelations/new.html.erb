@@ -1,3 +1,8 @@
+<%- model_class = Node -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+
 <table>
 	<tr>
 		<th/>
@@ -55,6 +60,6 @@
 	<div id=node-create-status>
 		Non Selected
 	</div>
-<%= button_tag 'Generate Node-Node', :class => 'gen_node_form_button'%>
+<%= button_tag 'Generate Node-Node', :id => 'gen_node_form_button', :class => 'btn btn-primary'%>
 <div id="start_node_form">
 </div>

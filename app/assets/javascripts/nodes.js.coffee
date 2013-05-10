@@ -52,7 +52,7 @@ $ ->
 	$('.start_node_inst').change ->
 		profile["start"] = {'inst': $('.start_node_inst').val()}
 		node_set_status('Start Inst')			
-	$('.gen_node_form_button').click ->
+	$('#gen_node_form_button').click ->
 		if profile.hasOwnProperty("start") && profile.hasOwnProperty("end") && profile.hasOwnProperty("reltype")
 			form = type_node(profile)
 		else
