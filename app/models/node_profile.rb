@@ -13,11 +13,11 @@ class NodeProfile
     if profile.nil?
       @end_type = nil
       @end_inst = nil
-      return
+      return nil
     end
     if profile[:type]
       @start_type = Type.find(profile[:type])
-    else
+    else # its an :inst =>
       @start_inst = Node.find(profile[:inst])
       @start_type = @start_inst.type
     end
@@ -31,9 +31,11 @@ class NodeProfile
     end
     if profile[:type]
       @end_type = Type.find(profile[:type])
-    else
+    elsif profile[:inst]
       @end_inst = Node.find(profile[:inst])
       @end_type = @end_inst.type
+    else
+      raise Exception
     end
   end
 

@@ -1,0 +1,53 @@
+<%- model_class = Type -%>
+<% title "Reltype #{@rel.name}"%>
+<% if @rel.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@rel.errors.count, "error") %> prohibited the type from being saved:</h2>
+
+		<ul>
+			<% @rel.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+<h3><%= @rel.name%></h3>
+<div class="alert alert-success">		
+	<h4>Used in the following Types</h4>
+</div>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Start</th>
+			<th>End</th>			
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><%= link_to @rel.arcprop.start_node.type_ref, type_path(@rel.arcprop.start_node) %></td>
+			<td><%= link_to @rel.arcprop.end_node.type_ref, type_path(@rel.arcprop.end_node) %></td>
+		</tr>
+	</tbody>
+</table>
+<div class="alert alert-success">		
+	<h4>Used in the following Node Pairs</h4>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+		<th>Start Name</th>
+		<th>End Name</th>
+	</tr>
+  </thead>
+  <tbody>
+	<% for node_pair in Node.node_pairs(@rel.assigned_nodes) %>
+		<tr>
+			<td>
+				<%= link_to node_pair[:start].name, node_path(node_pair[:start]) %>
+			</td>
+			<td>
+				<%= link_to node_pair[:end].name, node_path(node_pair[:end]) %>
+			</td>
+		</tr>
+	<%end%>	
+</table>

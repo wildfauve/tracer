@@ -1,0 +1,55 @@
+<table>
+	<tr>
+		<th/>
+		<th>Start Node </th>
+		<th>Relationship</th>
+		<th>End Node </th>
+	</tr>
+	<tr>
+		<td>Types</td>
+		<td>
+			<% if !@start_node %>
+				<% @type.nil? ? start_sel = nil : start_sel = @type.id.to_s %>
+				<%= select_tag(:start, options_for_select(type_list(@type, @typearc, @position, :start_node), :selected => start_sel), :include_blank => true, :prompt => "Select a Node Type", :class => "start_node" ) %>
+			<% end %>
+		</td>
+		<td>
+			<%= select_tag(:reltype, options_for_select(reltype_list(@typearc)), :include_blank => true, :prompt => "Select a Relationship Type", :class => "rel_type") %>			
+		</td>
+		<td>
+			<%= select_tag(:end, options_for_select(type_list(@type, @typearc, @position, :end_node)), :include_blank => true, :prompt => "Select a Node Type", :class => "end_node") %>
+		</td>
+	
+	</tr>
+	<tr>
+		<td>Instances</td>
+		<td>
+			<% if @start_node %>
+				<div data-sn=<%=@start_node%>>
+					<%= Node.find(@start_node).name %>
+				</div>
+			<% else %>
+				<%= select_tag(:start_instance, options_for_select(node_list), :include_blank => true, :prompt => "Select a Node ", :class => "start_node_inst") %>
+		
+			<% end %>
+		</td>
+		<td>
+		</td>
+		<td>
+			<%= select_tag(:end_instance, options_for_select(node_list), :include_blank => true, :prompt => "Select a Node ", :class => "end_node_inst") %>
+		</td>
+	
+	</tr>
+	<tr>
+		<td>
+			<div id='start_form'/>
+		</td>
+		<td>
+			<div id='rel_form'/>
+		</td>
+		<td>
+			<div id='rel_form'/>
+		</td>
+	
+	</tr>
+</table>

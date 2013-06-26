@@ -58,13 +58,13 @@ class ReltypesController < ApplicationController
 
   def destroy
     @rel = Reltype.find(params[:id])
-    @rel.destroy
+    @rel.remove_the_reltype
     respond_to do |format|
-      if @rel.valid?
+      if @rel.errors.blank?
         format.html { redirect_to reltypes_path }
         format.json
       else
-        format.html { render action: "new" }
+        format.html { render action: "show" }
         format.json
       end
     end

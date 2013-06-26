@@ -1,0 +1,15 @@
+<% if !@start_node %>
+	<% @type.nil? ? start_sel = nil : start_sel = @type.id.to_s %>
+	<%= select_tag(:start, options_for_select(type_list(@type, @typearc, @position, :start_node), :selected => start_sel), :include_blank => true, :prompt => "Select a Node Type", :class => "start_node" ) %>
+<% end %>
+<% if @start_node %>
+	<div data-sn=<%=@start_node.id%> data-sn-type=<%=@start_node.type.id%> >
+	</div>
+<% else %>
+	<%= select_tag(:start_instance, options_for_select(node_list), :include_blank => true, :prompt => "Select a Node ", :class => "start_node_inst") %>
+
+<% end %>
+
+
+
+

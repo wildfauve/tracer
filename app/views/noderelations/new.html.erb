@@ -1,65 +1,21 @@
 <%- model_class = Node -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+<p>
+	<%= link_to 'Reset Form', reset_form_noderelations_path, :class => " btn btn-primary" %>
+</p>
+<div id="node_start_select">	
+	<%= render :partial => 'node_start_sel' %>
+</div>
+<div id="node_rel_select">
+	
+</div>
+<div id="node_end_select">
+	
 </div>
 
-<table>
-	<tr>
-		<th/>
-		<th>Start Node </th>
-		<th>Relationship</th>
-		<th>End Node </th>
-	</tr>
-	<tr>
-		<td>Types</td>
-		<td>
-			<% if !@start_node %>
-				<%= select_tag(:start, options_for_select(type_list), :include_blank => true, :prompt => "Select a Node Type", :class => "start_node") %>
-			<% end %>
-		</td>
-		<td>
-			<%= select_tag(:reltype, options_for_select(reltype_list), :include_blank => true, :prompt => "Select a Relationship Type", :class => "rel_type") %>			
-		</td>
-		<td>
-			<%= select_tag(:end, options_for_select(type_list), :include_blank => true, :prompt => "Select a Node Type", :class => "end_node") %>
-		</td>
-		
-	</tr>
-	<tr>
-		<td>Instances</td>
-		<td>
-			<% if @start_node %>
-				<div data-sn=<%=@start_node%>>
-					<%= Node.find(@start_node).name %>
-				</div>
-			<% else %>
-				<%= select_tag(:start_instance, options_for_select(node_list), :include_blank => true, :prompt => "Select a Node ", :class => "start_node_inst") %>
-			
-			<% end %>
-		</td>
-		<td>
-		</td>
-		<td>
-			<%= select_tag(:end_instance, options_for_select(node_list), :include_blank => true, :prompt => "Select a Node ", :class => "end_node_inst") %>
-		</td>
-		
-	</tr>
-	<tr>
-		<td>
-			<div id='start_form'/>
-		</td>
-		<td>
-			<div id='rel_form'/>
-		</td>
-		<td>
-			<div id='rel_form'/>
-		</td>
-		
-	</tr>
-</table>
-	<div id=node-create-status>
-		Non Selected
-	</div>
-<%= button_tag 'Generate Node-Node', :id => 'gen_node_form_button', :class => 'btn btn-primary'%>
 <div id="start_node_form">
+	
+</div>
+
+<div id=node-create-status>
+	Non Selected
 </div>

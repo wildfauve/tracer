@@ -56,7 +56,17 @@ class Type
     Node.where(:type => self)
   end
 
-    
+  def find_associations(params)
+      if params[:as] == "start_node"
+          reltypes = Reltype.where('arcprop.start' => self.id)
+          return {:node_ass => reltypes.map {|rt| rt.arcprop.end_node},
+          :reltypes => reltypes}
+      else # as end node
+          reltypes = Reltype.where('arcprop.end' => self.id)          
+          {:node_ass => reltypes.map {|rt| rt.arcprop.start_node}}
+      end
+  end
+      
   private
   
   

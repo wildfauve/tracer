@@ -31,6 +31,21 @@ class Node
     node
   end
   
+  def self.related_reltypes(reltype_id)
+    return self.where('relinstances.reltype' => reltype_id) 
+  end
+  
+  def self.node_pairs(node_filter=nil)
+    pairs = []
+    node_filter ? nodes = node_filter : nodes = Node.all
+    nodes.each do |n| 
+      n.relinstances.each do |rel|
+        pairs << {:start => n, :end => rel.related_node} if !pairs.find_index({:end => n, :start => rel.related_node})
+      end
+    end
+    pairs
+  end
+  
   def create_the_node(params={}) # :rel => Relinstance, :other_node => Node
     Rails.logger.info(">>>Node#create_the_node #{params.inspect} ")    
     if params[:rel]  # a relationship provided?
@@ -74,5 +89,6 @@ class Node
     #Rails.logger.info(">>>Node#remove_the_node self: #{self.id}  #{to_delete.inspect} ")    
     save!
   end
+  
     
 end

@@ -13,6 +13,7 @@ Tracer::Application.routes.draw do
     collection do
       get 'node_form'
       get 'accumulate_node_form'
+      get 'reset_form'
     end
   end
   resources :archives

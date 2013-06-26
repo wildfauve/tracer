@@ -1,3 +1,4 @@
+<%- model_class = Type -%>
 <% title "Type #{@type.type_ref}"%>
 <% if @type.errors.any? %>
 	<div id="error_explanation">
@@ -11,14 +12,31 @@
 	</div>
 <% end %>
 
-<%= @type.type_ref%>
+<h3><%= @type.type_ref%></h3>
+<div class="alert alert-success">		
+	<h4>Used in the following Relation Types</h4>
+</div>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Relation Type</th>
+			<th>Start/End</th>			
+		</tr>
+	</thead>
+	<tbody>
+		<% @type.assigned_reltypes.each do |rt| %>
+			<tr>
+				<td><%= link_to rt.name, reltype_path(rt) %></td>
+				<td><%= rt.arcprop.which?(@type)%></td>
+			</tr>
+		<%end %>
+		
+	</tbody>
+</table>
 
-<p>Used in the following Relation Types</p>
-<% @type.assigned_reltypes.each do |rt| %>
-	<p><%= rt.name %> --> <%= rt.arcprop.which?(@type)%></p>
-<%end %>
-
-<p>Nodes of this type:</p>
+<div class="alert alert-success">		
+	<h4>Nodes of this type:</h4>
+</div>
 <table class="table table-striped">
 	<thead>
 		<tr>

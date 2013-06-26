@@ -47,6 +47,5 @@ class Relinstance
   def related_node
     Node.find(self.relnode)
 	end
-	
 
 end

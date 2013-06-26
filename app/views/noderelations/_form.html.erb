@@ -1,6 +1,12 @@
 <%= form_tag(noderelations_path) do %>
 	<div id='start_node'>
-		<p>Start Node: Type: <%= @profile.start_type.type_ref if @profile.start_type %></p>
+		<div class="alert alert-success">		
+			<h4>Start Node: Type: <%= @profile.start_type.type_ref if @profile.start_type %> 
+				<% if @profile.start_inst %>
+					Name: <%= @profile.start_inst.name %>
+				<% end %>
+			</h4>
+		</div>
 		<%= hidden_field_tag('start[type]', @profile.start_type.id) if @profile.start_type %>
 		<% if @profile.start_inst %>
 			<%= hidden_field_tag 'start[node]', @profile.start_inst.id%>
@@ -16,7 +22,9 @@
 	</div>
 	<div id='rel'>
 		<% if @profile.rel %>
-			<p>Relationship: Type: <%= @profile.rel.name%></p>
+			<div class="alert alert-success">				
+				<h4>Relationship: Type: <%= @profile.rel.name%></h4>
+			</div>
 			<%= hidden_field_tag 'rel[type]', @profile.rel.id%>		
 			<p>Properties</p>
 			<% for p in @profile.rel.properties.each %>
@@ -28,7 +36,13 @@
 		<% end %>
 	</div>	
 	<div id='end_node'>
-		<p>End Node: Type: <%= @profile.end_type.type_ref if @profile.end_type %></p>
+		<div class="alert alert-success">
+			<% if @profile.end_inst %>				
+				<h4>End Node: Type: <%= @profile.end_type.type_ref%> Instance: <%= @profile.end_inst.name if @profile.end_inst %></h4>			
+			<% else %>
+				<h4>End Node: Type: <%= @profile.end_type.type_ref if @profile.end_type %></h4>			
+			<% end %>			
+		</div>
 		<%= hidden_field_tag('end[type]', @profile.end_type.id) if @profile.end_type%>
 		<% if @profile.end_inst %>
 			<%= hidden_field_tag 'end[node]', @profile.end_inst.id%>

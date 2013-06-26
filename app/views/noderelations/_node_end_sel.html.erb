@@ -1,0 +1,2 @@
+<%= select_tag(:end, options_for_select(type_list(@type, @typearc, @position, :end_node)), :include_blank => true, :prompt => "Select a Node Type", :class => "end_node") %>
+<%= select_tag(:end_instance, options_for_select(node_list(@typearc)), :include_blank => true, :prompt => "Select a Node Instance", :class => "end_node_instance") %>

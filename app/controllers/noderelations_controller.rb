@@ -1,7 +1,10 @@
 class NoderelationsController < ApplicationController
   
   def new
-    @start_node = params[:start_node]
+      if params[:start_node]
+          @start_node = Node.find(params[:start_node])
+      end
+
   end
   
   def edit
@@ -50,6 +53,12 @@ class NoderelationsController < ApplicationController
       #format.html {render 'node_form', :layout => false}
       format.js {render 'node_form', :layout => false }# 
     end  
+  end
+  
+  def reset_form
+    respond_to do |format|
+      format.html {render 'new'}
+    end
   end
   
 end
