@@ -1,7 +1,7 @@
 class NodesController < ApplicationController
   
   def index
-    @nodes = Node.where(:deleted.ne => true)
+    @nodes = Node.all_active
   end
   
   # create a new node, without creating a node relationship.
@@ -31,8 +31,9 @@ class NodesController < ApplicationController
   end
   
   def create
+    @node = Node.nodefactory(params).create_the_node
     respond_to do |format|
-    if Node.nodefactory(params).create_the_node
+    if @node.valid?
       format.html { redirect_to nodes_path }
       format.json
     else

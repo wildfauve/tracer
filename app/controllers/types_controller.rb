@@ -26,13 +26,13 @@ class TypesController < ApplicationController
   # POST /types
   # POST /types.json
   def create
-    Rails.logger.info(">>>Type Controller>>CREATE: #{params.inspect}, #{request.format}")
     @type = Type.create_the_type(params[:type])
     respond_to do |format|
       if @type.valid?
         format.html { redirect_to types_path }
         format.json
       else
+        Rails.logger.info(">>>Type Controller>>CREATE/error: #{@type.errors.inspect}")        
         format.html { render action: "new" }
         format.json
       end

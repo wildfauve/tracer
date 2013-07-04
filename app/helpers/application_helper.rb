@@ -11,4 +11,19 @@ module ApplicationHelper
       type
   end
 
+  def error_content(ar_obj=nil)
+    return if ar_obj.nil?
+    if ar_obj.errors.any?
+      content_tag(:div, :class => 'error_explanation') do
+        concat(content_tag(:h2, "#{pluralize(ar_obj.errors.count, "error")} prohibited the Model from being saved:"))
+        concat(content_tag(:ul) do
+          ar_obj.errors.full_messages.each do |msg| 
+            concat(content_tag(:li,msg))
+          end
+        end)
+      end
+    end
+  end
+
+
 end

@@ -1,16 +1,6 @@
 <%- model_class = Type -%>
 <% title "Reltype #{@rel.name}"%>
-<% if @rel.errors.any? %>
-	<div id="error_explanation">
-		<h2><%= pluralize(@rel.errors.count, "error") %> prohibited the type from being saved:</h2>
-
-		<ul>
-			<% @rel.errors.full_messages.each do |msg| %>
-			<li><%= msg %></li>
-			<% end %>
-		</ul>
-	</div>
-<% end %>
+<%= error_content(@rel) %>
 <h3><%= @rel.name%></h3>
 <div class="alert alert-success">		
 	<h4>Used in the following Types</h4>

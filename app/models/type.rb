@@ -2,15 +2,17 @@ class Type
   @@per_page = 20
     
   include Mongoid::Document
-    
+  include Mongoid::Timestamps    
+  
   field :type_ref, :type => String
   field :desc, :type => String
   
   embeds_many :properties
   has_many :node
   
+  validates_uniqueness_of :type_ref
 #  validate :has_assigned_reltypes, :on => :destroy
-  before_destroy :has_assigned_reltypes
+  before_destroy :has_assigned_reltypes, :has_assigned_nodes
 
   
   # TODO: Needs to not create the property if NIL
@@ -27,13 +29,19 @@ class Type
   def self.create_the_type(params)
     Rails.logger.info(">>>Type#create_the_type #{params[:properties_attributes].count}")    
     type = self.new(params)  
-    type.save!
+    type.save
     return type
   end
 
   def update_the_type(params)
+    # when a property is removed, the properties need to be removed from any nodes as well
+    
+    # TODO: needs to send BSON ObjectId not string
+    Node.delete_properties(params[:properties_attributes].select {|k,v| v[:_destroy] == "1"}.collect {|k,v| self.properties.find(v[:id])})
+    
+    
     self.attributes = params       
-    save!
+    save
     return self
   end
     
@@ -53,7 +61,7 @@ class Type
 
 
   def nodes
-    Node.where(:type => self)
+    Node.find_active(self)
   end
 
   def find_associations(params)
@@ -66,15 +74,25 @@ class Type
           {:node_ass => reltypes.map {|rt| rt.arcprop.start_node}}
       end
   end
+  
+  def has_assigned_nodes?
+    self.nodes.count > 0 ? true : false
+  end
+  
       
   private
-  
-  
+    
   def has_assigned_reltypes
     Rails.logger.info(">>>Type#has_assigned_reltypes ")     
-    errors.add(:type_ref, "Cant delete a type if it has assigned relation types") if self.has_assigned_reltypes?
+    errors.add(:type_ref, "Can't delete a Type if it has assigned relation types") if self.has_assigned_reltypes?
     errors.blank?
   end
+  
+  def has_assigned_nodes
+    errors.add(:nodes, "Can't delete a Type if it has assigned nodes") if self.has_assigned_nodes?
+    errors.blank?
+  end
+  
   
   
 end

@@ -10,7 +10,7 @@ class TypeRelationsController < ApplicationController
       elsif params[:context] == 'node_inst'
           @type = Node.find(params[:type_id]).type
           @typearc = @type.find_associations(:as => @position)           
-      else # must be a rel
+      else # must be a "rel_type"
           @type = Reltype.find(params[:type_id])
           @typearc = @type.find_associations
       end

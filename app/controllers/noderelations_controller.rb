@@ -1,10 +1,10 @@
 class NoderelationsController < ApplicationController
   
   def new
-      if params[:start_node]
-          @start_node = Node.find(params[:start_node])
-      end
-
+    @nodeset = Nodeset.new
+    if params[:start_node]
+        @start_node = Node.find(params[:start_node])
+    end
   end
   
   def edit
@@ -12,15 +12,16 @@ class NoderelationsController < ApplicationController
   end
   
   def create
-    @nodeset = Nodeset.new(params)
+    @nodeset = Nodeset.new.create(params)
+    Rails.logger.info(">>>NodeController#create  Valid?  #{@nodeset.start.valid?} #{@nodeset.end.valid?} ")    
     respond_to do |format|
-#      if @type.valid?
+      if @nodeset.start.valid? && @nodeset.end.valid?
         format.html { redirect_to nodes_path }
         format.json
-#      else
-#        format.html { render action: "new" }
-#        format.json
-#      end
+      else
+        format.html { render action: "new" }
+        format.json
+      end
     end
     
   end
@@ -57,7 +58,7 @@ class NoderelationsController < ApplicationController
   
   def reset_form
     respond_to do |format|
-      format.html {render 'new'}
+      format.html {redirect_to  new_noderelation_path}
     end
   end
   

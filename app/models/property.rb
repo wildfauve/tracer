@@ -7,6 +7,7 @@ class Property
   field :proptype, :type => String
   field :name_prop, :type => Boolean
 
+  validates :name, exclusion: {in: [ "node", "type" ], message: "used a reserved word for a property name"}
   embedded_in :type, :inverse_of => :properties
   
   

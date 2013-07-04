@@ -1,18 +1,13 @@
 <%- model_class = Type -%>
 <% title "Type #{@type.type_ref}"%>
-<% if @type.errors.any? %>
-	<div id="error_explanation">
-		<h2><%= pluralize(@type.errors.count, "error") %> prohibited the type from being saved:</h2>
+<%= error_content(@type) %>
 
-		<ul>
-			<% @type.errors.full_messages.each do |msg| %>
-			<li><%= msg %></li>
-			<% end %>
-		</ul>
-	</div>
-<% end %>
+<h3>
+	<%= @type.type_ref%>
+	<%= link_to 'edit', edit_type_path(@type), :class => 'btn btn-success btn-mini'%>
+	<%= link_to 'delete', type_path(@type), :method => :delete, :class => 'btn btn-danger btn-mini'%>		
+</h3>
 
-<h3><%= @type.type_ref%></h3>
 <div class="alert alert-success">		
 	<h4>Used in the following Relation Types</h4>
 </div>

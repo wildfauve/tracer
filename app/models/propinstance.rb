@@ -7,6 +7,8 @@ class Propinstance
 
   embedded_in :node, :inverse_of => :propinstances
 
+  validates :value, exclusion: {in: [ "node", "type" ], message: "used a reserved word for a property name"}  
+
   def name
     Type.where('properties._id' => ref).first.properties.find(ref).name
   end

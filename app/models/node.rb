@@ -1,9 +1,18 @@
 class Node
   
   include Mongoid::Document
+  include Mongoid::Timestamps  
   
   field :name, :type => String
   field :deleted, :type => Boolean
+  
+  scope :all_active, where(:deleted.ne => true)
+  scope :all_archived, where(:deleted => true)
+  scope :find_active, ->(type){ where(:type => type, :deleted.ne => true) }
+  
+  validates :name, exclusion: {in: [ "node", "type" ], message: "used a reserved word for a Node name"}  
+  
+  validates_uniqueness_of :name
   
   embeds_many :propinstances
   embeds_many :relinstances
@@ -16,7 +25,8 @@ class Node
 # name = the name prop for the type
 # type = ref to the type
 # Prop instances, :propref = :implement_date, :propvalue = "0101010"
-  def self.nodefactory(node_params)
+  def self.nodefactory(node_params=nil)
+    return Node.new if node_params.nil?    
     Rails.logger.info(">>>Node#Nodefactory #{node_params.inspect} ")
     return Node.find(node_params[:node]) if node_params[:node]  # if this is an existing node
     node = Node.new
@@ -46,19 +56,29 @@ class Node
     pairs
   end
   
+  def self.delete_properties(props)
+    props.each do |prop|
+      self.where('propinstances.ref' => prop.id).each do |node|
+        node.propinstances.select {|pi| pi.ref == prop.id}.each {|pii| pii.destroy}
+        node.save
+      end
+    end
+  end
+  
   def create_the_node(params={}) # :rel => Relinstance, :other_node => Node
     Rails.logger.info(">>>Node#create_the_node #{params.inspect} ")    
     if params[:rel]  # a relationship provided?
       params[:rel].relnode = params[:other_node].id
       self.relinstances << params[:rel]
     end
-    save!
+    save
+    self
   end
   
   def update_the_node(params)
     self.attributes = params       
-    save!
-    return self
+    save
+    self
   end
 
   def add_relationship
@@ -76,19 +96,32 @@ class Node
   
   def remove_the_node
     #to_delete = []
-    self.relinstances.each do |relation|
-      rel_node = relation.related_node
-      rel_node.relinstances.each do |rel_inst|  # need to delete the other side of the relationship
-        #to_delete << {:node => rel_node.related_node.name, :rel => rel_inst.id, :related => rel_inst.relnode} if rel_inst.relnode == self.id  
-        rel_inst.deleted = true if rel_inst.relnode == self.id  
-        rel_node.save! # save changes to related node relinstances
-      end
-      relation.deleted = true # delete the relations on self side
-    end
+    set_delete_on_relinstances(:to => true)    
     self.deleted = true
     #Rails.logger.info(">>>Node#remove_the_node self: #{self.id}  #{to_delete.inspect} ")    
     save!
   end
   
+  
+  
+  def archive_perform
+    set_delete_on_relinstances(:to => false)
+    self.deleted = false
+    save!
+  end
+  
+  private
+  
+  def set_delete_on_relinstances(archive_flag)
+    self.relinstances.each do |relation|
+      rel_node = relation.related_node
+      rel_node.relinstances.each do |rel_inst|  # need to delete the other side of the relationship
+        #to_delete << {:node => rel_node.related_node.name, :rel => rel_inst.id, :related => rel_inst.relnode} if rel_inst.relnode == self.id  
+        rel_inst.deleted = archive_flag[:to] if rel_inst.relnode == self.id  
+        rel_node.save! # save changes to related node relinstances
+      end
+      relation.deleted = archive_flag[:to] # delete the relations on self side
+    end
+  end
     
 end

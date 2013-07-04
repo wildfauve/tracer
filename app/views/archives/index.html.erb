@@ -1,6 +1,3 @@
-<%- model_class = Node -%>
-<%= link_to 'New Single Node', new_node_path, :class => " btn btn-primary" %>
-<%= link_to 'New Node<->Node Relationship', new_noderelation_path, :class => " btn btn-primary" %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -37,8 +34,7 @@
 				<% end %>
 			</td>
 			<td>
-				<%= link_to 'Edit', edit_node_path(node), :class => 'btn btn-success btn-mini' %>
-				<%= link_to 'Delete', node_path(node), :method => :delete, :class => 'btn btn-danger btn-mini'%>			
+				<%= link_to 'undelete', undelete_archives_path(:ctx => 'node', :ctx_id => node.id), :method => :put, :class => 'btn btn-danger btn-mini'%>			
 			</td>
 		</tr>
 	<%end%>	

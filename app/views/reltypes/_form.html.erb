@@ -1,16 +1,6 @@
 <div class="border-form">
 	<%= form_for(setup_reltype(@rel)) do |form| %>
-		<% if @rel.errors.any? %>
-			<div id="error_explanation">
-				<h2><%= pluralize(@rel.errors.count, "error") %> prohibited the type from being saved:</h2>
-
-				<ul>
-					<% @rel.errors.full_messages.each do |msg| %>
-					<li><%= msg %></li>
-					<% end %>
-				</ul>
-			</div>
-		<% end %>
+		<%= error_content(@rel) %>
 		<div class="field">
 			<%= form.label :name %>
 			<%= form.text_field :name %>

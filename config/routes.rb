@@ -16,6 +16,12 @@ Tracer::Application.routes.draw do
       get 'reset_form'
     end
   end
-  resources :archives
+  
+  resources :archives do
+    collection do
+      put 'undelete'
+    end
+  end
+  
   
 end

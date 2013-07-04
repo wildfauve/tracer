@@ -1,17 +1,7 @@
 </br>
 </br>
 <%= form_for(setup_type(@type), :class => "form-horizontal") do |form| %>
-	<% if @type.errors.any? %>
-		<div id="error_explanation">
-			<h2><%= pluralize(@type.errors.count, "error") %> prohibited the type from being saved:</h2>
-
-			<ul>
-				<% @type.errors.full_messages.each do |msg| %>
-				<li><%= msg %></li>
-				<% end %>
-			</ul>
-		</div>
-	<% end %>
+	<%= error_content(@type) %>
 	<div class="field">
 		<%= form.label :type_ref %>
 		<%= form.text_field :type_ref %>
