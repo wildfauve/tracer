@@ -3,6 +3,7 @@ class Relinstance
   include Mongoid::Document
   
   field :name, :type => String
+  field :position, :type => String  
   field :reltype, :type => Moped::BSON::ObjectId
   field :relnode, :type => Moped::BSON::ObjectId
   field :deleted, :type => Boolean

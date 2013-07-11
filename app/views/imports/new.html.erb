@@ -1,0 +1,8 @@
+<%= form_tag(imports_path, :method => :post, :multipart => true ) do  %>
+	<p><%= label_tag "Upload an Import File" %></p>
+  <p><%= file_field_tag :import, :class => "button"%></p>
+  </p>
+  <div class="actions">
+    <%= submit_tag "Run Import", :class => "btn btn-primary" %>
+  </div>
+<% end %>

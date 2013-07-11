@@ -23,5 +23,8 @@ Tracer::Application.routes.draw do
     end
   end
   
+  resources :exports
+  resources :imports
+  
   
 end

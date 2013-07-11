@@ -25,21 +25,44 @@ class Type
     doc_from = ((page.to_i - 1) * @@per_page)
     self.all.order_by([:year, :asc]).page(params[:page])
   end
-    
+  
+  # {"type"=>{"type_ref"=>"test", 
+  #         "properties_attributes"=>{"0"=>{"name"=>"name", "proptype"=>"string", "name_prop"=>"1", "_destroy"=>"0"}, 
+  # =>      "1"=>{"name"=>"prop2", "proptype"=>"string", "name_prop"=>"0", "_destroy"=>"0"}, 
+   # =>     "2"=>{"name"=>"", "proptype"=>"", "name_prop"=>"0", "_destroy"=>"0"}}}, "commit"=>"Create"}  
   def self.create_the_type(params)
-    Rails.logger.info(">>>Type#create_the_type #{params[:properties_attributes].count}")    
+    Rails.logger.info(">>>Type#create_the_type #{params[:properties_attributes]}")    
     type = self.new(params)  
     type.save
     return type
   end
+  
+#  {"id"=>"51db3d9be4df1c5b0f000001", "type_ref"=>"Arch Driver", "desc"=>nil, 
+# "nodes"=>[{"id"=>"51db66c3e4df1c12cf000001", "name"=>"drive1"}], 
+# "properties"=>[{"id"=>{"id"=>"51db3d9be4df1c5b0f000002"}, "name"=>{"propid"=>"51db3d9be4df1c5b0f000002", "name"=>"name"}, "proptype"=>"string", "name_prop"=>true}, {"id"=>{"id"=>"51db3d9be4df1c5b0f000003"}, "name"=>{"propid"=>"51db3d9be4df1c5b0f000003", "name"=>"desc"}, "proptype"=>"string", "name_prop"=>false}]}
+  def self.import(type)
+    current = self.where(:id => type["id"]).first
+    params = {}
+    params[:type_ref] = type["type_ref"]
+    params[:desc] = type["desc"]
+    prop_attr = {}
+    ct = 0
+    type["properties"].each do |prop|
+      prop["name_prop"] ? nameprop = "1" : nameprop = "0" 
+      prop_attr[ct.to_s] = {:name => prop["name"]["name"], :proptype => prop["proptype"], :name_prop => nameprop, :_destroy => "0"}
+      ct += 1
+    end
+    params[:properties_attributes] = prop_attr
+    current ? t = current.update_the_type(params) : t = self.create_the_type(params)
+    return t
+  end
 
   def update_the_type(params)
+    Rails.logger.info(">>>Type#update_the_type #{params}")        
     # when a property is removed, the properties need to be removed from any nodes as well
     
     # TODO: needs to send BSON ObjectId not string
     Node.delete_properties(params[:properties_attributes].select {|k,v| v[:_destroy] == "1"}.collect {|k,v| self.properties.find(v[:id])})
-    
-    
     self.attributes = params       
     save
     return self
@@ -52,6 +75,8 @@ class Type
   end  
   
   def has_assigned_reltypes?
+    rt = Reltype.all
+    return false if rt.count == 0
     Reltype.all.all? {|r| r.arcprop.start == self.id || r.arcprop.end == self.id }
   end
   

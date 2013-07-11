@@ -8,7 +8,7 @@ class Node
   
   scope :all_active, where(:deleted.ne => true)
   scope :all_archived, where(:deleted => true)
-  scope :find_active, ->(type){ where(:type => type, :deleted.ne => true) }
+  scope :find_active, ->(type) { where(:type => type, :deleted.ne => true) }
   
   validates :name, exclusion: {in: [ "node", "type" ], message: "used a reserved word for a Node name"}  
   
@@ -22,10 +22,8 @@ class Node
                                 :reject_if => proc {|attrs| attrs[:value].blank?}
   
   
-# name = the name prop for the type
-# type = ref to the type
-# Prop instances, :propref = :implement_date, :propvalue = "0101010"
-  def self.nodefactory(node_params=nil)
+# {"type"=>"51dce71de4df1c1e6f000133", "title"=>"r2", "desc"=>"rr2", "likelihood"=>"1", "impact"=>"1", "commit"=>"Confirm"}
+  def self.nodefactory(node_params=nil, position=nil)
     return Node.new if node_params.nil?    
     Rails.logger.info(">>>Node#Nodefactory #{node_params.inspect} ")
     return Node.find(node_params[:node]) if node_params[:node]  # if this is an existing node
@@ -33,12 +31,32 @@ class Node
     t = Type.find(node_params[:type])
     raise Exceptions::NoTypeError if t.nil?
     node.type = t
+    raise
     node.name = node_params[t.properties.where(:name_prop => true).first.name.to_sym] # find the name prop and set it in the node
     t.properties.keep_if {|p| p.name_prop == false}.each do |prop|
       #work with the properties
       node.propinstances << Propinstance.new(:ref => prop.id, :value => node_params[prop.name])
     end
     node
+  end
+  
+  def self.import(node, type_map, rt_map)
+    current = self.where(:id => node["id"]).first
+    params = {}
+    params[:name] = node["name"]  # TODO :this bit is done by looking up type property for the name prop OH DEER
+    params[:desc] = node["desc"]
+    prop_attr = {}
+    ct = 0
+    type["properties"].each do |prop|
+      prop["name_prop"] ? nameprop = "1" : nameprop = "0" 
+      prop_attr[ct.to_s] = {:name => prop["name"]["name"], :proptype => prop["proptype"], :name_prop => nameprop, :_destroy => "0"}
+      ct += 1
+    end
+    params[:properties_attributes] = prop_attr
+    current ? t = current.update_the_type(params) : t = self.create_the_type(params)
+    return t
+    
+    
   end
   
   def self.related_reltypes(reltype_id)
@@ -108,6 +126,15 @@ class Node
     set_delete_on_relinstances(:to => false)
     self.deleted = false
     save!
+  end
+
+  
+# { "type"=>"51db3d9be4df1c5b0f000001", "name"=>"drive1", "desc"=>"dkfjdkfdkfdjff", "commit"=>"Confirm"}    
+  def generate
+    Jbuilder.encode do |j|
+      j.name self.name
+    end
+    
   end
   
   private

@@ -1,6 +1,6 @@
 <%- model_class = Node -%>
-<%= error_content(@@nodeset.start) %>
-<%= error_content(@@nodeset.end) %>
+<%= error_content(@nodeset.start) %>
+<%= error_content(@nodeset.end) %>
 
 <p>
 	<%= link_to 'Reset Form', reset_form_noderelations_path, :class => " btn btn-primary" %>

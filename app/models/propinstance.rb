@@ -13,5 +13,8 @@ class Propinstance
     Type.where('properties._id' => ref).first.properties.find(ref).name
   end
 
+  def property
+    Type.where('properties._id' => ref).first.properties.find(ref)
+  end
 
 end

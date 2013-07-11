@@ -34,7 +34,7 @@ gem 'jbuilder'
 gem 'redis'
 gem "highcharts-rails"
 gem 'kaminari'
-#gem "twitter-bootstrap-rails"
+gem 'carrierwave'
 
 # Neo4j Gems
 #gem 'neography'
