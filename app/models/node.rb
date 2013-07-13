@@ -35,11 +35,11 @@ class Node
     # when Node id is provided this is an update function
     if node_id
       node.propinstances.each do |pi|
-        pi.value = node_params[node.propinstances.first.name]
+        pi.value = node_params[pi.name]
       end
   		pi = node.propinstances.collect {|pi| pi.name}
   		t = node.type.properties.collect {|p| p if p.name_prop == false}
-  		t.delete_if {|i| pi.find_index(i) || i.nil?}.each do |p|
+  		t.delete_if {|i| i.nil? || pi.find_index(i.name)}.each do |p|
   		  node.propinstances << Propinstance.new(:ref => p.id, :value => node_params[p.name])
 		  end
     else

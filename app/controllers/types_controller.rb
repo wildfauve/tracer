@@ -1,7 +1,7 @@
 class TypesController < ApplicationController
   
   def index
-    @types = Type.all
+    @types = Type.all.sort(:type_ref => :asc)
   end
   
   def show
