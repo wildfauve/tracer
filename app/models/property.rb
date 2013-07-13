@@ -9,6 +9,6 @@ class Property
 
   validates :name, exclusion: {in: [ "node", "type" ], message: "used a reserved word for a property name"}
   embedded_in :type, :inverse_of => :properties
-  
+  embedded_in :reltype, :inverse_of => :properties
   
 end

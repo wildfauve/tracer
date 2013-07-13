@@ -45,8 +45,7 @@ class NodesController < ApplicationController
   end
   
   def update
-    @node = Node.find(params[:id])
-    @node.update_the_node(params[:node])
+    @node = Node.nodefactory(params, nil, params[:id]).update_the_node
     respond_to do |format|
       if @node.valid?
         format.html { redirect_to nodes_path }

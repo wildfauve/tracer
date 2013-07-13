@@ -33,11 +33,10 @@
 				<tr>
 					<td><%= link_to nrel.related_node.name, node_path(nrel.related_node) %></td>
 					<td><%= link_to nrel.related_node.type.type_ref, reltype_path(nrel.nodereltype) %></td>
-					<td><%= nrel.nodereltype.name %></td>
+					<td><%= nrel.position == "start" ? nrel.nodereltype.name : "(#{nrel.nodereltype.name})"  %></td>
 					<td>
 						<% nrel.relpropinstances.each do |i| %>
-							<%= i.proptype.name%>
-							<%= i.value %>
+							<%= i.proptype.name + ": " + i.value %>
 						<% end %>
 					</td>
 					<td>

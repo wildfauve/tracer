@@ -23,40 +23,44 @@ class Node
   
   
 # {"type"=>"51dce71de4df1c1e6f000133", "title"=>"r2", "desc"=>"rr2", "likelihood"=>"1", "impact"=>"1", "commit"=>"Confirm"}
-  def self.nodefactory(node_params=nil, position=nil)
+  def self.nodefactory(node_params=nil, position=nil, node_id=nil)
     return Node.new if node_params.nil?    
     Rails.logger.info(">>>Node#Nodefactory #{node_params.inspect} ")
     return Node.find(node_params[:node]) if node_params[:node]  # if this is an existing node
-    node = Node.new
+    node_id ? node = Node.find(node_id) : node = Node.new
     t = Type.find(node_params[:type])
     raise Exceptions::NoTypeError if t.nil?
     node.type = t
-    raise
     node.name = node_params[t.properties.where(:name_prop => true).first.name.to_sym] # find the name prop and set it in the node
-    t.properties.keep_if {|p| p.name_prop == false}.each do |prop|
-      #work with the properties
-      node.propinstances << Propinstance.new(:ref => prop.id, :value => node_params[prop.name])
+    # when Node id is provided this is an update function
+    if node_id
+      node.propinstances.each do |pi|
+        pi.value = node_params[node.propinstances.first.name]
+      end
+  		pi = node.propinstances.collect {|pi| pi.name}
+  		t = node.type.properties.collect {|p| p if p.name_prop == false}
+  		t.delete_if {|i| pi.find_index(i) || i.nil?}.each do |p|
+  		  node.propinstances << Propinstance.new(:ref => p.id, :value => node_params[p.name])
+		  end
+    else
+      # Work with propertuies for a new node
+      t.properties.keep_if {|p| p.name_prop == false}.each do |prop|
+        node.propinstances << Propinstance.new(:ref => prop.id, :value => node_params[prop.name])
+      end
     end
     node
   end
   
-  def self.import(node, type_map, rt_map)
+  def self.import(node, type_map, rt_map, build_only=false)
     current = self.where(:id => node["id"]).first
-    params = {}
-    params[:name] = node["name"]  # TODO :this bit is done by looking up type property for the name prop OH DEER
-    params[:desc] = node["desc"]
-    prop_attr = {}
-    ct = 0
-    type["properties"].each do |prop|
-      prop["name_prop"] ? nameprop = "1" : nameprop = "0" 
-      prop_attr[ct.to_s] = {:name => prop["name"]["name"], :proptype => prop["proptype"], :name_prop => nameprop, :_destroy => "0"}
-      ct += 1
+    fields = {}
+    type = Type.find(type_map[node["type"]["id"]])
+    fields[:type] = type.id
+    fields[type.properties.where(:name_prop => true).first.name.to_sym] = node["name"]  
+    node["propinstances"].each do |prop|
+      fields[prop["name"]["name"]] = prop["value"]      
     end
-    params[:properties_attributes] = prop_attr
-    current ? t = current.update_the_type(params) : t = self.create_the_type(params)
-    return t
-    
-    
+    build_only ? fields : self.nodefactory(fields).create_the_node
   end
   
   def self.related_reltypes(reltype_id)
@@ -82,6 +86,22 @@ class Node
       end
     end
   end
+
+  def self.delete_rel_prop(rel_type, props)
+    nodes = Node.where('relinstances.reltype' => rel_type.id) 
+    nodes.each do |node|
+      node.relinstances.each do |ri|
+        if ri.reltype == rel_type.id
+          props.each do |prop|
+            ri.relpropinstances.each do |rpi|
+              rpi.destroy if rpi.ref == prop.id
+            end
+          end
+        end
+      end
+      node.save
+    end
+  end
   
   def create_the_node(params={}) # :rel => Relinstance, :other_node => Node
     Rails.logger.info(">>>Node#create_the_node #{params.inspect} ")    
@@ -93,8 +113,10 @@ class Node
     self
   end
   
-  def update_the_node(params)
-    self.attributes = params       
+
+# CREATE Params  {"type"=>"51e069c5e4df1c7435000011", "name"=>"D1000", "desc"=>"A description"}
+# Update Params  {"type"=>"51e069c5e4df1c7435000011", "name"=>"D1000", "desc"=>"A description A DDDD"}  
+  def update_the_node
     save
     self
   end

@@ -9,7 +9,7 @@ class Relpropinstance
   validates :value, exclusion: {in: [ "node", "type" ], message: "used a reserved word for a property name"}
   
   def proptype
-    Reltype.where('properties.id' == self.ref).first.properties.find(self.ref)
+    Reltype.where('properties._id' => self.ref).first.properties.find(self.ref)
   end
   
 end

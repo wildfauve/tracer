@@ -1,1 +1,22 @@
-<%= render :partial => 'edit_node_form'%>
+<%= form_tag(node_path, :method => :put) do %>
+	<div id='node'>
+		<p>Node Form</p>
+		<p>Properties</p>
+		<%= hidden_field_tag 'type', @node.type.id%>
+		<%= label_tag :name %>
+		<%= text_field_tag 'name', @node.name %>			
+		<% for pi in @node.propinstances.each %>
+			<%= label_tag pi.name%>
+			<%= text_field_tag pi.name, pi.value%>			
+		<% end %>
+		<% pi = @node.propinstances.collect {|pi| pi.name} %>
+		<% t = @node.type.properties.collect {|p| p.name if p.name_prop == false} %>
+		<% t.delete_if {|i| pi.find_index(i) || i.nil?} %>
+		<% for p in t %>
+			<%= label_tag p%>
+			<%= text_field_tag p%>			
+		<% end %>
+	</div>
+	
+	<%= submit_tag "Confirm" %>		
+<% end %>

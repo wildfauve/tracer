@@ -29,6 +29,13 @@ class Relinstance
     rel
   end
   
+  def self.import(params)
+    rel_params = {}
+    params[:rel]["relpropinstances"].each {|relprop| rel_params[relprop["reltype_name"]] = relprop["value"]}
+    rel_params[:type] = params[:rt_map][params[:rel]["reltype"]["reltypeid"]]
+    rel_params
+  end
+  
   def update_rel(params)
     params[:rel].each do |k, v|
       inst = self.relpropinstances.where(:ref => k)

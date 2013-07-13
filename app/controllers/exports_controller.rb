@@ -9,7 +9,7 @@ class ExportsController < ApplicationController
   end
   
   def new
-    @nodes = Node.all
+    @nodes = Node.all_active
     @types = Type.all
     @reltypes = Reltype.all
     respond_to do |f|

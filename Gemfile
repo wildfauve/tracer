@@ -29,12 +29,8 @@ end
 gem 'jquery-rails'
 gem "mongoid", "~> 3.0.0"
 gem "origin", "~> 1.0.4"
-gem 'tire'
 gem 'jbuilder'
-gem 'redis'
-gem "highcharts-rails"
 gem 'kaminari'
-gem 'carrierwave'
 
 # Neo4j Gems
 #gem 'neography'

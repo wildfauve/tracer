@@ -19,6 +19,12 @@ json.nodes nodes do |node|
       json.id rel.related_node.id
       json.name rel.related_node.name
     end
+    json.relpropinstances rel.relpropinstances do |inst|
+      json.id inst.id
+      json.prop_ref_id inst.ref
+      json.value inst.value
+      json.reltype_name inst.proptype.name
+    end
   end
   json.propinstances node.propinstances do |prop|
     json.id(prop, :id)

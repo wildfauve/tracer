@@ -89,6 +89,10 @@ class Type
     Node.find_active(self)
   end
 
+  def name_prop
+    self.properties.keep_if {|p| p.name_prop == true}.first
+  end
+
   def find_associations(params)
       if params[:as] == "start_node"
           reltypes = Reltype.where('arcprop.start' => self.id)
