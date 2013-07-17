@@ -1,34 +1,49 @@
 </br>
 </br>
-<div class="form-horizontal">
-<%= form_for(setup_type(@type)) do |form| %>
-	<%= error_content(@type) %>
-	<div class="control-group">
-		<%= form.label 'Name', :class => "control-label" %>
-		<div class="controls">
-			<%= form.text_field :type_ref %>
+<div >
+	<%= form_for(setup_type(@type), :html => {:class => "form-horizontal"}) do |form| %>
+		<%= error_content(@type) %>
+		<div class="control-group">
+			<%= form.label 'Name', class: "control-label"%>
+			<div class="controls">
+				<%= form.text_field :type_ref %>
+			</div>
 		</div>
-	</div>
-	<h3>Properties</h3>
-	<%= form.fields_for :properties do |ff| %>
-	  <p>
-		  <%= ff.label :name, "Name" %><br />
-		  <%= ff.text_field :name %><br />
-		  <%= ff.label :proptype, "Type" %><br />
-		  <%= ff.text_field :proptype %><br />
-		  <%= ff.check_box :name_prop %>
-		  <%= ff.label :name_prop, "Mark as the Name Property" %>			
-		  <%= ff.check_box :_destroy %>
-		  <%= ff.label :_destroy, "Remove Property" %>
-
-	  </p>
-	  <% end %>
-	<div>
-		<p>
-			<%= form.submit "Create", :class => "form-submit-button" %>
-		</p>
-	</div>
+		<div class="alert alert-success">				
+			<h4>Properties</h4>
+		</div>
+		<%= form.fields_for :properties do |ff| %>
+			<div class="control-group">			
+			  	<%= ff.label :name, "Name", class: "control-label" %><br />
+				<div class="controls">			
+			  		<%= ff.text_field :name %><br />
+				</div>
+			</div>
+			<div class="control-group">
+			  	<%= ff.label :proptype, "Type", class: "control-label" %><br />
+				<div class="controls">						
+			  		<%= ff.text_field :proptype %><br />
+				</div>
+			</div>
+			<div class="control-group">							
+				<div class="controls">
+			  		<%= ff.check_box :name_prop %>									
+				</div>
+			  	<%= ff.label :name_prop, "Mark as the Name Property", class: "control-label" %>							
+			</div>
+			<div class="control-group">
+				<div class="controls">						
+			  		<%= ff.check_box :_destroy, class: "checkbox" %>
+				</div>
+			  	<%= ff.label :_destroy, "Remove Property", class: "control-label" %>
+			</div>
+		  <% end %>
+		<div class="control-group">
+			<div class="controls">
+				<%= form.submit "Create", :class => "btn" %>
+			</div>
+		</div>
 		
-<%end%>
+	<%end%>
 </div>
 </br>

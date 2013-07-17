@@ -1,5 +1,6 @@
 <%- model_class = Type -%>
 <% title model_class.to_s %>
+<%= link_to 'New Type', new_type_path, :class => 'btn btn-primary' %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -33,4 +34,3 @@
 	</tr>	
 <%end%>
 </table>
-<%= link_to 'New Type', new_type_path, :class => 'btn btn-primary' %>

@@ -1,0 +1,47 @@
+</br>
+</br>
+<div >
+	<%= form_for(setup_type(@type)) do |form| %>
+		<%= error_content(@type) %>
+		<%= form.label 'Name'%>
+		<%= form.text_field :type_ref %>
+		<div class="alert alert-success">				
+			<h4>Properties</h4>
+		</div>
+		<table class="table table-striped">		
+		  <thead>
+		    <tr>
+				<th>Property Name</th>
+				<th>Property Type</th>
+				<th>Name Property</th>
+				<th>Delete Property</th>				
+			</tr>
+		  </thead>
+		  <tbody>
+			<%= form.fields_for :properties do |ff| %>
+				<tr>
+					<td>
+					  	<%= ff.text_field :name %><br />
+					</td>
+					<td>
+					  	<%= ff.text_field :proptype %><br />
+					</div>
+					</td>
+					<td>
+					  	<%= ff.check_box :name_prop %>									
+					</div>
+					</td>
+					<td>
+					  	<%= ff.check_box :_destroy, class: "checkbox" %>
+					</td>
+				</tr>
+			  <% end %>
+			</tbody>
+			<div class="control-group">
+				<div class="controls">
+					<%= form.submit "Create", :class => "btn" %>
+				</div>
+			</div>
+		<%end%>
+</div>
+</br>
