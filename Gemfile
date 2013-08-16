@@ -17,7 +17,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
-  gem 'twitter-bootstrap-rails'
+  gem 'zurb-foundation', '~> 4.0.0'    
 end
 
 group :development do

@@ -6,14 +6,14 @@
 </h3>
 <p>Node Type: <%= link_to @node.type.type_ref, type_path(@node.type)%></p>
 
-<p>Node Properties</p>
+<h4 class="subheader">Node Properties</h4>
 <% @node.propinstances.each do |prop| %>
 	<p>
 		<%= prop.name %>: <%=prop.value%>
 	</p>
 <% end %>
 
-<button><%= link_to 'New Relationship', new_noderelation_path(:start_node => @node)%></button>
+<%= link_to 'New Relationship', new_noderelation_path(:start_node => @node), :class => "small button"%>
 
 <p>Related to the following Nodes:</p>
 <table class="table table-striped">
@@ -40,8 +40,8 @@
 						<% end %>
 					</td>
 					<td>
-						<p><%= link_to 'delete relation', node_relation_path(@node, nrel), :method => :delete, :class => 'btn btn-danger btn-mini' %></p>
-						<p><%= link_to 'edit relation', edit_node_relation_path(@node, nrel), :class => 'btn btn-success btn-mini' %></p>
+						<p><%= link_to 'delete relation', node_relation_path(@node, nrel), :method => :delete, :class => 'tiny button success' %></p>
+						<p><%= link_to 'edit relation', edit_node_relation_path(@node, nrel), :class => 'tiny button' %></p>
 					</td>
 				</tr>
 			<% end %>
@@ -49,5 +49,5 @@
 	</tbody>
 </table>
 <p>
-<button><%= link_to 'Back to List', nodes_path %></button>
+<%= link_to 'Back to List', nodes_path, :class => "small button" %>
 </p>

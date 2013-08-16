@@ -1,4 +1,4 @@
-<%= form_tag (node_relation_path), :id => @rel, :method => :put  do %>
+<%= form_tag (node_relation_path), :id => @rel, :html => {:class => "custom"}, :method => :put  do %>
 	<div id='rel'>
 		<% for p in @rel.nodereltype.properties.each %>
 			<%= label_tag p.name%>

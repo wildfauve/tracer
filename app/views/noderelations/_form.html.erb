@@ -1,4 +1,4 @@
-<%= form_tag(noderelations_path) do %>
+<%= form_tag(noderelations_path, :class => "custom") do %>
 	<div id='start_node'>
 		<div class="alert alert-success">		
 			<h4>Start Node: Type: <%= @profile.start_type.type_ref if @profile.start_type %> 
@@ -57,5 +57,5 @@
 		<% end %>
 	</div>
 	
-	<%= submit_tag "Confirm" %>		
+	<%= submit_tag "Confirm", :class => "button small" %>		
 <% end %>

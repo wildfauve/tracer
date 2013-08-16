@@ -2,15 +2,13 @@
 <% title "Type #{@type.type_ref}"%>
 <%= error_content(@type) %>
 
-<h3>
+<h3 class="subheader">
 	<%= @type.type_ref%>
-	<%= link_to 'edit', edit_type_path(@type), :class => 'btn btn-success btn-mini'%>
-	<%= link_to 'delete', type_path(@type), :method => :delete, :class => 'btn btn-danger btn-mini'%>		
+	<%= link_to 'edit', edit_type_path(@type), :class => 'tiny button'%>
+	<%= link_to 'delete', type_path(@type), :method => :delete, :class => 'tiny success button'%>		
 </h3>
 
-<div class="alert alert-success">		
-	<h4>Used in the following Relation Types</h4>
-</div>
+<h3 class="subheader">Used in the following Relation Types</h3>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -29,9 +27,7 @@
 	</tbody>
 </table>
 
-<div class="alert alert-success">		
-	<h4>Nodes of this type:</h4>
-</div>
+<h3 class="subheader">Nodes of this type:</h3>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -50,5 +46,5 @@
 
 
 <p>
-<%= link_to 'Back to List', types_path %>
+<%= link_to 'Back to List', types_path, :class => 'button small' %>
 </p>

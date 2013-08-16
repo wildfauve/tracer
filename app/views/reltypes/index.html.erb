@@ -1,5 +1,5 @@
 <%- model_class = Reltype -%>
-<%= link_to 'New relationship type', new_reltype_path, :class => " btn btn-primary" %>
+<%= link_to 'New relationship type', new_reltype_path, :class => " small button" %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -35,8 +35,8 @@
 		<%end %>
 	</td>
 	<td>
-		<%= link_to 'edit', edit_reltype_path(rel)%>
-		<%= link_to 'delete', reltype_path(rel), :method => :delete%>		
+		<%= link_to 'edit', edit_reltype_path(rel), :class => "tiny button"%>
+		<%= link_to 'delete', reltype_path(rel), :class => "tiny button", :method => :delete%>		
 	</td>
 </tr>	
 <%end%>

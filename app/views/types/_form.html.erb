@@ -1,49 +1,46 @@
-</br>
-</br>
-<div >
-	<%= form_for(setup_type(@type), :html => {:class => "form-horizontal"}) do |form| %>
-		<%= error_content(@type) %>
-		<div class="control-group">
-			<%= form.label 'Name', class: "control-label"%>
-			<div class="controls">
-				<%= form.text_field :type_ref %>
+<%= form_for(setup_type(@type), :html => {:class => "custom"}) do |form| %>
+	<%= error_content(@type) %>
+	<div class="row">
+	  <div class="small-3 columns">
+			<%= form.label 'Name' %>
+		</div>
+	  <div class="small-9 columns">		
+			<%= form.text_field :type_ref %>
+		</div>
+	</div>
+	<h3 class="subheader">Properties</h3>
+	<%= form.fields_for :properties do |ff| %>
+		<div class="row">
+	  		<div class="small-1 columns">
+		  		<%= ff.label :name, "Name" %>
+			</div>
+	  		<div class="small-3 columns">		
+		  		<%= ff.text_field :name %>
+			</div>
+	  		<div class="small-1 columns">
+		  		<%= ff.label :proptype, "Property Type" %>
+			</div>
+	  		<div class="small-3 columns">		
+		  		<%= ff.text_field :proptype %>
+			</div>
+	  		<div class="small-1 columns">
+		  	<%= ff.label :name_prop, "Name Prop" %>							
+			</div>
+	  		<div class="small-1 columns">		
+		  		<%= ff.check_box :name_prop %>
+			</div>
+	  		<div class="small-1 columns">
+		  		<%= ff.label :_destroy, "Remove?" %>
+			</div>
+	  		<div class="small-1 columns">		
+		  		<%= ff.check_box :_destroy, class: "checkbox" %>
 			</div>
 		</div>
-		<div class="alert alert-success">				
-			<h4>Properties</h4>
-		</div>
-		<%= form.fields_for :properties do |ff| %>
-			<div class="control-group">			
-			  	<%= ff.label :name, "Name", class: "control-label" %><br />
-				<div class="controls">			
-			  		<%= ff.text_field :name %><br />
-				</div>
-			</div>
-			<div class="control-group">
-			  	<%= ff.label :proptype, "Type", class: "control-label" %><br />
-				<div class="controls">						
-			  		<%= ff.text_field :proptype %><br />
-				</div>
-			</div>
-			<div class="control-group">							
-				<div class="controls">
-			  		<%= ff.check_box :name_prop %>									
-				</div>
-			  	<%= ff.label :name_prop, "Mark as the Name Property", class: "control-label" %>							
-			</div>
-			<div class="control-group">
-				<div class="controls">						
-			  		<%= ff.check_box :_destroy, class: "checkbox" %>
-				</div>
-			  	<%= ff.label :_destroy, "Remove Property", class: "control-label" %>
-			</div>
-		  <% end %>
-		<div class="control-group">
-			<div class="controls">
-				<%= form.submit "Create", :class => "btn" %>
-			</div>
-		</div>
-		
-	<%end%>
-</div>
-</br>
+
+	  <% end %>
+	<div class="row">
+	  <div class="small-9 small-offset-3 columns">
+	    <%= form.submit :class => 'button small' %>
+	  </div>
+	</div>
+<%end%>
