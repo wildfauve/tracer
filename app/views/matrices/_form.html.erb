@@ -1,0 +1,31 @@
+<%= form_for(@matrix, :html => {:class => "custom"}) do |form| %>
+   <div class="row">
+      <div class="small-2 columns">
+         <%= form.label :name, "Name" %>
+      </div>
+      <div class="small-10 columns">
+         <%= form.text_field :name %>
+      </div>
+   </div>
+   <div class="row">
+      <div class="small-2 columns">
+         <%= form.label :x, "X Axis" %>
+      </div>
+      <div class="small-10 columns">      
+         <%= form.select(:x, options_for_select(type_list), :include_blank => true, :prompt => "Select an X Axis", :class => "medium") %>
+      </div>
+   </div>
+   <div class="row">
+      <div class="small-2 columns">
+         <%= form.label :y, "Y Axis" %>
+      </div>
+      <div class="small-10 columns">      
+         <%= form.select(:y, options_for_select(type_list), :include_blank => true, :prompt => "Select an Y Axis", :class => "medium") %>
+      </div>
+   </div>   
+   <div class="row">
+     <div class="small-9 small-offset-3 columns">
+       <%= form.submit :class => 'button small' %>
+     </div>
+   </div>
+<% end %>

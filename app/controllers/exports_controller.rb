@@ -9,7 +9,7 @@ class ExportsController < ApplicationController
   end
   
   def new
-    @nodes = Node.all_active
+    params[:export_type] == "all" ? @nodes = Node.all_active : @nodes = nil
     @types = Type.all
     @reltypes = Reltype.all
     respond_to do |f|

@@ -1,4 +1,6 @@
 Tracer::Application.routes.draw do
+  root to: "nodes#index"
+  
   resources :types do
     resources :type_relations
   end
@@ -7,6 +9,9 @@ Tracer::Application.routes.draw do
       resources :relations
       collection do
         get 'node_form'
+      end
+      collection do
+        get 'node_filter'
       end
   end
   resources :noderelations do
@@ -26,5 +31,6 @@ Tracer::Application.routes.draw do
   resources :exports
   resources :imports
   
+  resources :matrices
   
 end

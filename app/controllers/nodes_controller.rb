@@ -1,7 +1,11 @@
 class NodesController < ApplicationController
   
   def index
-    @nodes = Node.all_active
+    if params[:filter_type].present?
+      @nodes = Type.find(params[:filter_type]).nodes
+    else
+      @nodes = Node.all_active
+    end
   end
   
   # create a new node, without creating a node relationship.
@@ -75,6 +79,12 @@ class NodesController < ApplicationController
     @node_type = Type.find(params[:node_type])
     respond_to do |format|
       format.js {render 'node_form', :layout => false }# 
+    end
+  end
+  
+  def node_filter
+    respond_to do |format|
+      format.html {redirect_to nodes_path}
     end
   end
   

@@ -1,46 +1,44 @@
 <%- model_class = Node -%>
-<%= link_to 'New Single Node', new_node_path, :class => " small button" %>
-<%= link_to 'New Node<->Node Relationship', new_noderelation_path, :class => " small button" %>
 <table class="table table-striped">
   <thead>
     <tr>
-		<th>Node Name</th>
-		<th>Node Type</th>
-		<th>Properties</th>
-		<th>Arcs</th>
-		<th>Actions</th>				
-	</tr>
+      <th>Node Name</th>
+      <th>Node Type</th>
+      <th>Properties</th>
+      <th>Arcs</th>
+      <th>Actions</th>           
+   </tr>
   </thead>
   <tbody>
-	<% for node in @nodes %>
-		<tr>
-			<td>
-				<%= link_to node.name, node_path(node) %>
-			</td>
-			<td>
-			<%= node.type.type_ref %>
-			</td>
-			<td>
-				<% node.propinstances.each do |pi| %>
-				<p>
-					<%= "#{pi.name} = #{pi.value} "%>
-				</p>
-				<% end %>
-			</td>
-			<td>
-				<% node.relinstances.each do |rel| %>
-					<p>
-						<%= rel.name%>
-						<%= rel.nodereltype.name if rel.position == "start" %> 
-						<%= "#{rel.related_node.type.type_ref}::#{rel.related_node.name}"%>
-						<%= "(#{rel.nodereltype.name})" if rel.position == "end" %> 						
-					</p>
-				<% end %>
-			</td>
-			<td>
-				<%= link_to 'Edit', edit_node_path(node), :class => 'tiny button' %>
-				<%= link_to 'Delete', node_path(node), :method => :delete, :class => 'tiny success button'%>			
-			</td>
-		</tr>
-	<%end%>	
+   <% for node in @nodes %>
+      <tr>
+         <td>
+            <%= link_to node.name, node_path(node) %>
+         </td>
+         <td>
+         <%= node.type.type_ref %>
+         </td>
+         <td>
+            <% node.propinstances.each do |pi| %>
+            <p>
+               <%= "#{pi.name} = #{pi.value} "%>
+            </p>
+            <% end %>
+         </td>
+         <td>
+            <% node.relinstances.each do |rel| %>
+               <p>
+                  <%= rel.name%>
+                  <%= rel.nodereltype.name if rel.position == "start" %> 
+                  <%= "#{rel.related_node.type.type_ref}::#{rel.related_node.name}"%>
+                  <%= "(#{rel.nodereltype.name})" if rel.position == "end" %>                   
+               </p>
+            <% end %>
+         </td>
+         <td>
+            <%= link_to 'Edit', edit_node_path(node), :class => 'tiny button' %>
+            <%= link_to 'Delete', node_path(node), :method => :delete, :class => 'tiny success button'%>       
+         </td>
+      </tr>
+   <%end%>  
 </table>

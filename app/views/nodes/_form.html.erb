@@ -1,13 +1,24 @@
 <%= form_tag(nodes_path, :class => 'custom') do %>
-	<div id='node'>
-		<p>Node Form</p>
-		<p>Properties</p>
-		<%= hidden_field_tag 'type', @node_type.id%>
-		<% for p in @node_type.properties.each %>
-			<%= label_tag p.name%>
-			<%= text_field_tag "#{p.name}"%>			
-		<% end %>
-	</div>
-	
-	<%= submit_tag "Confirm" %>		
+   <div id='node'>
+      <h2 class="subheader">Node Form</h2>
+      <h3 class="subheader">Properties</h3>
+      <%= hidden_field_tag 'type', @node_type.id%>
+      <% for p in @node_type.properties.each %>
+      <div class="row">
+         <div class="small-6 columns">
+            <%= label_tag p.name%>
+         </div>
+         <div class="small-6 columns">
+            <% if p.proptype == "string" %>
+               <%= text_field_tag "#{p.name}"%>       
+            <% elsif p.proptype == "long_text" %>
+               <%= text_area_tag "#{p.name}", nil, size: "10x30" %>
+            <% else %>
+               <% raise %>
+            <% end %>
+         </div>
+      </div>
+      <% end %>
+   </div>
+   <%= submit_tag "Confirm", :class => "small button"%>      
 <% end %>

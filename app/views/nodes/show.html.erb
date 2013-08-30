@@ -1,52 +1,57 @@
 <% title "Node", @node.name%>
 <h3>
-	<%= @node.name%>
-	<%= link_to 'edit', edit_node_path(@node), :class => 'btn btn-success btn-mini'%>
-	<%= link_to 'delete', node_path(@node), :method => :delete, :class => 'btn btn-danger btn-mini'%>		
+   <%= @node.name%>
+   <%= link_to 'edit', edit_node_path(@node), :class => 'tiny button'%>
+   <%= link_to 'delete', node_path(@node), :method => :delete, :class => 'tiny success button'%>      
 </h3>
 <p>Node Type: <%= link_to @node.type.type_ref, type_path(@node.type)%></p>
 
 <h4 class="subheader">Node Properties</h4>
 <% @node.propinstances.each do |prop| %>
-	<p>
-		<%= prop.name %>: <%=prop.value%>
-	</p>
+   <div class="row">
+      <div class="small-2 columns">
+         <h5 class="subheader"><%= prop.name %></h5>
+      </div>
+      <div class="small-10 columns">      
+         <%=prop.value%>
+      </div>
+   </div>
 <% end %>
 
 <%= link_to 'New Relationship', new_noderelation_path(:start_node => @node), :class => "small button"%>
 
-<p>Related to the following Nodes:</p>
+<h4 class="subheader">Related to the following Nodes:</h4>
 <table class="table table-striped">
-	<thead>
-		<tr>
-			<th>Node Name</th>
-			<th>Node Type</th>
-			<th>Node Relation Type</th>
-			<th>Relation Instances</th>
-			<th>Actions</th>
-		</tr>
-	</thead>
-	<tbody>
+   <thead>
+      <tr>
+         <th>Node Name</th>
+         <th>Node Type</th>
+         <th>Node Relation Type</th>
+         <th>Relation Instances</th>
+         <th>Actions</th>
+      </tr>
+   </thead>
+   <tbody>
 
-		<% @node.relinstances.each do |nrel| %>
-			<% if !nrel.deleted%>
-				<tr>
-					<td><%= link_to nrel.related_node.name, node_path(nrel.related_node) %></td>
-					<td><%= link_to nrel.related_node.type.type_ref, reltype_path(nrel.nodereltype) %></td>
-					<td><%= nrel.position == "start" ? nrel.nodereltype.name : "(#{nrel.nodereltype.name})"  %></td>
-					<td>
-						<% nrel.relpropinstances.each do |i| %>
-							<%= i.proptype.name + ": " + i.value %>
-						<% end %>
-					</td>
-					<td>
-						<p><%= link_to 'delete relation', node_relation_path(@node, nrel), :method => :delete, :class => 'tiny button success' %></p>
-						<p><%= link_to 'edit relation', edit_node_relation_path(@node, nrel), :class => 'tiny button' %></p>
-					</td>
-				</tr>
-			<% end %>
-		<% end %>
-	</tbody>
+      <% @node.relinstances.each do |nrel| %>
+         <% if !nrel.deleted%>
+            <tr>
+               <td><%= link_to nrel.related_node.name, node_path(nrel.related_node) %></td>
+               <td><%= link_to nrel.related_node.type.type_ref, reltype_path(nrel.nodereltype) %></td>
+               <td><%= nrel.position == "start" ? nrel.nodereltype.name : "(#{nrel.nodereltype.name})"  %></td>
+               <td>
+                  <% nrel.relpropinstances.each do |i| %>
+                     <%= i.proptype.name + ": " + i.value %>
+                  <% end %>
+               </td>
+               <td>
+                  <p><%= link_to 'delete relation', node_relation_path(@node, nrel), :method => :delete, :class => 'tiny button success' %></p>
+                  <p><%= link_to 'edit relation', edit_node_relation_path(@node, nrel), :class => 'tiny button' %></p>
+               </td>
+            </tr>
+         <% end %>
+      <% end %>
+   </tbody>
 </table>
 <p>
 <%= link_to 'Back to List', nodes_path, :class => "small button" %>

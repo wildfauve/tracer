@@ -6,9 +6,13 @@ class Node
   field :name, :type => String
   field :deleted, :type => Boolean
   
-  scope :all_active, where(:deleted.ne => true)
+  scope :all_active, ->(filter=nil) do
+    where(:deleted.ne => true)
+  end
   scope :all_archived, where(:deleted => true)
-  scope :find_active, ->(type) { where(:type => type, :deleted.ne => true) }
+  scope :find_active, ->(type) do 
+    where(:type => type, :deleted.ne => true)
+  end
   
   validates :name, exclusion: {in: [ "node", "type" ], message: "used a reserved word for a Node name"}  
   
@@ -43,7 +47,7 @@ class Node
   		  node.propinstances << Propinstance.new(:ref => p.id, :value => node_params[p.name])
 		  end
     else
-      # Work with propertuies for a new node
+      # Work with properties for a new node
       t.properties.keep_if {|p| p.name_prop == false}.each do |prop|
         node.propinstances << Propinstance.new(:ref => prop.id, :value => node_params[prop.name])
       end

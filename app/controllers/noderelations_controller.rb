@@ -2,6 +2,7 @@ class NoderelationsController < ApplicationController
   
   def new
     @nodeset = Nodeset.new
+    @formctx = params[:form_ctx]
     if params[:start_node]
         @start_node = Node.find(params[:start_node])
     end
@@ -49,6 +50,8 @@ class NoderelationsController < ApplicationController
   end
   
   def accumulate_node_form
+    Rails.logger.info(">>>NodeController#accum  #{params.inspect}")        
+    @ctx = params[:node_profile][:ctx]
     @profile = NodeProfile.new(params[:node_profile])
     respond_to do |format|
       #format.html {render 'node_form', :layout => false}
@@ -57,8 +60,10 @@ class NoderelationsController < ApplicationController
   end
   
   def reset_form
+    Rails.logger.info(">>>NodeController#reset  #{params.inspect}")            
+    @formctx = params[:form_ctx]    
     respond_to do |format|
-      format.html {redirect_to  new_noderelation_path}
+      format.html {redirect_to  new_noderelation_path(form_ctx: @formctx)}
     end
   end
   

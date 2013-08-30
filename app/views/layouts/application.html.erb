@@ -1,79 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Tracer" %></title>
-	<%= csrf_meta_tags %>
- 	<%= stylesheet_link_tag "application", :media => "all" %>
-	<%= javascript_include_tag "vendor/custom.modernizr" %>
-	<%= javascript_include_tag "application" %>
+  	<meta charset="utf-8" />
+
+  	<!-- Uncomment to make IE8 render like IE7 -->
+  	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+
+  	<!-- Set the viewport width to device width for mobile -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  	<title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+
+  	<%= stylesheet_link_tag    "application" %>
+  	<%= javascript_include_tag "vendor/custom.modernizr" %>
+    <%= csrf_meta_tags %>
   </head>
 
   <body>
-	<nav class="top-bar">
-	  <ul class="title-area">
-	    <!-- Title Area -->
-	    <li class="name">
-	      <h1><a href="#">Tracer </a></h1>
-	    </li>
-	    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-	  </ul>
+     <nav class="top-bar">
+       <ul class="title-area">
+         <!-- Title Area -->
+         <li class="name">
+           <h1><a href="#">Tracer </a></h1>
+         </li>
+         <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+         <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+       </ul>
 
-	  <section class="top-bar-section">
-	    <!-- Left Nav Section -->
-	    <ul class="left">
-	      <li class="divider"></li>
-	      <li class="active"><%= link_to "Types", types_path  %></li>
-     		<li><%= link_to "Relationships", reltypes_path  %></li>	
-     		<li><%= link_to "Nodes", nodes_path  %></li>
-	      <li class="divider"></li>
-	      <li class="has-dropdown"><a href="#">Utilities</a>
-	      	<ul class="dropdown">
-     				<li><%= link_to "Archives", archives_path  %></li>
-			     	<li><%= link_to "Export", exports_path  %></li>
-			     	<li><%= link_to "Import", imports_path  %></li>
-	        </ul>
-	      </li>
-	      <li class="divider"></li>
-	    </ul>
+       <section class="top-bar-section">
+         <!-- Left Nav Section -->
+         <ul class="left">
+           <li class="divider"></li>
+           <li class="active"><%= link_to "Types", types_path  %></li>
+           <li><%= link_to "Relationships", reltypes_path  %></li>  
+           <li><%= link_to "Nodes", nodes_path  %></li>
+           <li><%= link_to "Matrices", matrices_path  %></li>         
+           <li class="divider"></li>
+           <li class="has-dropdown"><a href="#">Utilities</a>
+              <ul class="dropdown">
+                 <li><%= link_to "Archives", archives_path  %></li>
+                 <li><%= link_to "Export", exports_path  %></li>
+                 <li><%= link_to "Import", imports_path  %></li>
+             </ul>
+           </li>
+           <li class="divider"></li>
+         </ul>
 
-	    <!-- Right Nav Section -->
-	    <ul class="right">
-	      <li class="divider hide-for-small"></li>
-	      <li class="divider"></li>
-	      <li class="has-form">
-	        <form>
-	          <div class="row collapse">
-	            <div class="small-8 columns">
-	              <input type="text">
-	            </div>
-	            <div class="small-4 columns">
-	              <a href="#" class="alert button">Search</a>
-	            </div>
-	          </div>
-	        </form>
-	      </li>
-	      <li class="divider show-for-small"></li>
-	      <li class="has-form">
-	        <a class="button" href="#">Button!</a>
-	      </li>
-	    </ul>
-	  </section>
-	</nav>
-	<div class="row">
-		<div class="small-10 small-uncentered columns">
-			<%= yield %>
-		</div>
-		<div class="small-2 columns">
-			Side Bar
-		</div>
-	</div>
-	<footer>
-		</br>
-		<p>&copy; Dinsdale 2013</p>
-	</footer>
+         <!-- Right Nav Section -->
+         <ul class="right">
+           <li class="divider hide-for-small"></li>
+           <li class="divider"></li>
+           <li class="has-form">
+             <form>
+               <div class="row collapse">
+                 <div class="small-8 columns">
+                   <input type="text">
+                 </div>
+                 <div class="small-4 columns">
+                   <a href="#" class="alert button">Search</a>
+                 </div>
+               </div>
+             </form>
+           </li>
+         </ul>
+       </section>
+     </nav>
+     <div class="row">
+        <div class="small-10 small-uncentered columns">
+           <%= yield %>
+        </div>
+        <div class="small-2 columns">
+           <%= render :partial => 'shared/side_bar'%>
+        </div>
+     </div>
+
+    <%= javascript_include_tag "application" %>
   </body>
 </html>

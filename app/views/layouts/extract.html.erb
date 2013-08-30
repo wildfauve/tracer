@@ -1,0 +1,61 @@
+ <nav class="top-bar">
+   <ul class="title-area">
+     <!-- Title Area -->
+     <li class="name">
+       <h1><a href="#">Tracer </a></h1>
+     </li>
+     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+   </ul>
+
+   <section class="top-bar-section">
+     <!-- Left Nav Section -->
+     <ul class="left">
+       <li class="divider"></li>
+       <li class="active"><%= link_to "Types", types_path  %></li>
+       <li><%= link_to "Relationships", reltypes_path  %></li>  
+       <li><%= link_to "Nodes", nodes_path  %></li>
+       <li><%= link_to "Matrices", matrices_path  %></li>         
+       <li class="divider"></li>
+       <li class="has-dropdown"><a href="#">Utilities</a>
+          <ul class="dropdown">
+             <li><%= link_to "Archives", archives_path  %></li>
+             <li><%= link_to "Export", exports_path  %></li>
+             <li><%= link_to "Import", imports_path  %></li>
+         </ul>
+       </li>
+       <li class="divider"></li>
+     </ul>
+
+     <!-- Right Nav Section -->
+     <ul class="right">
+       <li class="divider hide-for-small"></li>
+       <li class="divider"></li>
+       <li class="has-form">
+         <form>
+           <div class="row collapse">
+             <div class="small-8 columns">
+               <input type="text">
+             </div>
+             <div class="small-4 columns">
+               <a href="#" class="alert button">Search</a>
+             </div>
+           </div>
+         </form>
+       </li>
+     </ul>
+   </section>
+ </nav>
+ <div class="row">
+    <div class="small-10 small-uncentered columns">
+       <%= yield %>
+    </div>
+    <div class="small-2 columns">
+       <%= render :partial => 'shared/side_bar'%>
+    </div>
+ </div>
+ <footer>
+    </br>
+    <p>&copy; Dinsdale 2013</p>
+ </footer>
+</body>

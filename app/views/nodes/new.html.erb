@@ -1,6 +1,13 @@
 <%- model_class = Node -%>
 <% title "Node", "New"%>
 <%= error_content(@node) %>
-<%= select_tag(:node, options_for_select(type_list), :include_blank => true, :prompt => "Select a Node Type", :class => "single_node") %>
+<div class="row">
+   <div class="small-6 columns">
+      Node Type
+   </div>
+   <div class="small-6 columns">   
+      <%= select_tag(:node, options_for_select(type_list), :include_blank => true, :prompt => "Select a Node Type", :class => "single_node") %>
+   </div>
+</div>
 <div id="single_node_form">
 </div>

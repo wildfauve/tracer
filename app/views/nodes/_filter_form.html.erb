@@ -1,0 +1,16 @@
+<div class="row">
+   <div class="small-1 columns">
+      <h2 class="subheader">Filter</h2>
+   </div>
+   <div class="small-11 columns">
+      <dl class="sub-nav">
+         <dl class="sub-nav">
+            <% for type in Type.all %>
+               <dd class=<%= params[:filter_type] == type.id.to_s ? "active" : "" %>>
+                  <p><%= link_to type.type_ref, nodes_path(filter_type: type.id) %></p>
+               </dd>
+            <% end %>
+         </dl>
+      </dl>
+   </div>
+</div>

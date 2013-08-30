@@ -1,22 +1,46 @@
 <%= form_tag(node_path, :method => :put) do %>
-	<div id='node'>
-		<p>Node Form</p>
-		<p>Properties</p>
-		<%= hidden_field_tag 'type', @node.type.id%>
-		<%= label_tag :name %>
-		<%= text_field_tag 'name', @node.name %>			
-		<% for pi in @node.propinstances.each %>
-			<%= label_tag pi.name%>
-			<%= text_field_tag pi.name, pi.value%>			
-		<% end %>
-		<% pi = @node.propinstances.collect {|pi| pi.name} %>
-		<% t = @node.type.properties.collect {|p| p.name if p.name_prop == false} %>
-		<% t.delete_if {|i| pi.find_index(i) || i.nil?} %>
-		<% for p in t %>
-			<%= label_tag p%>
-			<%= text_field_tag p%>			
-		<% end %>
-	</div>
-	
-	<%= submit_tag "Confirm" %>		
+   <div id='node'>
+      <h2 class="subheader">Node Form</h2>
+      <h3 class="subheader">Properties</h3>
+      <%= hidden_field_tag 'type', @node.type.id%>
+      <%= label_tag @node.type.name_prop.name %>
+      <%= text_field_tag @node.type.name_prop.name, @node.name %>        
+      <% for pi in @node.propinstances.each %>
+         <div class="row">
+            <div class="small-2 columns">
+               <%= label_tag pi.name%>
+            </div>
+            <div class="small-10 columns">
+               <% if pi.property.proptype == "string" %>
+                  <%= text_field_tag pi.name, pi.value%>       
+               <% elsif pi.property.proptype == "long_text" %>
+                  <%= text_area_tag pi.name, pi.value %>
+               <% else %>
+                  <% raise %>
+               <% end %>
+            </div>
+         </div>
+      <% end %>
+      <% pi = @node.propinstances.collect {|pi| pi.name} %>
+      <% t = @node.type.properties.collect {|p| p.name if p.name_prop == false} %>
+      <% t.delete_if {|i| pi.find_index(i) || i.nil?} %>
+      <% for p in t %>
+         <div class="row">
+            <div class="small-6 columns">
+               <%= label_tag p.name %>
+            </div>
+            <div class="small-6 columns">
+               <% if p.proptype == "string" %>
+                  <%= text_field_tag "#{p.name}"%>       
+               <% elsif p.proptype == "long_text" %>
+                  <%= text_area_tag "#{p.name}", :rows => 5, :cols => 40%>
+               <% else %>
+                  <% raise %>
+               <% end %>
+            </div>
+         </div>
+      <% end %>
+   </div>
+   
+   <%= submit_tag "Confirm", :class => "small button" %>    
 <% end %>

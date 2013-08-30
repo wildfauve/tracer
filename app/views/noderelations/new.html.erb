@@ -3,8 +3,9 @@
 <%= error_content(@nodeset.end) %>
 
 <p>
-	<%= link_to 'Reset Form', reset_form_noderelations_path, :class => " small button" %>
+	<%= link_to 'Reset Form', reset_form_noderelations_path(form_ctx: @formctx), :class => " small button" %>
 </p>
+<div id="context" data-ctx=<%= @formctx %>></div>
 <div id="node_start_select">	
 	<%= render :partial => 'node_start_sel' %>
 </div>
@@ -20,5 +21,4 @@
 </div>
 
 <div id=node-create-status>
-	Non Selected
 </div>
