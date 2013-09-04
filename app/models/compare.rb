@@ -36,12 +36,23 @@ class Compare
     x_types = nodes_from_type(self.x)
     y_types = nodes_from_type(self.y)
     @titles = x_types
-    @matrix = Matrix[[1,2,3], [4,5,6], [7,8,9]]
+    @matrix = Matrix.build(y_types.size + 1,x_types.size + 1) do |row,col|
+      if row == 0 && col == 0
+        "Head"
+      elsif col == 0
+        y_types[row - 1].name if col == 0
+      elsif row == 0
+        x_types[col - 1].name
+      else
+        "a"
+      end
+    end
     self
   end
   
   def delete_it
     self.destroy
+    self
   end
   
   def nodes_from_type(type)

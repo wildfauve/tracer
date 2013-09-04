@@ -1,4 +1,4 @@
-<% @ctx == "node" ? path = noderelations_path : path = compares_path %>
+<% @formctx == "node" ? path = noderelations_path : path = compares_path %>
 <%= form_tag(path, :class => "custom") do %>
    <div id='start_node'>
       <div class="alert alert-success">      

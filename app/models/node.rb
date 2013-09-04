@@ -166,6 +166,12 @@ class Node
     self.relinstances.any? {|ri| ri.reltype == reltype_id}
   end
   
+#  {other_node: <node>, rel_type: <reltype}
+  def rel_attribute(args)
+    inst = self.relinstances.select {|ri| ri.reltype == args[:rel_type].id && ri.relnode == args[:other_node]}
+    raise of inst.count > 1
+    inst.first
+  end
   
   private
   
