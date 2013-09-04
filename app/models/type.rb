@@ -57,6 +57,10 @@ class Type
     return t
   end
 
+  def self.factory(params)
+    Type.find(params[:type])
+  end
+
   def update_the_type(params)
     Rails.logger.info(">>>Type#update_the_type #{params}")        
     # when a property is removed, the properties need to be removed from any nodes as well

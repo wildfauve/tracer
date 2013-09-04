@@ -1,0 +1,22 @@
+<%- model_class = Compare -%>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>           
+   </tr>
+  </thead>
+  <tbody>
+   <% for matx in @compares %>
+      <tr>
+         <td>
+            <%= link_to matx.name, compare_path(matx) %>
+         </td>
+         <td>
+            <%= link_to 'Edit', edit_compare_path(matx), :class => 'tiny button' %>
+            <%= link_to 'Show', compare_path(matx), :class => 'tiny button' %>            
+            <%= link_to 'Delete', compare_path(matx), :method => :delete, :class => 'tiny success button'%>       
+         </td>
+      </tr>
+   <%end%>  
+</table>

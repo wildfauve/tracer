@@ -31,5 +31,6 @@ class Nodeset
     @end.create_the_node(:rel => @rel, :other_node => @start)
     self
   end
+  
     
 end

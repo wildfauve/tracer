@@ -160,8 +160,12 @@ class Node
     Jbuilder.encode do |j|
       j.name self.name
     end
-    
   end
+  
+  def has_related_reltypes?(reltype_id)
+    self.relinstances.any? {|ri| ri.reltype == reltype_id}
+  end
+  
   
   private
   

@@ -18,7 +18,7 @@
    </div>
 <% end %>
 
-<%= link_to 'New Relationship', new_noderelation_path(:start_node => @node), :class => "small button"%>
+<%= link_to 'New Relationship', new_noderelation_path(:start_node => @node, form_ctx: "node"), :class => "small button"%>
 
 <h4 class="subheader">Related to the following Nodes:</h4>
 <table class="table table-striped">

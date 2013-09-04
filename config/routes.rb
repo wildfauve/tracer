@@ -31,6 +31,6 @@ Tracer::Application.routes.draw do
   resources :exports
   resources :imports
   
-  resources :matrices
+  resources :compares
   
 end

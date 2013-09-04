@@ -17,12 +17,13 @@
   node_form.done (data) ->
     return data
 
-@rel_list = (nodetype, position, context) ->
+@rel_list = (nodetype, position, context, formctx) ->
   rel_select = $.ajax({
     url: '/types/' + nodetype + '/type_relations',
     data: { 
       context: context,
-      position: position 
+      position: position,
+      ctx: formctx
     }
   })
   rel_select.done (data) ->
@@ -34,15 +35,13 @@
 
 $ -> 
   if $('div[data-sn]').length != 0
-    profile["ctx"] = $('#context').data().ctx
+    profile["ctx"] = $('#context').data("ctx")
     profile["start"] = {'inst': $('div[data-sn]').data().sn}
-#    node_set_status('Start')
     selects = rel_list($('div[data-sn-type]').data().snType, 'start_node', 'node_type')
     form = accumulate_node_form(profile)    
   $('.start_node').change ->
     profile["ctx"] = $('#context').data("ctx")
     profile["start"] = {'type': $('.start_node').val()}
-#    node_set_status('Start')
     selects = rel_list($('.start_node').val(), 'start_node', 'node_type')
     form = accumulate_node_form(profile)
 #  $('.end_node').change ->
@@ -52,7 +51,6 @@ $ ->
 # $('.rel_type').change ->
 #   alert('rel')
 #   profile["reltype"] = $('.rel_type').val()
-#   node_set_status('Rel')
 #   selects = rel_list($('.rel_type').val(), 'rel')   
 #   form = accumulate_node_form(profile)      
   $('.end_node_inst').change ->
@@ -62,7 +60,6 @@ $ ->
   $('.start_node_inst').change ->
     profile["ctx"] = $('#context').data().ctx    
     profile["start"] = {'inst': $('.start_node_inst').val()}
-#    node_set_status('Start Inst')
     selects = rel_list($('.start_node_inst').val(), 'start_node', 'node_inst')    
     form = accumulate_node_form(profile)        
 #  $('#gen_node_form_button').click ->

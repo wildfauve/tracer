@@ -27,7 +27,7 @@ class Relinstance
       rel.relpropinstances << Relpropinstance.new(:ref => prop.id, :value => params[prop.name])
     end
     rel
-  end
+  end 
   
   def self.import(params)
     rel_params = {}

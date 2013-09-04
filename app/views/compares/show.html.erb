@@ -1,0 +1,10 @@
+<h2 class="subheader">X Axis: <%= @compare.axis_title(x: true) %></h2>
+<h2 class="subheader">Y Axis: <%= @compare.axis_title(y: true) %></h2>
+<h2 class="subheader">Relationship: <%= @compare.relation_title %></h2>
+<% for axis in @compare.titles %>
+   <%= axis.name%>
+<% end %>
+
+<% @compare.matrix.each do |n| %>
+   <%= n %>
+<% end %>

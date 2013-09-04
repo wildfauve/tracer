@@ -55,6 +55,10 @@ class Reltype
     return res
   end
 
+  def self.factory(params)
+    Reltype.find(params[:type])
+  end
+
 
   def update_the_reltype(params)
     Node.delete_rel_prop(self, params[:properties_attributes].select {|k,v| v[:_destroy] == "1"}.collect {|k,v| self.properties.find(v[:id])})

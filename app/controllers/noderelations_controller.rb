@@ -51,7 +51,7 @@ class NoderelationsController < ApplicationController
   
   def accumulate_node_form
     Rails.logger.info(">>>NodeController#accum  #{params.inspect}")        
-    @ctx = params[:node_profile][:ctx]
+    @formctx = params[:node_profile][:ctx]
     @profile = NodeProfile.new(params[:node_profile])
     respond_to do |format|
       #format.html {render 'node_form', :layout => false}
