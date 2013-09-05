@@ -33,18 +33,19 @@ class Compare
   def show_it
     matx = []
     y_axis = []
-    x_types = nodes_from_type(self.x)
-    y_types = nodes_from_type(self.y)
-    @titles = x_types
-    @matrix = Matrix.build(y_types.size + 1,x_types.size + 1) do |row,col|
+    @x_types = nodes_from_type(self.x)
+    @y_types = nodes_from_type(self.y)
+    #@titles = @x_types
+    @matrix = Matrix.build(@y_types.size + 1,@x_types.size + 1) do |row,col|
       if row == 0 && col == 0
         "Head"
       elsif col == 0
-        y_types[row - 1].name if col == 0
+        @y_types[row - 1].name if col == 0
       elsif row == 0
-        x_types[col - 1].name
+        @x_types[col - 1].name
       else
-        "a"
+        rel_inst = @y_types[row - 1].rel_attribute(other_node: @x_types[col - 1], rel_type_id: self.rel)
+        rel_inst ? "X" : ""
       end
     end
     self
@@ -75,5 +76,14 @@ class Compare
   def relation_title
     self.reltype.name
   end
+  
+  def x_axis_size
+    @x_types.size + 1
+  end
+
+  def y_axis_size
+    @y_types.size
+  end
+
   
 end

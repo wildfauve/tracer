@@ -5,3 +5,24 @@
 <% @compare.matrix.each_with_index do |e, r, c| %>
   <p> <%= "#{e} @ #{r},#{c}" %></p>
 <% end %>
+
+<table class="table table-striped">
+   <thead>
+      <tr>
+         <% @compare.x_axis_size.times do |x_hdr| %>
+            <th><%= @compare.matrix[0, x_hdr] %></th>
+         <% end %>
+      </tr>
+   </thead>
+   <tbody>
+      <% @compare.y_axis_size.times do |row| %>
+         <tr>
+            <% @compare.x_axis_size.times do |col| %>
+               <td><%= @compare.matrix[row + 1, col] %></td>
+            <% end %>
+         </tr>
+      <% end %>
+   </tbody>
+</table>
+
+
