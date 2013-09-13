@@ -21,16 +21,28 @@ class Nodeset
     self
   end
   
-  def create(params)
-    @rel = Relinstance.relfactory(params[:rel])
-    @start = Node.nodefactory(params[:start], :start) 
-    @end = Node.nodefactory(params[:end], :end)
+  def create(args)
+    Rails.logger.info(">>>Nodeset#create #{args.inspect} ")    
+    @rel = Relinstance.relfactory(args[:rel])
+    args[:start].class == Node ? @start = args[:start] : @start = Node.nodefactory(args[:start], :start) 
+    args[:end].class == Node ? @end = args[:end] : @end = Node.nodefactory(args[:end], :end)
+    Event.create_event(entry: ">>>NodeSet#create  Start: #{@start.name}  Rel: #{@rel.name} End: #{@end.name} ")    
     @rel.position = :start
     @start = @start.create_the_node(:rel => @rel, :other_node => @end)
     @rel.position = :end
     @end.create_the_node(:rel => @rel, :other_node => @start)
+    # find the problem with relinstances other node....
+    
+    check_rel_i(@start)
+    check_rel_i(@end)
+    
     self
   end
   
+  def check_rel_i(node)
+    # need to make it blow up on Relinstances related_node method
+    node.relinstances.each {|n| n.related_node}
+    
+  end
     
 end

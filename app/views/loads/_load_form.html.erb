@@ -1,0 +1,8 @@
+<%= form_tag(up_load_loads_path, :method => :post, :multipart => true ) do  %>
+   <h3 class="subheader"><%= label_tag "Upload the File" %></h3>
+  <p><%= file_field_tag :import, :class => "button"%></p>
+  </p>
+  <div class="actions">
+    <%= submit_tag "Run Load", :class => "button" %>
+  </div>
+<% end %>

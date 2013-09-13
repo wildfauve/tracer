@@ -1,0 +1,19 @@
+<%= link_to "Reset", reset_events_path, method: :post, class: "button"%>
+<%- model_class = Event -%>
+<% title model_class.to_s %>
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:entry) %></th>      
+   </tr>
+  </thead>
+  <tbody>
+
+   <% for event in @events do %>
+      <tr>
+         <td><%= event.created_at %></td>
+         <td><%= event.entry %></td>
+      </tr> 
+   <%end%>
+</table>

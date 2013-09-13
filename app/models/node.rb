@@ -55,8 +55,12 @@ class Node
     node
   end
   
+  
+  # Build_only=true is for a node with relationships, false is for a node without 
+  
   def self.import(node, type_map, rt_map, build_only=false)
-    current = self.where(:id => node["id"]).first
+    current = self.where(id: node["id"]).first  # has the node already exist BEFORE the import
+    current = self.where(name: node["name"]).first if !current  # now what say we have already created it DURING the import?
     fields = {}
     type = Type.find(type_map[node["type"]["id"]])
     fields[:type] = type.id
@@ -64,7 +68,16 @@ class Node
     node["propinstances"].each do |prop|
       fields[prop["name"]["name"]] = prop["value"]      
     end
-    build_only ? fields : self.nodefactory(fields).create_the_node
+    Event.create_event(entry: "Node#Import: #{node["name"]} is a Single Node") if !build_only
+    if build_only
+      if current
+        return self.nodefactory(fields, nil, current.id).update_the_node
+      else
+        return fields
+      end
+    end
+    Event.create_event(entry: "Node#Import Current: #{current.inspect}")
+    self.nodefactory(fields).create_the_node
   end
   
   def self.related_reltypes(reltype_id)
@@ -108,14 +121,21 @@ class Node
   end
   
   def create_the_node(params={}) # :rel => Relinstance, :other_node => Node
-    Rails.logger.info(">>>Node#create_the_node #{params.inspect} ")    
+    Event.create_event(entry: "Node#create #{self.id} #{self.name} Created") 
     if params[:rel]  # a relationship provided?
       params[:rel].relnode = params[:other_node].id
       self.relinstances << params[:rel]
     end
     save
+    check_rel_i(self)
     self
   end
+  
+  def check_rel_i(node)
+    # need to make it blow up on Relinstances related_node method
+    node.relinstances.each {|n| Event.create_event(entry: ">>>Node#check_rel_i  Node: #{node.name} #{n.inspect}   Found? #{n.found_related_node?}" )}
+  end
+  
   
 
 # CREATE Params  {"type"=>"51e069c5e4df1c7435000011", "name"=>"D1000", "desc"=>"A description"}

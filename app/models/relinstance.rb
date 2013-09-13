@@ -54,6 +54,10 @@ class Relinstance
     
   def related_node
     Node.find(self.relnode)
-	end
+  end
+  
+  def found_related_node?
+    Node.where(id: self.relnode).count == 0 ? false : true
+  end
 
 end

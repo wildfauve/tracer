@@ -28,9 +28,19 @@ Tracer::Application.routes.draw do
     end
   end
   
-  resources :exports
-  resources :imports
+  resources :loads do
+    collection do
+      post 'up_load'
+      post 'down_load'
+    end
+  end
   
   resources :compares
+  
+  resources :events do
+    collection do
+      post 'reset'
+    end
+  end
   
 end

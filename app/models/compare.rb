@@ -10,6 +10,10 @@ class Compare
   field :y, type: Moped::BSON::ObjectId
   field :rel , type: Moped::BSON::ObjectId
   
+  # Input into create is the format of the standard node forms, hence:
+  # "start"=>{"type"=>"521ac0e4e4df1cfb1a00003c"}, 
+  # "rel"=>{"type"=>"521ac0e4e4df1cfb1a000062"}, "end"=>{"type"=>"521ac0e4e4df1cfb1a000055"}
+  
   def self.create_it(params)
     ts = Typeset.new.load(params)
     matx = Compare.new
@@ -28,6 +32,19 @@ class Compare
   def self.delete_it(params)
     matx = Compare.find(params[:id]).delete_it
     matx
+  end
+  
+  # {"id":"52247905e4df1cc1b5000001","name":"Quality-Attribute->has_quality_category_of->NFR-Cat",
+  # "start":{"type":{"type_ref":"Quality Attribute"}},
+  # "end":{"type":{"type_ref":"NFR Cat"}},
+  # "rel":{"type":{"type_ref":"has_quality_category_of"}}}
+  def self.import(compare)
+    current = self.where(:id => compare["id"]).first
+    x = Type.where(type_ref: compare["start"]["type"]["type_ref"]).first
+    y = Type.where(type_ref: compare["end"]["type"]["type_ref"]).first
+    rel = Reltype.where(name: compare["rel"]["type"]["type_ref"]).first
+    params = {start: {type: x.id}, end: {type: y.id}, rel: {type: rel.id} }
+    current ? c = current.update_the_type(params) : c = self.create_it(params)
   end
   
   def show_it
@@ -69,8 +86,8 @@ class Compare
     Type.find(axis)
   end
   
-  def axis_title(params)
-    params[:x] ? self.related_type(self.x).type_ref : self.related_type(self.y).type_ref
+  def axis_title(args)
+    args[:axis] == :x ? self.related_type(self.x).type_ref : self.related_type(self.y).type_ref
   end
   
   def relation_title

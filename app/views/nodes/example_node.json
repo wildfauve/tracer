@@ -1,0 +1,45 @@
+{
+  "id":"521ac951e4df1c0fac000097",
+  "name":"Availability",
+  "deleted":null,
+  "type":{
+    "type_ref":"NFR Cat",
+    "id":"521ac0e4e4df1cfb1a000055"
+  },
+  "relinstances":[
+    {
+      "id":"521ac99de4df1c084f00009a",
+      "name":null,
+      "reltype":{
+        "id":"521ac99de4df1c084f00009a",
+        "reltypeid":"521ac8c8e4df1c5c0e000090",
+        "name":"has_quality_category_of",
+        "position":"end"
+      },
+      "relnode":{
+        "id":"521ac7a9e4df1ccb7100006b",
+        "name":"Core System Availability"
+      },
+      "relpropinstances":[
+      ]
+    },
+    {
+      "id":"521ac9c0e4df1c084f00009c",
+      "name":null,
+      "reltype":{
+        "id":"521ac9c0e4df1c084f00009c",
+        "reltypeid":"521ac8c8e4df1c5c0e000090",
+        "name":"has_quality_category_of",
+        "position":"end"
+      },
+      "relnode":{
+        "id":"521ac7f3e4df1c3a7c000077",
+        "name":"System Down Time"
+      },
+      "relpropinstances":[
+      ]
+    }
+  ],
+  "propinstances":[
+  ]
+}
