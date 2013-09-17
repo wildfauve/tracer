@@ -8,7 +8,8 @@ class Compare
   field :name, :type => String
   field :x, type: Moped::BSON::ObjectId
   field :y, type: Moped::BSON::ObjectId
-  field :rel , type: Moped::BSON::ObjectId
+  field :rel, type: Moped::BSON::ObjectId
+  field :rel_attr, type: Moped::BSON::ObjectId
   
   # Input into create is the format of the standard node forms, hence:
   # "start"=>{"type"=>"521ac0e4e4df1cfb1a00003c"}, 
@@ -47,6 +48,18 @@ class Compare
     current ? c = current.update_the_type(params) : c = self.create_it(params)
   end
   
+  def self.get_rel_attrs(params)
+    self.find(params[:id])
+  end
+
+  def self.set_rel_attrs(params)
+    c = self.find(params[:id])
+    c.rel_attr = params[:rel_attr]
+    c.save!
+    c
+  end
+
+  
   def show_it
     matx = []
     y_axis = []
@@ -61,8 +74,8 @@ class Compare
       elsif row == 0
         @x_types[col - 1].name
       else
-        rel_inst = @y_types[row - 1].rel_attribute(other_node: @x_types[col - 1], rel_type_id: self.rel)
-        rel_inst ? "X" : ""
+        rel_inst = @y_types[row - 1].rel_attribute(other_node: @x_types[col - 1], rel_type_id: self.rel, rel_attr: self.rel_attr)
+        rel_inst
       end
     end
     self
@@ -102,5 +115,9 @@ class Compare
     @y_types.size
   end
 
+  def rel_prop
+    rt_prop = Reltype.where('properties._id' => self.rel_attr).first
+    rt_prop.properties.select{|p| p.id == self.rel_attr}.first
+  end
   
 end

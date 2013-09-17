@@ -47,5 +47,18 @@ class ComparesController < ApplicationController
     end    
   end
   
+  def attr_form
+    @compare = Compare.get_rel_attrs(params)
+    respond_to do |format|
+      format.js {render "attr_form", layout: false }
+    end
+  end
+  
+  def attr_set
+    @compare = Compare.set_rel_attrs(params)
+    respond_to do |format|
+      format.html { redirect_to compares_path }
+    end
+  end
 
 end

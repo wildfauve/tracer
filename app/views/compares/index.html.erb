@@ -3,6 +3,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Rel Attribute</th>      
       <th>Actions</th>           
    </tr>
   </thead>
@@ -13,10 +14,15 @@
             <%= link_to matx.name, compare_path(matx) %>
          </td>
          <td>
+            <%= matx.rel_prop.name if !matx.rel_prop.nil? %>
+         </td>
+         <td>
             <%= link_to 'Edit', edit_compare_path(matx), :class => 'tiny button' %>
             <%= link_to 'Show', compare_path(matx), :class => 'tiny button' %>            
             <%= link_to 'Delete', compare_path(matx), :method => :delete, :class => 'tiny success button'%>       
+            <%= link_to 'Set Rel Attr', attr_form_compare_path(matx), :class => 'tiny button', remote: true %>                   
          </td>
       </tr>
    <%end%>  
 </table>
+<div id="rel-attr-form"></div>

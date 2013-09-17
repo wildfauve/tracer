@@ -5,10 +5,10 @@
       <%= hidden_field_tag 'type', @node_type.id%>
       <% for p in @node_type.properties.each %>
       <div class="row">
-         <div class="small-6 columns">
+         <div class="large-6 columns">
             <%= label_tag p.name%>
          </div>
-         <div class="small-6 columns">
+         <div class="large-6 columns">
             <% if p.proptype == "string" %>
                <%= text_field_tag "#{p.name}"%>       
             <% elsif p.proptype == "long_text" %>

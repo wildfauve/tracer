@@ -17,7 +17,7 @@ class NoderelationsController < ApplicationController
     Rails.logger.info(">>>NodeController#create  Valid?  #{@nodeset.start.valid?} #{@nodeset.end.valid?} ")    
     respond_to do |format|
       if @nodeset.start.valid? && @nodeset.end.valid?
-        format.html { redirect_to nodes_path }
+        format.html { redirect_to node_path(@nodeset.start) }
         format.json
       else
         format.html { render action: "new" }

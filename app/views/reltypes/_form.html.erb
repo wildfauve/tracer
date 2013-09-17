@@ -1,73 +1,72 @@
 <%= form_for(setup_reltype(@rel), :html => {:class => "custom"}) do |form| %>
-	<%= error_content(@rel) %>
-	<div class="row">
-  		<div class="small-1 columns">
-			<%= form.label :name %>
-		</div>
-  		<div class="small-2 columns">
-			<%= form.text_field :name %>
-		</div>
-  		<div class="small-1 columns">			
-			<%= form.label :desc %>
-		</div>	
-  		<div class="small-8 columns">				
-			<%= form.text_area :desc%>
-		</div>
-		<%= hidden_field_tag 'rel_type', @rel.id %>			
-	</div>
-	<h3 class="subheader">Properties</h3>
-	<%= form.fields_for :properties do |ff| %>
-		<div class="row">
-	  		<div class="small-1 columns">
-		  		<%= ff.label :name, "Name" %>
-			</div>
-	  		<div class="small-3 columns">		
-		  		<%= ff.text_field :name %>
-			</div>
-	  		<div class="small-1 columns">
-		  		<%= ff.label :proptype, "Property Type" %>
-			</div>
-	  		<div class="small-3 columns">		
-		  		<%= ff.text_field :proptype %>
-			</div>
-	  		<div class="small-2 columns">
-		  		<%= ff.label :_destroy, "Remove?" %>
-			</div>
-	  		<div class="small-2 columns">		
-		  		<%= ff.check_box :_destroy %>
-			</div>
-		</div>	
-	<% end %>
-	<%= form.fields_for :arcprop do |ff| %>
-		<div class="row">
-			<div class="small-3 columns">
-				<%= ff.label :start, 'Start Node' %>
-			</div>
-			<div class="small-9 columns">
-				<%= ff.select(:start, options_for_select(type_list, @rel.arcprop.start), :include_blank => true, :prompt => "Select Start Type", :class => "medium") %>
-			</div>
-		</div>			
-		<div class="row">		
-	  		<div class="small-3 columns">				
-				<%= ff.label :end, 'End Node' %>
-			</div>
-
-	  		<div class="small-9 columns">
-				<%= ff.select(:end, options_for_select(type_list, @rel.arcprop.end), :include_blank => true, :prompt => "Select End Type", :class => "medium") %>
-			</div>
-		<div class="row">
-	  		<div class="small-6 columns">					
-				<%= ff.label :directed, "Directed?" %>
-			</div>
-	  		<div class="small-6 columns">				
-				<%= ff.check_box :directed %>
-			<div>
-		</div>
-	<% end %>
-	<div class="row">
-	  <div class="small-9 small-offset-3 columns">
-	    <%= form.submit 'Submit', :class => 'button small' %>
-	  </div>
-	</div>
-		
+   <%= error_content(@rel) %>
+   <div class="row">
+      <div class="large-1 columns">
+         <%= form.label :name %>
+      </div>
+      <div class="large-3 columns">
+         <%= form.text_field :name %>
+      </div>
+      <div class="large-1 columns">       
+         <%= form.label :desc %>
+      </div>   
+      <div class="large-7 columns">          
+         <%= form.text_area :desc%>
+      </div>
+      <%= hidden_field_tag 'rel_type', @rel.id %>        
+   </div>
+   <h3 class="subheader">Properties</h3>
+   <%= form.fields_for :properties do |ff| %>
+      <div class="row">
+         <div class="large-1 columns">
+            <%= ff.label :name, "Name" %>
+         </div>
+         <div class="large-3 columns">    
+            <%= ff.text_field :name %>
+         </div>
+         <div class="large-1 columns">
+            <%= ff.label :proptype, "Property Type" %>
+         </div>
+         <div class="large-3 columns">    
+            <%= ff.text_field :proptype %>
+         </div>
+         <div class="large-2 columns">
+            <%= ff.label :_destroy, "Remove?" %>
+         </div>
+         <div class="large-2 columns">    
+            <%= ff.check_box :_destroy %>
+         </div>
+      </div>   
+   <% end %>
+   <%= form.fields_for :arcprop do |ff| %>
+      <div class="row">
+         <div class="large-3 columns">
+            <%= ff.label :start, 'Start Node', class: "right inline" %>
+         </div>
+         <div class="large-9 columns">
+            <%= ff.select(:start, options_for_select(type_list, @rel.arcprop.start), :include_blank => true, :prompt => "Select Start Type", :class => "medium") %>
+         </div>
+      </div>         
+      <div class="row">    
+         <div class="large-3 columns">          
+            <%= ff.label :end, 'End Node', class: "right inline" %>
+         </div>
+         <div class="large-9 columns">
+            <%= ff.select(:end, options_for_select(type_list, @rel.arcprop.end), :include_blank => true, :prompt => "Select End Type", :class => "medium") %>
+         </div>
+      </div>
+      <div class="row">
+         <div class="large-3 columns">             
+            <%= ff.label :directed, "Directed?", class: "right inline" %>
+         </div>
+         <div class="large-9 columns">          
+            <%= ff.check_box :directed %>
+         </div>
+      </div>
+   <% end %>
+   <div class="row">
+      <div class="large-11 small-offset-1 columns">
+        <%= form.submit "Submit", :class => 'button' %>
+      </div>
+   </div>
 <%end%>

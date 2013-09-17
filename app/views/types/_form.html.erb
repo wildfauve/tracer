@@ -1,54 +1,54 @@
-<%= form_for(setup_type(@type), :html => {:class => "custom"}) do |form| %>
+<%= form_for(setup_type(@type)) do |form| %>
    <%= error_content(@type) %>
    <div class="row">
-     <div class="small-3 columns">
-         <%= form.label 'Name' %>
+     <div class="large-3 columns">
+         <%= form.label 'Name', class: "inline right" %>
       </div>
-     <div class="small-9 columns">     
+     <div class="large-9 columns">     
          <%= form.text_field :type_ref %>
       </div>
    </div>
    <div class="row">
-     <div class="small-3 columns">
-         <%= form.label 'Description' %>
+     <div class="large-3 columns">
+         <%= form.label 'Description', class: "inline right" %>
       </div>
-     <div class="small-9 columns">     
+     <div class="large-9 columns">     
          <%= form.text_area :desc %>
       </div>
    </div>
    <h3 class="subheader">Properties</h3>
    <%= form.fields_for :properties do |ff| %>
       <div class="row">
-         <div class="small-1 columns">
+         <div class="large-1 columns">
             <%= ff.label :name, "Name" %>
          </div>
-         <div class="small-3 columns">    
+         <div class="large-3 columns">    
             <%= ff.text_field :name %>
          </div>
-         <div class="small-1 columns">
+         <div class="large-1 columns">
             <%= ff.label :proptype, "Property Type" %>
          </div>
-         <div class="small-3 columns">    
+         <div class="large-3 columns">    
             <%= ff.text_field :proptype %>
          </div>
-         <div class="small-1 columns">
+         <div class="large-1 columns">
          <%= ff.label :name_prop, "Name Prop" %>                     
          </div>
-         <div class="small-1 columns">    
+         <div class="large-1 columns">    
             <%= ff.check_box :name_prop %>
          </div>
-         <div class="small-1 columns">
+         <div class="large-1 columns">
             <%= ff.label :_destroy, "Remove?" %>
          </div>
-         <div class="small-1 columns">    
+         <div class="large-1 columns">    
             <%= ff.check_box :_destroy, class: "checkbox" %>
          </div>
       </div>
 
      <% end %>
    <div class="row">
-     <div class="small-9 small-offset-3 columns">
-       <%= form.submit :class => 'button small' %>
+     <div class="large-11 small-offset-1 columns">
+       <%= form.submit "Submit", :class => 'button' %>
      </div>
    </div>
 <%end%>

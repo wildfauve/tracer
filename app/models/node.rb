@@ -186,11 +186,13 @@ class Node
     self.relinstances.any? {|ri| ri.reltype == reltype_id}
   end
   
-#  {other_node: <node>, rel_type_id: <reltype>}
+#  {other_node: <node>, rel_type_id: <reltype>, rel_attr: <relpropinstance}
   def rel_attribute(args)
     inst = self.relinstances.select {|ri| ri.reltype == args[:rel_type_id] && ri.relnode == args[:other_node].id}
     raise if inst.count > 1
-    inst.first
+    return "" if inst.count == 0 
+    rel_attr = inst.first.relpropinstances.select {|rpi| rpi.ref == args[:rel_attr]}.first
+    rel_attr.nil? ? "X" : rel_attr.value
   end
   
   private

@@ -35,7 +35,13 @@ Tracer::Application.routes.draw do
     end
   end
   
-  resources :compares
+  resources :compares do
+    member do
+      get 'attr_form'
+      post 'attr_set'      
+    end
+  end
+  
   
   resources :events do
     collection do

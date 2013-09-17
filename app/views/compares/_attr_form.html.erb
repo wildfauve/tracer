@@ -1,0 +1,15 @@
+<%= form_tag(attr_set_compare_path(@compare), class: "custom", method: :post) do %>
+   <div class="row">
+     <div class="large-3 columns">
+       <%= label_tag :name, nil, class: "right inline", title: "A name for the project, must be unique", data: {tooltip: true } %>
+     </div>
+     <div class="large-9 columns">
+        <%= select_tag(:rel_attr, options_for_select(compare_rel_attr_list(@compare.reltype.properties), @compare.rel_prop.id.to_s)) %>
+     </div>
+   </div>
+   <div class="row">
+     <div class="large-9 large-offset-3 columns">
+       <%= submit_tag "Submit", class: "small button" %>
+     </div>
+   </div>
+<% end %>

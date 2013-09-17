@@ -7,10 +7,10 @@
       <%= text_field_tag @node.type.name_prop.name, @node.name %>        
       <% for pi in @node.propinstances.each %>
          <div class="row">
-            <div class="small-2 columns">
+            <div class="large-2 columns">
                <%= label_tag pi.name%>
             </div>
-            <div class="small-10 columns">
+            <div class="large-10 columns">
                <% if pi.property.proptype == "string" %>
                   <%= text_field_tag pi.name, pi.value%>       
                <% elsif pi.property.proptype == "long_text" %>
@@ -26,10 +26,10 @@
       <% t.delete_if {|i| pi.find_index(i) || i.nil?} %>
       <% for p in t %>
          <div class="row">
-            <div class="small-6 columns">
+            <div class="large-6 columns">
                <%= label_tag p.name %>
             </div>
-            <div class="small-6 columns">
+            <div class="large-6 columns">
                <% if p.proptype == "string" %>
                   <%= text_field_tag "#{p.name}"%>       
                <% elsif p.proptype == "long_text" %>
