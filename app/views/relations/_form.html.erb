@@ -1,11 +1,13 @@
-<%= form_tag (node_relation_path), :id => @rel, :html => {:class => "custom"}, :method => :put  do %>
-	<div id='rel'>
-		<% for p in @rel.nodereltype.properties.each %>
-			<%= label_tag p.name%>
-			<% ref = @rel.relpropinstances.where(:ref => p) %>
-			<% ref.empty? ? value = "" : value = ref.first.value %>
-			<%= text_field_tag "rel[#{p.id}]", value %>			
-		<% end %>
-	</div>	
-	<%= submit_tag "Confirm" %>		
+<%= form_tag node_relation_path, id: @rel, html: {:class => "custom"}, :method => :put  do %>
+   <div id='rel'>
+      <%= hidden_field_tag('callback[controller]', @callback[0]) if @callback %>      
+      <%= hidden_field_tag('callback[id]', @callback[1]) if @callback %>            
+      <% for p in @rel.nodereltype.properties.each %>
+         <%= label_tag p.name%>
+         <% ref = @rel.relpropinstances.where(:ref => p) %>
+         <% ref.empty? ? value = "" : value = ref.first.value %>
+         <%= text_field_tag "rel[#{p.id}]", value %>        
+      <% end %>
+   </div>   
+   <%= submit_tag "Confirm", class: "small button" %>    
 <% end %>

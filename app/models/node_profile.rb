@@ -46,8 +46,8 @@ class NodeProfile
   def create_if_instances
     if @start_inst && @end_inst
       rel = Relinstance.relfactory({:type => @rel.id})
-      @start_inst.create_the_node(:rel => rel, :other_node => @end_inst)
-      @end_inst.create_the_node(:rel => rel, :other_node => @start_inst)      
+      @start_inst.create_or_update_the_node(:rel => rel, :other_node => @end_inst)
+      @end_inst.create_or_update_the_node(:rel => rel, :other_node => @start_inst)      
     end
   end
 end

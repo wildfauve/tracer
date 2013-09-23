@@ -22,7 +22,7 @@ class Relinstance
       name_prop = rt.properties.where(:name_prop => true).first
       rel.name = params[name_prop.to_sym] if !name_prop.nil?
     end
-    rt.properties.keep_if {|p| p.name_prop == false}.each do |prop|
+    rt.properties.keep_if {|p| p.name_prop == false || p.name_prop.nil?}.each do |prop|
       #work with the properties
       rel.relpropinstances << Relpropinstance.new(:ref => prop.id, :value => params[prop.name])
     end
@@ -54,6 +54,12 @@ class Relinstance
     
   def related_node
     Node.find(self.relnode)
+  end
+  
+  def related_relinstance(args)
+    # other_node: <node> reltype: <reltype>
+    ri = self.related_node.relinstances.select {|rn| rn.nodereltype == args[:reltype] }
+    ri.count > 1 ? raise : ri.first
   end
   
   def found_related_node?

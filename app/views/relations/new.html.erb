@@ -1,0 +1,16 @@
+<%- model_class = Node -%>
+
+<%= form_tag node_relations_path(@node), html: {:class => "custom"}  do %>
+   <div id='rel'>
+      <%= hidden_field_tag('callback[controller]', @callback[0]) if @callback %>      
+      <%= hidden_field_tag('callback[id]', @callback[1]) if @callback %>            
+      <%= hidden_field_tag('node', @node.id) %>
+      <%= hidden_field_tag('other_node', @other_node.id) %>
+      <%= hidden_field_tag 'rel[type]', @reltype.id%>      
+      <% for p in @reltype.properties.each %>
+         <%= label_tag p.name%>
+         <%= text_field_tag "rel[#{p.name}]" %>        
+      <% end %>
+   </div>   
+   <%= submit_tag "Create", class: "small button" %>    
+<% end %>

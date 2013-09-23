@@ -39,6 +39,8 @@ Tracer::Application.routes.draw do
     member do
       get 'attr_form'
       post 'attr_set'      
+      get 'complete'
+      get 'export'
     end
   end
   

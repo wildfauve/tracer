@@ -13,7 +13,9 @@
                <%= text_field_tag "#{p.name}"%>       
             <% elsif p.proptype == "long_text" %>
                <%= text_area_tag "#{p.name}", nil, size: "10x30" %>
-            <% else %>
+            <% elsif %>
+               <%= number_field_tag "#{p.name}", nil, :step => 0.1 %>            
+            <% else%>
                <% raise %>
             <% end %>
          </div>

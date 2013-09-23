@@ -35,7 +35,7 @@ class NodesController < ApplicationController
   end
   
   def create
-    @node = Node.nodefactory(params).create_the_node
+    @node = Node.nodefactory(params).create_or_update_the_node
     respond_to do |format|
     if @node.valid?
       format.html { redirect_to nodes_path }

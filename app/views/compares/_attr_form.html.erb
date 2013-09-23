@@ -4,7 +4,8 @@
        <%= label_tag :name, nil, class: "right inline", title: "A name for the project, must be unique", data: {tooltip: true } %>
      </div>
      <div class="large-9 columns">
-        <%= select_tag(:rel_attr, options_for_select(compare_rel_attr_list(@compare.reltype.properties), @compare.rel_prop.id.to_s)) %>
+        <%  @compare.rel_prop ? value = @compare.rel_prop.id.to_s : nil %>
+        <%= select_tag(:rel_attr, options_for_select(compare_rel_attr_list(@compare.reltype.properties), value)) %>
      </div>
    </div>
    <div class="row">

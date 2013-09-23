@@ -77,7 +77,7 @@ class Node
       end
     end
     Event.create_event(entry: "Node#Import Current: #{current.inspect}")
-    self.nodefactory(fields).create_the_node
+    self.nodefactory(fields).create_or_update_the_node
   end
   
   def self.related_reltypes(reltype_id)
@@ -120,14 +120,13 @@ class Node
     end
   end
   
-  def create_the_node(params={}) # :rel => Relinstance, :other_node => Node
+  def create_or_update_the_node(params={}) # :rel => Relinstance, :other_node => Node
     Event.create_event(entry: "Node#create #{self.id} #{self.name} Created") 
     if params[:rel]  # a relationship provided?
       params[:rel].relnode = params[:other_node].id
       self.relinstances << params[:rel]
     end
     save
-    check_rel_i(self)
     self
   end
   
@@ -150,12 +149,12 @@ class Node
   end
   
   def delete_relation(id)
-    this = self.relinstances.find(id)
-    others = this.related_node.relinstances.where(:relnode => self.id)
-    raise Exception if others.count > 1
-    other = others.first
-    this.destroy
-    other.destroy
+    this_rel = self.relinstances.find(id)
+    others_rel = this_rel.related_node.relinstances.where(:relnode => self.id)
+    raise Exception if others_rel.count > 1
+    other_rel = others_rel.first
+    this_rel.destroy
+    other_rel.destroy
   end
   
   def remove_the_node
@@ -186,13 +185,17 @@ class Node
     self.relinstances.any? {|ri| ri.reltype == reltype_id}
   end
   
-#  {other_node: <node>, rel_type_id: <reltype>, rel_attr: <relpropinstance}
+#  {other_node: <node>, rel_type_id: <reltype>, rel_attr: <relpropinstance, return: <:rel_attr | :rel_id>}
   def rel_attribute(args)
     inst = self.relinstances.select {|ri| ri.reltype == args[:rel_type_id] && ri.relnode == args[:other_node].id}
     raise if inst.count > 1
     return "" if inst.count == 0 
-    rel_attr = inst.first.relpropinstances.select {|rpi| rpi.ref == args[:rel_attr]}.first
-    rel_attr.nil? ? "X" : rel_attr.value
+    if args[:return] == :rel_id
+      return inst.first.id
+    else
+      rel_attr = inst.first.relpropinstances.select {|rpi| rpi.ref == args[:rel_attr]}.first
+      return rel_attr.nil? ? "X" : rel_attr.value
+    end
   end
   
   private

@@ -60,5 +60,19 @@ class ComparesController < ApplicationController
       format.html { redirect_to compares_path }
     end
   end
+  
+  def complete
+    @compare = Compare.show_it(params)
+    respond_to do |format|
+      format.html { render "show"}
+    end
+  end
+  
+  def export
+    @compare = Compare.show_it(params)
+    respond_to do |format|
+      format.csv { render text: @compare.to_csv }
+    end    
+  end
 
 end

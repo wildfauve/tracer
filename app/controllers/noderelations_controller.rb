@@ -44,7 +44,6 @@ class NoderelationsController < ApplicationController
   def node_form
     @profile = NodeProfile.new(params[:node_profile])
     respond_to do |format|
-      #format.html {render 'node_form', :layout => false}
       format.js {render 'node_form', :layout => false }# 
     end
   end
@@ -54,8 +53,7 @@ class NoderelationsController < ApplicationController
     @formctx = params[:node_profile][:ctx]
     @profile = NodeProfile.new(params[:node_profile])
     respond_to do |format|
-      #format.html {render 'node_form', :layout => false}
-      format.js {render 'node_form', :layout => false }# 
+      format.js {render 'node_form', :layout => false }
     end  
   end
   

@@ -15,6 +15,8 @@
                   <%= text_field_tag pi.name, pi.value%>       
                <% elsif pi.property.proptype == "long_text" %>
                   <%= text_area_tag pi.name, pi.value %>
+               <% elsif %>
+                  <%= number_field_tag pi.name, nil, :step => 0.1 %>            
                <% else %>
                   <% raise %>
                <% end %>

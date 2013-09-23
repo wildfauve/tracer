@@ -1,6 +1,6 @@
 class Compare
   
-  attr_accessor :matrix, :titles
+  attr_accessor :matrix, :titles, :x_types, :y_types
   
   include Mongoid::Document
   include Mongoid::Timestamps  
@@ -27,7 +27,7 @@ class Compare
   end
   
   def self.show_it(params)
-    matx = Compare.find(params[:id]).show_it
+    matx = Compare.find(params[:id]).show_it(params)
   end
   
   def self.delete_it(params)
@@ -60,12 +60,12 @@ class Compare
   end
 
   
-  def show_it
-    matx = []
-    y_axis = []
-    @x_types = nodes_from_type(self.x)
-    @y_types = nodes_from_type(self.y)
+  def show_it(args={})
+    @x_types = nodes_from_type(type: self.x, all: args[:all])
+    @y_types = nodes_from_type(type: self.y, all: args[:all])
     #@titles = @x_types
+=begin    
+    # Matrix[["Head", "Core System Availability", "Data accuracy", "System Down Time", "Audit Records", "Business Transaction Throughput", "Business Transactions per Month", "Transaction Response Time"], ["Integrity", "", "X", "", "X", "", "", ""], ["Scaleability", "", "", "", "", "X", "X", ""], ["Performance", "", "", "", "", "", "", "X"], ["Availability", "X", "", "X", "", "", "", ""]]
     @matrix = Matrix.build(@y_types.size + 1,@x_types.size + 1) do |row,col|
       if row == 0 && col == 0
         "Head"
@@ -78,6 +78,7 @@ class Compare
         rel_inst
       end
     end
+=end
     self
   end
   
@@ -86,9 +87,9 @@ class Compare
     self
   end
   
-  def nodes_from_type(type)
-    nodes = self.related_type(type).nodes
-    nodes.select {|n| n.has_related_reltypes?(self.reltype.id)}
+  def nodes_from_type(args)
+    nodes = self.related_type(args[:type]).nodes
+    args[:all] == "true" ? nodes : nodes.select {|n| n.has_related_reltypes?(self.reltype.id)}
   end
   
   def reltype
@@ -118,6 +119,23 @@ class Compare
   def rel_prop
     rt_prop = Reltype.where('properties._id' => self.rel_attr).first
     rt_prop.properties.select{|p| p.id == self.rel_attr}.first
+  end
+  
+  def to_csv
+    CSV.generate do |csv|
+      hrd = [""]
+      self.x_types.each {|x| hrd << x.name }
+      csv << hrd
+      self.y_types.each do |y|
+        y_row = []        
+        y_row << y.name
+        self.x_types.each do |x|
+          tag = y.rel_attribute(other_node: x, rel_type_id: self.rel, rel_attr: self.rel_attr)
+          tag == "" ? y_row << "" : y_row << tag
+        end
+        csv << y_row        
+      end
+    end    
   end
   
 end

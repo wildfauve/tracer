@@ -2,27 +2,35 @@
 <h3 class="subheader">Y Axis: <%= @compare.axis_title(axis: :y) %></h3>
 <h3 class="subheader">Relationship: <%= @compare.relation_title %></h3>
 
-<% @compare.matrix.each_with_index do |e, r, c| %>
-  <p> <%= "#{e} @ #{r},#{c}" %></p>
-<% end %>
+<%= link_to "Get All", complete_compare_path(@compare, all: true), class: "button small" %>
+<%= link_to "Get Set", complete_compare_path(@compare, all: false), class: "button small" %>
+<% params[:all].present? ? all = true : all = false %>
+<%= link_to 'Export CSV', export_compare_path(@compare, params.merge(format: :csv, all: all)), class: "button small"%>
+
 
 <table class="table table-striped">
    <thead>
       <tr>
-         <% @compare.x_axis_size.times do |x_hdr| %>
-            <th><%= @compare.matrix[0, x_hdr] %></th>
+         <th>Title</th>
+         <% @compare.x_types.each do |x| %>
+            <th><%= link_to x.name, node_path(x) %></th>
          <% end %>
       </tr>
    </thead>
    <tbody>
-      <% @compare.y_axis_size.times do |row| %>
+      <% @compare.y_types.each do |y| %>
          <tr>
-            <% @compare.x_axis_size.times do |col| %>
-               <td><%= @compare.matrix[row + 1, col] %></td>
+            <td><%= link_to y.name, node_path(y) %></td>
+            <% @compare.x_types.each do |x| %>
+               <% tag = y.rel_attribute(other_node: x, rel_type_id: @compare.rel, rel_attr: @compare.rel_attr) %>
+               <% if tag == "" %>
+                  <th><%= link_to "new", new_node_relation_path(y, other_node: x, rel_type_id: @compare.rel, return: :rel_id, callback: [:compare, @compare]) %></th>      
+               
+               <% else %>
+                  <th><%= link_to tag, edit_node_relation_path(y, y.rel_attribute(other_node: x, rel_type_id: @compare.rel, rel_attr: @compare.rel_attr, return: :rel_id), callback: [:compare, @compare]) %></th>      
+               <% end %>                           
             <% end %>
          </tr>
       <% end %>
    </tbody>
 </table>
-
-
