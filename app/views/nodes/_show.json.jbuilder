@@ -1,7 +1,7 @@
 json.nodes nodes do |node|
   json.(node, :id)
   json.(node, :name)
-  json.(node, :deleted)
+  json.(node, :archived)
   json.type do 
     json.type_ref node.type.type_ref
     json.id node.type.id

@@ -4,14 +4,14 @@ class Node
   include Mongoid::Timestamps  
   
   field :name, :type => String
-  field :deleted, :type => Boolean
+  field :archived, :type => Boolean
   
   scope :all_active, ->(filter=nil) do
-    where(:deleted.ne => true)
+    where(:archived.ne => true)
   end
-  scope :all_archived, where(:deleted => true)
+  scope :all_archived, -> {where(:archived => true)}
   scope :find_active, ->(type) do 
-    where(:type => type, :deleted.ne => true)
+    where(:type => type, :archived.ne => true)
   end
   
   validates :name, exclusion: {in: [ "node", "type" ], message: "used a reserved word for a Node name"}  
@@ -95,7 +95,7 @@ class Node
     pairs
   end
   
-  def self.delete_properties(props)
+  def self.delete_properties(props: nil)
     props.each do |prop|
       self.where('propinstances.ref' => prop.id).each do |node|
         node.propinstances.select {|pi| pi.ref == prop.id}.each {|pii| pii.destroy}
@@ -160,7 +160,7 @@ class Node
   def remove_the_node
     #to_delete = []
     set_delete_on_relinstances(:to => true)    
-    self.deleted = true
+    self.archived = true
     #Rails.logger.info(">>>Node#remove_the_node self: #{self.id}  #{to_delete.inspect} ")    
     save!
   end
@@ -169,7 +169,7 @@ class Node
   
   def archive_perform
     set_delete_on_relinstances(:to => false)
-    self.deleted = false
+    self.archived = false
     save!
   end
 
@@ -198,6 +198,13 @@ class Node
     end
   end
   
+  def new_properties
+    pi = self.propinstances.collect {|pi| pi.name}
+    all_props = self.type.properties.select {|p| p if p.name_prop == false}
+    all_props.delete_if {|p| self.propinstances.where(ref: p.id).first }
+  end
+  
+  
   private
   
   def set_delete_on_relinstances(archive_flag)
@@ -205,10 +212,10 @@ class Node
       rel_node = relation.related_node
       rel_node.relinstances.each do |rel_inst|  # need to delete the other side of the relationship
         #to_delete << {:node => rel_node.related_node.name, :rel => rel_inst.id, :related => rel_inst.relnode} if rel_inst.relnode == self.id  
-        rel_inst.deleted = archive_flag[:to] if rel_inst.relnode == self.id  
+        rel_inst.archived = archive_flag[:to] if rel_inst.relnode == self.id  
         rel_node.save! # save changes to related node relinstances
       end
-      relation.deleted = archive_flag[:to] # delete the relations on self side
+      relation.archived = archive_flag[:to] # delete the relations on self side
     end
   end
     

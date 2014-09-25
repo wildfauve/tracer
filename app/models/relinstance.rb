@@ -4,9 +4,9 @@ class Relinstance
   
   field :name, :type => String
   field :position, :type => String  
-  field :reltype, :type => Moped::BSON::ObjectId
-  field :relnode, :type => Moped::BSON::ObjectId
-  field :deleted, :type => Boolean
+  field :reltype, :type => BSON::ObjectId
+  field :relnode, :type => BSON::ObjectId
+  field :archived, :type => Boolean
 
   embedded_in :node, :inverse_of => :relinstances
   embeds_many :relpropinstances

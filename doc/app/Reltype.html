@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class Reltype - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/models/reltype.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="Object.html">Object</a>
+  
+</nav>
+
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">Mongoid::Document</span>
+  
+  
+  
+    <li><span class="include">Mongoid::Timestamps</span>
+  
+  
+  </ul>
+</nav>
+
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-create_the_reltype">::create_the_reltype</a>
+    
+    <li><a href="#method-c-factory">::factory</a>
+    
+    <li><a href="#method-c-import">::import</a>
+    
+    <li><a href="#method-c-search">::search</a>
+    
+    <li><a href="#method-i-assigned_nodes">#assigned_nodes</a>
+    
+    <li><a href="#method-i-find_associations">#find_associations</a>
+    
+    <li><a href="#method-i-get_type_from_position">#get_type_from_position</a>
+    
+    <li><a href="#method-i-has_assigned_nodes-3F">#has_assigned_nodes?</a>
+    
+    <li><a href="#method-i-remove_the_reltype">#remove_the_reltype</a>
+    
+    <li><a href="#method-i-update_the_reltype">#update_the_reltype</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Exceptions.html">Exceptions</a>
+  
+    <li><a href="./Exceptions/Standard.html">Exceptions::Standard</a>
+  
+    <li><a href="./Exceptions/TypeHasTypeRel.html">Exceptions::TypeHasTypeRel</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./Archive.html">Archive</a>
+  
+    <li><a href="./ArchivesController.html">ArchivesController</a>
+  
+    <li><a href="./Arcprop.html">Arcprop</a>
+  
+    <li><a href="./Compare.html">Compare</a>
+  
+    <li><a href="./CompareHelper.html">CompareHelper</a>
+  
+    <li><a href="./ComparesController.html">ComparesController</a>
+  
+    <li><a href="./Event.html">Event</a>
+  
+    <li><a href="./EventsController.html">EventsController</a>
+  
+    <li><a href="./Export.html">Export</a>
+  
+    <li><a href="./Import.html">Import</a>
+  
+    <li><a href="./ImportUploader.html">ImportUploader</a>
+  
+    <li><a href="./LoadsController.html">LoadsController</a>
+  
+    <li><a href="./Node.html">Node</a>
+  
+    <li><a href="./NodeHelper.html">NodeHelper</a>
+  
+    <li><a href="./NodeProfile.html">NodeProfile</a>
+  
+    <li><a href="./NoderelationsController.html">NoderelationsController</a>
+  
+    <li><a href="./NodesController.html">NodesController</a>
+  
+    <li><a href="./Nodeset.html">Nodeset</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./Property.html">Property</a>
+  
+    <li><a href="./Propinstance.html">Propinstance</a>
+  
+    <li><a href="./RelationsController.html">RelationsController</a>
+  
+    <li><a href="./Relinstance.html">Relinstance</a>
+  
+    <li><a href="./Relpropinstance.html">Relpropinstance</a>
+  
+    <li><a href="./Reltype.html">Reltype</a>
+  
+    <li><a href="./ReltypeHelper.html">ReltypeHelper</a>
+  
+    <li><a href="./ReltypesController.html">ReltypesController</a>
+  
+    <li><a href="./Type.html">Type</a>
+  
+    <li><a href="./TypeHelper.html">TypeHelper</a>
+  
+    <li><a href="./TypeInRelValidator.html">TypeInRelValidator</a>
+  
+    <li><a href="./TypeRelationsController.html">TypeRelationsController</a>
+  
+    <li><a href="./TypesController.html">TypesController</a>
+  
+    <li><a href="./Typeset.html">Typeset</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Reltype</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-create_the_reltype" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_the_reltype</span><span
+            class="method-args">(params)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>“reltype”=&gt;{“name”=&gt;“has_a”, “desc”=&gt;“”, 
+“properties_attributes”=&gt;{“0”=&gt;{“name”=&gt;“name”,
+“proptype”=&gt;“string”, “name_prop”=&gt;“1”, “_destroy”=&gt;“0”}, 
+“1”=&gt;{“name”=&gt;“”, “proptype”=&gt;“”, “name_prop”=&gt;“0”,
+“_destroy”=&gt;“0”},  “2”=&gt;{“name”=&gt;“”, “proptype”=&gt;“”,
+“name_prop”=&gt;“0”, “_destroy”=&gt;“0”}}, 
+“arcprop_attributes”=&gt;{“start”=&gt;“51dccd8de4df1c6e31000096”,
+“end”=&gt;“51dccd8de4df1c6e31000099”, “directed”=&gt;“0”}}</p>
+          
+
+          
+          <div class="method-source-code" id="create_the_reltype-source">
+            <pre><span class="ruby-comment"># File app/models/reltype.rb, line 32</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_the_reltype</span>(<span class="ruby-identifier">params</span>)
+    <span class="ruby-identifier">type</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">params</span>
+<span class="ruby-comment">#    type.attributes = params</span>
+    <span class="ruby-identifier">type</span>.<span class="ruby-identifier">save!</span>
+    <span class="ruby-identifier">type</span>
+  <span class="ruby-keyword">end</span></pre>
+          </div><!-- create_the_reltype-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_the_reltype-method -->
+
+    
+      <div id="method-c-factory" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">factory</span><span
+            class="method-args">(params)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="factory-source">
+            <pre><span class="ruby-comment"># File app/models/reltype.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">factory</span>(<span class="ruby-identifier">params</span>)
+  <span class="ruby-constant">Reltype</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:type</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- factory-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- factory-method -->
+
+    
+      <div id="method-c-import" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">import</span><span
+            class="method-args">(rt, type_map)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="import-source">
+            <pre><span class="ruby-comment"># File app/models/reltype.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">import</span>(<span class="ruby-identifier">rt</span>, <span class="ruby-identifier">type_map</span>)
+  <span class="ruby-identifier">current</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">rt</span>[<span class="ruby-string">&quot;id&quot;</span>]).<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">params</span> = {}
+  <span class="ruby-identifier">params</span>[<span class="ruby-value">:name</span>] = <span class="ruby-identifier">rt</span>[<span class="ruby-string">&quot;name&quot;</span>]
+  <span class="ruby-identifier">params</span>[<span class="ruby-value">:desc</span>] = <span class="ruby-identifier">rt</span>[<span class="ruby-string">&quot;desc&quot;</span>]
+  <span class="ruby-identifier">prop_attr</span> = {}
+  <span class="ruby-identifier">ct</span> = <span class="ruby-value">0</span>
+  <span class="ruby-identifier">rt</span>[<span class="ruby-string">&quot;properties&quot;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">prop</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">prop</span>[<span class="ruby-string">&quot;name_prop&quot;</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">nameprop</span> = <span class="ruby-string">&quot;1&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">nameprop</span> = <span class="ruby-string">&quot;0&quot;</span> 
+    <span class="ruby-identifier">prop_attr</span>[<span class="ruby-identifier">ct</span>.<span class="ruby-identifier">to_s</span>] = {<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">prop</span>[<span class="ruby-string">&quot;name&quot;</span>][<span class="ruby-string">&quot;name&quot;</span>], <span class="ruby-value">:proptype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">prop</span>[<span class="ruby-string">&quot;proptype&quot;</span>], <span class="ruby-value">:name_prop</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">nameprop</span>, <span class="ruby-value">:_destroy</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;0&quot;</span>}
+    <span class="ruby-identifier">ct</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">params</span>[<span class="ruby-value">:properties_attributes</span>] = <span class="ruby-identifier">prop_attr</span>
+  <span class="ruby-identifier">start</span> = <span class="ruby-identifier">type_map</span>[<span class="ruby-identifier">rt</span>[<span class="ruby-string">&quot;arcprop&quot;</span>][<span class="ruby-string">&quot;start_node_type&quot;</span>]]
+  <span class="ruby-identifier">params</span>[<span class="ruby-value">:arcprop_attributes</span>] = {<span class="ruby-value">:start</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">type_map</span>[<span class="ruby-identifier">rt</span>[<span class="ruby-string">&quot;arcprop&quot;</span>][<span class="ruby-string">&quot;start_node_type&quot;</span>][<span class="ruby-string">&quot;id&quot;</span>]], <span class="ruby-value">:end</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">type_map</span>[<span class="ruby-identifier">rt</span>[<span class="ruby-string">&quot;arcprop&quot;</span>][<span class="ruby-string">&quot;end_node_type&quot;</span>][<span class="ruby-string">&quot;id&quot;</span>]]}
+  <span class="ruby-identifier">current</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">res</span> = <span class="ruby-identifier">current</span>.<span class="ruby-identifier">update_the_reltype</span>(<span class="ruby-identifier">params</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">res</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_the_reltype</span>(<span class="ruby-identifier">params</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">res</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- import-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- import-method -->
+
+    
+      <div id="method-c-search" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search</span><span
+            class="method-args">(params)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search-source">
+            <pre><span class="ruby-comment"># File app/models/reltype.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">params</span>)
+  <span class="ruby-identifier">page</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&quot;1&quot;</span>
+  <span class="ruby-identifier">doc_from</span> = ((<span class="ruby-identifier">page</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) * <span class="ruby-identifier">@@per_page</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">order_by</span>([<span class="ruby-value">:year</span>, <span class="ruby-value">:asc</span>]).<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- search-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- search-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-assigned_nodes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">assigned_nodes</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="assigned_nodes-source">
+            <pre><span class="ruby-comment"># File app/models/reltype.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">assigned_nodes</span>
+  <span class="ruby-constant">Node</span>.<span class="ruby-identifier">related_reltypes</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- assigned_nodes-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- assigned_nodes-method -->
+
+    
+      <div id="method-i-find_associations" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_associations</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="find_associations-source">
+            <pre><span class="ruby-comment"># File app/models/reltype.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_associations</span>
+    {<span class="ruby-value">:node_ass</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-keyword">self</span>.<span class="ruby-identifier">arcprop</span>.<span class="ruby-identifier">end_node</span>]}
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- find_associations-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- find_associations-method -->
+
+    
+      <div id="method-i-get_type_from_position" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_type_from_position</span><span
+            class="method-args">(position)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_type_from_position-source">
+            <pre><span class="ruby-comment"># File app/models/reltype.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_type_from_position</span>(<span class="ruby-identifier">position</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">position</span> <span class="ruby-operator">==</span> <span class="ruby-string">'start_node'</span>
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">arcprop</span>.<span class="ruby-identifier">start_node</span>
+    <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">arcprop</span>.<span class="ruby-identifier">end_node</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_type_from_position-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_type_from_position-method -->
+
+    
+      <div id="method-i-has_assigned_nodes-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">has_assigned_nodes?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="has_assigned_nodes-3F-source">
+            <pre><span class="ruby-comment"># File app/models/reltype.rb, line 87</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">has_assigned_nodes?</span>
+  <span class="ruby-constant">Node</span>.<span class="ruby-identifier">related_reltypes</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- has_assigned_nodes-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- has_assigned_nodes-3F-method -->
+
+    
+      <div id="method-i-remove_the_reltype" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">remove_the_reltype</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="remove_the_reltype-source">
+            <pre><span class="ruby-comment"># File app/models/reltype.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_the_reltype</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">destroy</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>    
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- remove_the_reltype-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- remove_the_reltype-method -->
+
+    
+      <div id="method-i-update_the_reltype" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_the_reltype</span><span
+            class="method-args">(params)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="update_the_reltype-source">
+            <pre><span class="ruby-comment"># File app/models/reltype.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_the_reltype</span>(<span class="ruby-identifier">params</span>)
+  <span class="ruby-constant">Node</span>.<span class="ruby-identifier">delete_rel_prop</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:properties_attributes</span>].<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>[<span class="ruby-value">:_destroy</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;1&quot;</span>}.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">properties</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">v</span>[<span class="ruby-value">:id</span>])})
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">attributes</span> = <span class="ruby-identifier">params</span>       
+  <span class="ruby-identifier">save!</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- update_the_reltype-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- update_the_reltype-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

@@ -6,7 +6,7 @@ class Archive
   end
   
   def perform
-    if @ctx = "node"
+    if @ctx == "node"
       @obj = Node.find(@id)
     end
     @obj.archive_perform

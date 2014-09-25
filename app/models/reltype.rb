@@ -1,5 +1,6 @@
 class Reltype
-    
+  
+  include Wisper::Publisher
   include Mongoid::Document
   include Mongoid::Timestamps
     
@@ -13,8 +14,8 @@ class Reltype
   has_many :types  # from type, to type, or any(?)  has and belongs to many?
 
   # TODO: Needs to not create the property if NIL  
-  accepts_nested_attributes_for :properties, :allow_destroy => true, :reject_if => proc {|attrs| attrs[:name].blank?}
-  accepts_nested_attributes_for :arcprop, :allow_destroy => true
+  accepts_nested_attributes_for :properties, allow_destroy: true, :reject_if => proc {|attrs| attrs[:name].blank?}
+  accepts_nested_attributes_for :arcprop
 
   before_destroy :has_assigned_nodes
   
@@ -29,12 +30,6 @@ class Reltype
 # "1"=>{"name"=>"", "proptype"=>"", "name_prop"=>"0", "_destroy"=>"0"}, 
 # "2"=>{"name"=>"", "proptype"=>"", "name_prop"=>"0", "_destroy"=>"0"}}, 
 # "arcprop_attributes"=>{"start"=>"51dccd8de4df1c6e31000096", "end"=>"51dccd8de4df1c6e31000099", "directed"=>"0"}}
-  def self.create_the_reltype(params)
-    type = self.new params
-#    type.attributes = params
-    type.save!
-    type
-  end
 
   def self.import(rt, type_map)
     current = self.where(:id => rt["id"]).first
@@ -59,13 +54,54 @@ class Reltype
     Reltype.find(params[:type])
   end
 
-
-  def update_the_reltype(params)
-    Node.delete_rel_prop(self, params[:properties_attributes].select {|k,v| v[:_destroy] == "1"}.collect {|k,v| self.properties.find(v[:id])})
-    self.attributes = params       
-    save!
-    self
+  def create_me(reltype: nil)
+    update_me(reltype: reltype)
   end
+
+  def update_me(reltype: nil)
+    reltype.permit!
+    self.attributes = reltype
+    determine_node_changes(props: reltype[:properties_attributes])
+    #self.name = reltype[:name]
+    #self.desc = reltype[:desc]
+    #self.update_properties(props: reltype[:properties_attributes])
+    #self.update_arc(arc: reltype[:arcprop_attributes])
+    self.save
+    publish(:successful_create, self)
+  end
+
+  def determine_node_changes(props: nil)
+    Node.delete_rel_prop(self, props: props.select {|k,v| v[:_destroy] == "1"}.collect {|k,v| self.properties.find(v[:id])})
+  end
+
+
+=begin
+  def update_properties(props: nil)
+
+    props.delete_if {|ct, p| p[:name] == ""}
+    props.each do |position, prop|
+      p = self.properties.where(name: prop[:name]).first
+      if p
+        if prop[:_destroy] == "1"
+          p.delete
+        else
+          p.add_attrs(prop: prop)
+        end
+      else
+        p = Property.new.add_attrs(prop: prop)
+        self.properties << p
+      end
+    end
+  end
+
+  def update_arc(arc: nil)
+    if self.arcprop
+      self.arcprop.add_attrs(arc: arc)
+    else
+      self.arcprop = Arcprop.create_me(arc: arc)
+    end
+  end
+=end
 
   def get_type_from_position(position)
       if position == 'start_node'

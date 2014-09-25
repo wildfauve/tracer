@@ -6,10 +6,10 @@ class Compare
   include Mongoid::Timestamps  
   
   field :name, :type => String
-  field :x, type: Moped::BSON::ObjectId
-  field :y, type: Moped::BSON::ObjectId
-  field :rel, type: Moped::BSON::ObjectId
-  field :rel_attr, type: Moped::BSON::ObjectId
+  field :x, type: BSON::ObjectId
+  field :y, type: BSON::ObjectId
+  field :rel, type: BSON::ObjectId
+  field :rel_attr, type: BSON::ObjectId
   
   # Input into create is the format of the standard node forms, hence:
   # "start"=>{"type"=>"521ac0e4e4df1cfb1a00003c"}, 

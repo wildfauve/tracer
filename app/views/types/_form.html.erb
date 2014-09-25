@@ -26,10 +26,10 @@
             <%= ff.text_field :name %>
          </div>
          <div class="large-1 columns">
-            <%= ff.label :proptype, "Property Type" %>
+            <%= ff.label :name, "Type" %>
          </div>
          <div class="large-3 columns">    
-            <%= ff.text_field :proptype %>
+            <%= ff.select(:proptype, options_for_select(proptype_select, ff.object.proptype )) %>
          </div>
          <div class="large-1 columns">
          <%= ff.label :name_prop, "Name Prop" %>                     

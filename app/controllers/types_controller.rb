@@ -26,47 +26,35 @@ class TypesController < ApplicationController
   # POST /types
   # POST /types.json
   def create
-    @type = Type.create_the_type(params[:type])
-    respond_to do |format|
-      if @type.valid?
-        format.html { redirect_to types_path }
-        format.json
-      else
-        Rails.logger.info(">>>Type Controller>>CREATE/error: #{@type.errors.inspect}")        
-        format.html { render action: "new" }
-        format.json
-      end
-    end
+    type = Type.new
+    type.subscribe(self)
+    type.create_me(type: params[:type])
   end
 
   def update
-    @type = Type.find(params[:id])
-    @type.update_the_type(params[:type])
-    respond_to do |format|
-      if @type.valid?
-        format.html { redirect_to types_path }
-        format.json
-      else
-        format.html { render action: "edit" }
-        format.json
-      end
-    end
+    type = Type.find(params[:id])
+    type.subscribe(self)
+    type.update_the_type(type: params[:type])
   end
 
 
   def destroy
-    @type = Type.find(params[:id])
-    @type.delete
-    Rails.logger.info(">>>TypeController#delete #{@type.errors.inspect} ")
-    respond_to do |format|
-      if @type.errors.blank?
-        format.html { redirect_to types_path }
-        format.json
-      else
-        format.html { render "show" }
-        format.json
-      end
-    end
+    type = Type.find(params[:id])
+    type.subscribe(self)
+    type.delete_me
+  end
+
+  def successful_create(type)
+    redirect_to types_path
+  end
+  
+  def successful_delete(type)
+    redirect_to types_path
+  end
+  
+  def error_delete(type)
+    @type = type
+    render 'show'
   end
 
 end

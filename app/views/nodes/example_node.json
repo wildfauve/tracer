@@ -1,7 +1,7 @@
 {
   "id":"521ac951e4df1c0fac000097",
   "name":"Availability",
-  "deleted":null,
+  "archived":null,
   "type":{
     "type_ref":"NFR Cat",
     "id":"521ac0e4e4df1cfb1a000055"

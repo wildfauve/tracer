@@ -1,6 +1,7 @@
 class Type
   @@per_page = 20
-    
+  
+  include Wisper::Publisher
   include Mongoid::Document
   include Mongoid::Timestamps    
   
@@ -11,13 +12,13 @@ class Type
   has_many :node
   
   validates_uniqueness_of :type_ref
-#  validate :has_assigned_reltypes, :on => :destroy
   before_destroy :has_assigned_reltypes, :has_assigned_nodes
 
   
   # TODO: Needs to not create the property if NIL
-  accepts_nested_attributes_for :properties, :allow_destroy => true, 
-                                :reject_if => proc {|attrs| attrs[:name].blank?}
+  accepts_nested_attributes_for :properties, 
+                                allow_destroy: true,  
+                                reject_if: proc {|attrs| attrs[:name].blank?}
                                 
   
   def self.search(params)
@@ -27,10 +28,10 @@ class Type
   end
   
   # {"type"=>{"type_ref"=>"test", 
-  #         "properties_attributes"=>{"0"=>{"name"=>"name", "proptype"=>"string", "name_prop"=>"1", "_destroy"=>"0"}, 
+  #         "properties"=>{"0"=>{"name"=>"name", "proptype"=>"string", "name_prop"=>"1", "_destroy"=>"0"}, 
   # =>      "1"=>{"name"=>"prop2", "proptype"=>"string", "name_prop"=>"0", "_destroy"=>"0"}, 
    # =>     "2"=>{"name"=>"", "proptype"=>"", "name_prop"=>"0", "_destroy"=>"0"}}}, "commit"=>"Create"}  
-  def self.create_the_type(params)
+  def self.create_the_type(typeparams)
     Rails.logger.info(">>>Type#create_the_type #{params[:properties_attributes]}")    
     type = self.new(params)  
     type.save
@@ -60,22 +61,54 @@ class Type
   def self.factory(params)
     Type.find(params[:type])
   end
-
-  def update_the_type(params)
-    Rails.logger.info(">>>Type#update_the_type #{params}")        
-    # when a property is removed, the properties need to be removed from any nodes as well
-    
-    # TODO: needs to send BSON ObjectId not string
-    Node.delete_properties(params[:properties_attributes].select {|k,v| v[:_destroy] == "1"}.collect {|k,v| self.properties.find(v[:id])})
-    self.attributes = params       
-    save
-    return self
+  
+  def create_me(type: nil)
+    update_the_type(type: type)
   end
+
+  def update_the_type(type: nil)
+    type.permit!
+    self.attributes = type
+    determine_node_changes(props: type[:properties_attributes])
+    #self.type_ref = type[:type_ref]
+    #self.desc = type[:desc]
+    #self.update_properties(props: type[:properties_attributes])
+    self.save
+    publish(:successful_create, self)
+  end
+  
+  def determine_node_changes(props: nil)
+    Node.delete_properties(props: props.select {|k,v| v[:_destroy] == "1"}.collect {|k,v| self.properties.find(v[:id])})
+  end
+  
+=begin  
+  def update_properties(props: nil)
+    Node.delete_properties(props: props.select {|k,v| v[:_destroy] == "1"}.collect {|k,v| self.properties.find(v[:id])})
+    props.delete_if {|ct, p| p[:name] == ""}
+    props.each do |position, prop|
+      p = self.properties.where(name: prop[:name]).first
+      if p
+        if prop[:_destroy] == "1"
+          p.delete
+        else
+          p.add_attrs(prop: prop)
+        end
+      else
+        p = Property.new.add_attrs(prop: prop)
+        self.properties << p
+      end
+    end
     
-  def delete
-    #raise Exceptions::TypeHasTypeRel if assigned_reltypes?
-    self.destroy
-    return self
+  end
+=end
+  
+  def delete_me
+    type = self.destroy
+    if type
+      publish(:successful_delete, self)
+    else
+      publish(:error_delete, self)
+    end
   end  
   
   def has_assigned_reltypes?
@@ -94,7 +127,7 @@ class Type
   end
 
   def name_prop
-    self.properties.keep_if {|p| p.name_prop == true}.first
+    self.properties.where(name_prop: true).first
   end
 
   def find_associations(params)
@@ -116,7 +149,6 @@ class Type
   private
     
   def has_assigned_reltypes
-    Rails.logger.info(">>>Type#has_assigned_reltypes ")     
     errors.add(:type_ref, "Can't delete a Type if it has assigned relation types") if self.has_assigned_reltypes?
     errors.blank?
   end

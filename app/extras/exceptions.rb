@@ -12,7 +12,7 @@ module Exceptions
   
   class TypeHasTypeRel < Standard
     def message
-      "The Type cannot be deleted because it has Type Relationships attached"
+      "The Type cannot be archived because it has Type Relationships attached"
     end
   end
 

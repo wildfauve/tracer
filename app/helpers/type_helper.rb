@@ -7,4 +7,8 @@ module TypeHelper
         return [[type.type_ref, type.id ]] if position == sel_pos.to_s  # TODO, maybe return everything to allow change
         @type_list = typearc[:node_ass].map{|t| [t.type_ref, t.id]}
     end	
+    
+    def proptype_select
+      Property.types
+    end
 end

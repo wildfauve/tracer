@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>module ApplicationHelper - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/helpers/application_helper.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-error_content">#error_content</a>
+    
+    <li><a href="#method-i-setup_type">#setup_type</a>
+    
+    <li><a href="#method-i-show_errors">#show_errors</a>
+    
+    <li><a href="#method-i-title">#title</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Exceptions.html">Exceptions</a>
+  
+    <li><a href="./Exceptions/Standard.html">Exceptions::Standard</a>
+  
+    <li><a href="./Exceptions/TypeHasTypeRel.html">Exceptions::TypeHasTypeRel</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./Archive.html">Archive</a>
+  
+    <li><a href="./ArchivesController.html">ArchivesController</a>
+  
+    <li><a href="./Arcprop.html">Arcprop</a>
+  
+    <li><a href="./Compare.html">Compare</a>
+  
+    <li><a href="./CompareHelper.html">CompareHelper</a>
+  
+    <li><a href="./ComparesController.html">ComparesController</a>
+  
+    <li><a href="./Event.html">Event</a>
+  
+    <li><a href="./EventsController.html">EventsController</a>
+  
+    <li><a href="./Export.html">Export</a>
+  
+    <li><a href="./Import.html">Import</a>
+  
+    <li><a href="./ImportUploader.html">ImportUploader</a>
+  
+    <li><a href="./LoadsController.html">LoadsController</a>
+  
+    <li><a href="./Node.html">Node</a>
+  
+    <li><a href="./NodeHelper.html">NodeHelper</a>
+  
+    <li><a href="./NodeProfile.html">NodeProfile</a>
+  
+    <li><a href="./NoderelationsController.html">NoderelationsController</a>
+  
+    <li><a href="./NodesController.html">NodesController</a>
+  
+    <li><a href="./Nodeset.html">Nodeset</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./Property.html">Property</a>
+  
+    <li><a href="./Propinstance.html">Propinstance</a>
+  
+    <li><a href="./RelationsController.html">RelationsController</a>
+  
+    <li><a href="./Relinstance.html">Relinstance</a>
+  
+    <li><a href="./Relpropinstance.html">Relpropinstance</a>
+  
+    <li><a href="./Reltype.html">Reltype</a>
+  
+    <li><a href="./ReltypeHelper.html">ReltypeHelper</a>
+  
+    <li><a href="./ReltypesController.html">ReltypesController</a>
+  
+    <li><a href="./Type.html">Type</a>
+  
+    <li><a href="./TypeHelper.html">TypeHelper</a>
+  
+    <li><a href="./TypeInRelValidator.html">TypeInRelValidator</a>
+  
+    <li><a href="./TypeRelationsController.html">TypeRelationsController</a>
+  
+    <li><a href="./TypesController.html">TypesController</a>
+  
+    <li><a href="./Typeset.html">Typeset</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module ApplicationHelper</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-error_content" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">error_content</span><span
+            class="method-args">(ar_obj=nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="error_content-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">error_content</span>(<span class="ruby-identifier">ar_obj</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">ar_obj</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">ar_obj</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">any?</span>
+    <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:div</span>, <span class="ruby-value">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'error_explanation'</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">concat</span>(<span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:h2</span>, <span class="ruby-node">&quot;#{pluralize(ar_obj.errors.count, &quot;error&quot;)} prohibited the Model from being saved:&quot;</span>))
+      <span class="ruby-identifier">concat</span>(<span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:ul</span>) <span class="ruby-keyword">do</span>
+        <span class="ruby-identifier">ar_obj</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">full_messages</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> 
+          <span class="ruby-identifier">concat</span>(<span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:li</span>,<span class="ruby-identifier">msg</span>))
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- error_content-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- error_content-method -->
+
+    
+      <div id="method-i-setup_type" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setup_type</span><span
+            class="method-args">(type)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="setup_type-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setup_type</span>(<span class="ruby-identifier">type</span>)
+    <span class="ruby-value">3</span>.<span class="ruby-identifier">times</span> {<span class="ruby-identifier">type</span>.<span class="ruby-identifier">properties</span>.<span class="ruby-identifier">build</span>}
+    <span class="ruby-identifier">type</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- setup_type-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- setup_type-method -->
+
+    
+      <div id="method-i-show_errors" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">show_errors</span><span
+            class="method-args">(model)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="show_errors-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show_errors</span>(<span class="ruby-identifier">model</span>)  
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- show_errors-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- show_errors-method -->
+
+    
+      <div id="method-i-title" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">title</span><span
+            class="method-args">(page_title, sup_title = "")</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="title-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">title</span>(<span class="ruby-identifier">page_title</span>, <span class="ruby-identifier">sup_title</span> = <span class="ruby-string">&quot;&quot;</span>)
+    <span class="ruby-identifier">content_for</span>(<span class="ruby-value">:title</span>, <span class="ruby-identifier">page_title</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;:&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sup_title</span>.<span class="ruby-identifier">to_s</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- title-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- title-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

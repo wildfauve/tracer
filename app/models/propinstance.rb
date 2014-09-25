@@ -2,7 +2,7 @@ class Propinstance
   
   include Mongoid::Document
   
-  field :ref, :type => Moped::BSON::ObjectId
+  field :ref, :type => BSON::ObjectId
   field :value, :type => String
 
   embedded_in :node, :inverse_of => :propinstances

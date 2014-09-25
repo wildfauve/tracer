@@ -1,14 +1,13 @@
 <!DOCTYPE html>
+<html lang="en">
   <head>
-   <meta charset="utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-   <!-- Set the viewport width to device width for mobile -->
-   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
 
-   <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
-   <%= stylesheet_link_tag    "application" %>
-   <%= javascript_include_tag "vendor/custom.modernizr" %>
-   <%= javascript_include_tag "application" %>   
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
   </head>
 
@@ -36,7 +35,8 @@
               <ul class="dropdown">
                  <li><%= link_to "Archives", archives_path  %></li>
                  <li><%= link_to "Import/Export", loads_path  %></li>                 
-                 <li><%= link_to "Events", events_path  %></li>                 
+                 <li><%= link_to "Events", events_path  %></li>
+                 <li><%= link_to "Delete All", reset_all_utils_path, method: :post %></li>
              </ul>
            </li>
            <li class="divider"></li>
@@ -69,5 +69,8 @@
            <%= render :partial => 'shared/side_bar'%>
         </div>
      </div>
+
+    <%= javascript_include_tag "application" %>    
+     
   </body>
 </html>

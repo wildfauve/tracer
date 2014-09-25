@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class Object - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/models/compare.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">BasicObject
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-get_rel_attrs">::get_rel_attrs</a>
+    
+    <li><a href="#method-c-set_rel_attrs">::set_rel_attrs</a>
+    
+    <li><a href="#method-i-axis_title">#axis_title</a>
+    
+    <li><a href="#method-i-delete_it">#delete_it</a>
+    
+    <li><a href="#method-i-nodes_from_type">#nodes_from_type</a>
+    
+    <li><a href="#method-i-rel_prop">#rel_prop</a>
+    
+    <li><a href="#method-i-related_type">#related_type</a>
+    
+    <li><a href="#method-i-relation_title">#relation_title</a>
+    
+    <li><a href="#method-i-reltype">#reltype</a>
+    
+    <li><a href="#method-i-show_it">#show_it</a>
+    
+    <li><a href="#method-i-to_csv">#to_csv</a>
+    
+    <li><a href="#method-i-x_axis_size">#x_axis_size</a>
+    
+    <li><a href="#method-i-y_axis_size">#y_axis_size</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Exceptions.html">Exceptions</a>
+  
+    <li><a href="./Exceptions/Standard.html">Exceptions::Standard</a>
+  
+    <li><a href="./Exceptions/TypeHasTypeRel.html">Exceptions::TypeHasTypeRel</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./Archive.html">Archive</a>
+  
+    <li><a href="./ArchivesController.html">ArchivesController</a>
+  
+    <li><a href="./Arcprop.html">Arcprop</a>
+  
+    <li><a href="./Compare.html">Compare</a>
+  
+    <li><a href="./CompareHelper.html">CompareHelper</a>
+  
+    <li><a href="./ComparesController.html">ComparesController</a>
+  
+    <li><a href="./Event.html">Event</a>
+  
+    <li><a href="./EventsController.html">EventsController</a>
+  
+    <li><a href="./Export.html">Export</a>
+  
+    <li><a href="./Import.html">Import</a>
+  
+    <li><a href="./ImportUploader.html">ImportUploader</a>
+  
+    <li><a href="./LoadsController.html">LoadsController</a>
+  
+    <li><a href="./Node.html">Node</a>
+  
+    <li><a href="./NodeHelper.html">NodeHelper</a>
+  
+    <li><a href="./NodeProfile.html">NodeProfile</a>
+  
+    <li><a href="./NoderelationsController.html">NoderelationsController</a>
+  
+    <li><a href="./NodesController.html">NodesController</a>
+  
+    <li><a href="./Nodeset.html">Nodeset</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./Property.html">Property</a>
+  
+    <li><a href="./Propinstance.html">Propinstance</a>
+  
+    <li><a href="./RelationsController.html">RelationsController</a>
+  
+    <li><a href="./Relinstance.html">Relinstance</a>
+  
+    <li><a href="./Relpropinstance.html">Relpropinstance</a>
+  
+    <li><a href="./Reltype.html">Reltype</a>
+  
+    <li><a href="./ReltypeHelper.html">ReltypeHelper</a>
+  
+    <li><a href="./ReltypesController.html">ReltypesController</a>
+  
+    <li><a href="./Type.html">Type</a>
+  
+    <li><a href="./TypeHelper.html">TypeHelper</a>
+  
+    <li><a href="./TypeInRelValidator.html">TypeInRelValidator</a>
+  
+    <li><a href="./TypeRelationsController.html">TypeRelationsController</a>
+  
+    <li><a href="./TypesController.html">TypesController</a>
+  
+    <li><a href="./Typeset.html">Typeset</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Object</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-get_rel_attrs" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_rel_attrs</span><span
+            class="method-args">(params)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_rel_attrs-source">
+            <pre><span class="ruby-comment"># File app/models/compare.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_rel_attrs</span>(<span class="ruby-identifier">params</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_rel_attrs-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_rel_attrs-method -->
+
+    
+      <div id="method-c-set_rel_attrs" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_rel_attrs</span><span
+            class="method-args">(params)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="set_rel_attrs-source">
+            <pre><span class="ruby-comment"># File app/models/compare.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">set_rel_attrs</span>(<span class="ruby-identifier">params</span>)
+  <span class="ruby-identifier">c</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">rel_attr</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:rel_attr</span>]
+  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">save!</span>
+  <span class="ruby-identifier">c</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- set_rel_attrs-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- set_rel_attrs-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-axis_title" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">axis_title</span><span
+            class="method-args">(args)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="axis_title-source">
+            <pre><span class="ruby-comment"># File app/models/compare.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">axis_title</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">args</span>[<span class="ruby-value">:axis</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:x</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">related_type</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">x</span>).<span class="ruby-identifier">type_ref</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">related_type</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">y</span>).<span class="ruby-identifier">type_ref</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- axis_title-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- axis_title-method -->
+
+    
+      <div id="method-i-delete_it" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_it</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="delete_it-source">
+            <pre><span class="ruby-comment"># File app/models/compare.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_it</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">destroy</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_it-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_it-method -->
+
+    
+      <div id="method-i-nodes_from_type" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">nodes_from_type</span><span
+            class="method-args">(args)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="nodes_from_type-source">
+            <pre><span class="ruby-comment"># File app/models/compare.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">nodes_from_type</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">nodes</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">related_type</span>(<span class="ruby-identifier">args</span>[<span class="ruby-value">:type</span>]).<span class="ruby-identifier">nodes</span>
+  <span class="ruby-identifier">args</span>[<span class="ruby-value">:all</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">nodes</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">has_related_reltypes?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">reltype</span>.<span class="ruby-identifier">id</span>)}
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- nodes_from_type-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- nodes_from_type-method -->
+
+    
+      <div id="method-i-rel_prop" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">rel_prop</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="rel_prop-source">
+            <pre><span class="ruby-comment"># File app/models/compare.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">rel_prop</span>
+  <span class="ruby-identifier">rt_prop</span> = <span class="ruby-constant">Reltype</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">'properties._id'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rel_attr</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">rt_prop</span>.<span class="ruby-identifier">properties</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rel_attr</span>}.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- rel_prop-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- rel_prop-method -->
+
+    
+      <div id="method-i-related_type" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">related_type</span><span
+            class="method-args">(axis)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="related_type-source">
+            <pre><span class="ruby-comment"># File app/models/compare.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">related_type</span>(<span class="ruby-identifier">axis</span>)
+  <span class="ruby-constant">Type</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">axis</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- related_type-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- related_type-method -->
+
+    
+      <div id="method-i-relation_title" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">relation_title</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="relation_title-source">
+            <pre><span class="ruby-comment"># File app/models/compare.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">relation_title</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">reltype</span>.<span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- relation_title-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- relation_title-method -->
+
+    
+      <div id="method-i-reltype" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reltype</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="reltype-source">
+            <pre><span class="ruby-comment"># File app/models/compare.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reltype</span>
+  <span class="ruby-constant">Reltype</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">rel</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reltype-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reltype-method -->
+
+    
+      <div id="method-i-show_it" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">show_it</span><span
+            class="method-args">(args={})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="show_it-source">
+            <pre><span class="ruby-comment"># File app/models/compare.rb, line 63</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">show_it</span>(<span class="ruby-identifier">args</span>={})
+    <span class="ruby-ivar">@x_types</span> = <span class="ruby-identifier">nodes_from_type</span>(<span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">x</span>, <span class="ruby-identifier">all</span><span class="ruby-operator">:</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:all</span>])
+    <span class="ruby-ivar">@y_types</span> = <span class="ruby-identifier">nodes_from_type</span>(<span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">y</span>, <span class="ruby-identifier">all</span><span class="ruby-operator">:</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:all</span>])
+    <span class="ruby-comment">#@titles = @x_types</span>
+<span class="ruby-comment">    # Matrix[[&quot;Head&quot;, &quot;Core System Availability&quot;, &quot;Data accuracy&quot;, &quot;System Down Time&quot;, &quot;Audit Records&quot;, &quot;Business Transaction Throughput&quot;, &quot;Business Transactions per Month&quot;, &quot;Transaction Response Time&quot;], [&quot;Integrity&quot;, &quot;&quot;, &quot;X&quot;, &quot;&quot;, &quot;X&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;], [&quot;Scaleability&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;X&quot;, &quot;X&quot;, &quot;&quot;], [&quot;Performance&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;X&quot;], [&quot;Availability&quot;, &quot;X&quot;, &quot;&quot;, &quot;X&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;]]
+    @matrix = Matrix.build(@y_types.size + 1,@x_types.size + 1) do |row,col|
+      if row == 0 &amp;&amp; col == 0
+        &quot;Head&quot;
+      elsif col == 0
+        @y_types[row - 1].name if col == 0
+      elsif row == 0
+        @x_types[col - 1].name
+      else
+        rel_inst = @y_types[row - 1].rel_attribute(other_node: @x_types[col - 1], rel_type_id: self.rel, rel_attr: self.rel_attr)
+        rel_inst
+      end
+    end
+</span>    <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">end</span></pre>
+          </div><!-- show_it-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- show_it-method -->
+
+    
+      <div id="method-i-to_csv" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_csv</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_csv-source">
+            <pre><span class="ruby-comment"># File app/models/compare.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_csv</span>
+  <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">hrd</span> = [<span class="ruby-string">&quot;&quot;</span>]
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">x_types</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">hrd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">name</span> }
+    <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">hrd</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">y_types</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">y_row</span> = []        
+      <span class="ruby-identifier">y_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">name</span>
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">x_types</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">tag</span> = <span class="ruby-identifier">y</span>.<span class="ruby-identifier">rel_attribute</span>(<span class="ruby-identifier">other_node</span><span class="ruby-operator">:</span> <span class="ruby-identifier">x</span>, <span class="ruby-identifier">rel_type_id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rel</span>, <span class="ruby-identifier">rel_attr</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rel_attr</span>)
+        <span class="ruby-identifier">tag</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">y_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">y_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">tag</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">y_row</span>        
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>    
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_csv-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_csv-method -->
+
+    
+      <div id="method-i-x_axis_size" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">x_axis_size</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="x_axis_size-source">
+            <pre><span class="ruby-comment"># File app/models/compare.rb, line 111</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">x_axis_size</span>
+  <span class="ruby-ivar">@x_types</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- x_axis_size-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- x_axis_size-method -->
+
+    
+      <div id="method-i-y_axis_size" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">y_axis_size</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="y_axis_size-source">
+            <pre><span class="ruby-comment"># File app/models/compare.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">y_axis_size</span>
+  <span class="ruby-ivar">@y_types</span>.<span class="ruby-identifier">size</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- y_axis_size-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- y_axis_size-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
