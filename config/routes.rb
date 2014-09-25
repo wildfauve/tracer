@@ -51,4 +51,10 @@ Tracer::Application.routes.draw do
     end
   end
   
+  resources :utils do
+    collection do
+      post 'reset_all'
+    end
+  end
+  
 end

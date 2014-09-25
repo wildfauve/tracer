@@ -27,32 +27,15 @@ class ReltypesController < ApplicationController
   # POST /rels
   # POST /rels.json
   def create
-    @rel = Reltype.create_the_reltype(params[:reltype])
-    respond_to do |format|
-      if @rel.valid?
-        format.html { redirect_to reltypes_path }
-        format.js
-        format.json
-      else
-        format.html { render action: "new" }
-        format.js { render "create_errors" }
-        format.json
-      end
-    end
+    rel = Reltype.new
+    rel.subscribe(self)
+    rel.create_me(reltype: params[:reltype])
   end
 
   def update
-    @reltype = Reltype.find(params[:id])
-    @reltype.update_the_reltype(params[:reltype])
-    respond_to do |format|
-      if @reltype.valid?
-        format.html { redirect_to reltypes_path }
-        format.json
-      else
-        format.html { render action: "edit" }
-        format.json
-      end
-    end
+    reltype = Reltype.find(params[:id])
+    reltype.subscribe(self)
+    reltype.update_me(reltype: params[:reltype])
   end
 
 
@@ -68,7 +51,10 @@ class ReltypesController < ApplicationController
         format.json
       end
     end
-    
+  end
+  
+  def successful_create(reltype)
+    redirect_to reltypes_path
   end
   
 end

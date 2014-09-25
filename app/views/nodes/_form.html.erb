@@ -9,11 +9,11 @@
             <%= label_tag p.name%>
          </div>
          <div class="large-6 columns">
-            <% if p.proptype == "string" %>
+            <% if p.proptype == :string %>
                <%= text_field_tag "#{p.name}"%>       
-            <% elsif p.proptype == "long_text" %>
+            <% elsif p.proptype == :long_text %>
                <%= text_area_tag "#{p.name}", nil, size: "10x30" %>
-            <% elsif %>
+            <% elsif p.proptype == :integer %>
                <%= number_field_tag "#{p.name}", nil, :step => 0.1 %>            
             <% else%>
                <% raise %>

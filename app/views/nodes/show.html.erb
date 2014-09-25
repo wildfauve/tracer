@@ -34,7 +34,7 @@
    <tbody>
 
       <% @node.relinstances.each do |nrel| %>
-         <% if !nrel.deleted%>
+         <% if !nrel.archived%>
             <tr>
                <td><%= link_to nrel.related_node.name, node_path(nrel.related_node) %></td>
                <td><%= link_to nrel.related_node.type.type_ref, reltype_path(nrel.nodereltype) %></td>
